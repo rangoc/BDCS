@@ -42,12 +42,13 @@ const Description = styled.p`
 
 const ImageWrapper = styled.section``;
 
-export default function About() {
+export default function About({ ...pageProps }) {
   return (
     <Layout>
       <SEO
         title="About | BD Corporate Services d.o.o. Podgorica"
         description="BDCS explores and realizes opportunities with the provision of high quality in accounting and audit services that go beyond cost reductions."
+        ogUrl={pageProps.canonical}
       />
       <Wrapper>
         <CopyWrapper>

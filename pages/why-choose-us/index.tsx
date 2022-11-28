@@ -81,12 +81,13 @@ const ImageWrapper = styled.div`
   flex: 1;
 `;
 
-export default function WhyChooseUs() {
+export default function WhyChooseUs({ ...pageProps }) {
   return (
     <Layout>
       <SEO
         title="Why Choose Us | BD Corporate Services d.o.o. Podgorica"
         description="Professional approach. Competitive pricing. Personalised attention. National standards."
+        ogUrl={pageProps.canonical}
       />
       <Wrapper>
         <Content>

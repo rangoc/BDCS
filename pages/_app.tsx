@@ -20,7 +20,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
         initial={false}
         onExitComplete={() => window.scrollTo(0, 0)}
       >
-        <Component {...pageProps} canonical={url} key={url} />
+        <Component {...pageProps} canonical={url} />
       </AnimatePresence>
       <Footer />
     </>

@@ -132,7 +132,7 @@ export const SubmitButton = styled.button`
   }
 `;
 
-export default function Contact() {
+export default function Contact({ ...pageProps }) {
   const {
     register,
     handleSubmit,
@@ -182,6 +182,7 @@ export default function Contact() {
       <SEO
         title="Contact Us | BD Corporate Services d.o.o. Podgorica"
         description="For more information about us, check out our website and get in touch today."
+        ogUrl={pageProps.canonical}
       />
       <Wrapper>
         {/* <ImageWrapper>
