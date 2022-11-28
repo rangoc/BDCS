@@ -60,13 +60,12 @@ const Description = styled.p`
   }
 `;
 
-export default function Home({ ...pageProps }) {
+export default function Home() {
   return (
     <Layout>
       <SEO
         title="Home | BD Corporate Services d.o.o. Podgorica"
         description="As an outsourcing firm, we believe in setting the bar high. We go above and beyond to make sure all of our clients’ needs are not only met, but exceeded."
-        ogUrl={pageProps.canonical}
       />
       <HeadingWrapper>
         <Title>BD Corporate Services</Title>

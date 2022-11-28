@@ -7,12 +7,10 @@ interface ISEOProps {
   ogUrl?: string;
 }
 
-const siteUrl = "https://bdcs.me";
-
 export function SEO({
   title = "BDCS | BD Corporate Services d.o.o. Podgorica",
   description = "Strive for quality",
-  ogUrl = siteUrl,
+  ogUrl = "https://www.bdcs.me",
   ogImgUrl = `${ogUrl}/logo.png`,
 }: ISEOProps) {
   return (
