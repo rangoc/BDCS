@@ -13,7 +13,7 @@ export function SEO({
   title = "BDCS | BD Corporate Services d.o.o. Podgorica",
   description = "Strive for quality",
   ogUrl = siteUrl,
-  ogImgUrl = "/logo.png",
+  ogImgUrl = `${ogUrl}/logo.png`,
 }: ISEOProps) {
   return (
     <Head>
