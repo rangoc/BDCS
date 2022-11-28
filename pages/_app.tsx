@@ -1,5 +1,5 @@
 import type { AppProps } from "next/app";
-import { GlobalStyles } from "./globalStyles";
+import { GlobalStyles } from "../lib/globalStyles";
 import { AnimatePresence } from "framer-motion";
 import { useRouter } from "next/router";
 
