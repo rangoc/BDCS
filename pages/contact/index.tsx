@@ -9,6 +9,7 @@ import { QUERIES } from "../../lib/constants";
 
 import contact from "../../public/contact.webp";
 import { Dialog } from "../../components/Dialog";
+import { Spinner } from "../../components/Spinner";
 
 interface IFormInputs {
   name: string;
@@ -36,15 +37,6 @@ const Wrapper = styled.div`
   margin: auto;
   gap: 50px;
 `;
-
-// const ImageWrapper = styled.div`
-//   display: none;
-//   flex: 1;
-
-//   @media ${QUERIES.tabletAndDown} {
-//     display: none;
-//   }
-// `;
 
 const Title = styled.h1`
   font-size: 2rem;
@@ -108,12 +100,14 @@ export const SubmitButton = styled.button`
   cursor: pointer;
   max-width: 320px;
   min-width: 240px;
+  height: 50px;
   margin: auto;
   padding: 8px;
   background-color: black;
   color: white;
   font-weight: 700;
   text-transform: uppercase;
+  text-align: center;
   border: 2px solid black;
   transition: all 0.25s ease-out;
 
@@ -185,12 +179,6 @@ export default function Contact({ ...pageProps }) {
         ogUrl={pageProps.canonical}
       />
       <Wrapper>
-        {/* <ImageWrapper>
-          <Image
-            src={contact}
-            alt="Contact us, we are always at your service."
-          />
-        </ImageWrapper> */}
         <FormWrapper>
           <Title>Contact Us</Title>
           <Form onSubmit={handleSubmit(onSubmit)}>
@@ -234,7 +222,9 @@ export default function Contact({ ...pageProps }) {
               {errors.message && <Error>This field is required!</Error>}
             </FormField>
 
-            <SubmitButton disabled={isFetching && true}>Submit</SubmitButton>
+            <SubmitButton disabled={isFetching && true}>
+              {isFetching ? <Spinner /> : "Submit"}
+            </SubmitButton>
           </Form>
         </FormWrapper>
       </Wrapper>
