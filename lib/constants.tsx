@@ -149,7 +149,7 @@ export const OUR_TEAM = [
     name: "Bojana Vučićević",
     image: bojana,
     role: "Assistant Auditor",
-    bio: `Bojana Vučićević is an audit assistant at BD Corporate Services. She has previous expereince in
+    bio: `Bojana Vučićević is an audit assistant at BD Corporate Services. She has previous experience in
     finance, accounting and audit amongst local and international companies operating in Europe.
     Bojana is currently pursuing her master degree in Controlling at the Faculty of Economics in
     Belgrade.`,
