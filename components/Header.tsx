@@ -100,7 +100,7 @@ export function Header() {
       </LogoWrapper>
       <div ref={node}>
         <Burger open={open} setOpen={setOpen} />
-        <Menu open={open} />
+        <Menu open={open} setOpen={setOpen} />
       </div>
 
       <Navbar>

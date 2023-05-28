@@ -10,6 +10,7 @@ import { QUERIES } from "../../lib/constants";
 import contact from "../../public/contact.webp";
 import { Dialog } from "../../components/Dialog";
 import { Spinner } from "../../components/Spinner";
+import Link from "next/link";
 
 interface IFormInputs {
   name: string;
@@ -34,6 +35,7 @@ const defaultValues: IFormInputs = {
 const Wrapper = styled.div`
   max-width: 1200px;
   display: flex;
+  flex-direction: column;
   margin: auto;
   gap: 50px;
 `;
@@ -46,7 +48,7 @@ const Title = styled.h1`
 `;
 
 const FormWrapper = styled.div`
-  flex: 1;
+  width: 100%;
   max-width: 720px;
   margin: auto;
   padding-inline: 16px;
@@ -123,6 +125,15 @@ export const SubmitButton = styled.button`
       background-color: white;
       color: revert;
     }
+  }
+`;
+
+const Caption = styled.span`
+  font-weight: 300;
+  font-style: italic;
+
+  @media ${QUERIES.mobileAndDown} {
+    padding-inline: 16px;
   }
 `;
 
@@ -227,6 +238,15 @@ export default function Contact({ ...pageProps }) {
             </SubmitButton>
           </Form>
         </FormWrapper>
+        <Caption>
+          Should you experience any challenges in reaching us through our
+          contact form, we kindly request that you direct your queries,
+          concerns, or requests to our dedicated email address:{" "}
+          <Link style={{ color: "black" }} href="mailto:info@bdcs.me">
+            <strong>info@bdscs.me</strong>
+          </Link>
+          .
+        </Caption>
       </Wrapper>
       <Dialog showModal={showModal} showModalSet={showModalSet} />
     </Layout>

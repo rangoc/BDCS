@@ -18,6 +18,9 @@ export const StyledMenu = styled.nav<{ open: boolean }>`
 const List = styled.ul`
   list-style: none;
   padding: 0;
+  li:not(:first-child) {
+    margin-block-start: 1rem;
+  }
 `;
 
 const ListItem = styled.li`
@@ -49,31 +52,37 @@ const ListItem = styled.li`
   }
 `;
 
-export function Menu({ open }: { open: boolean }) {
+export function Menu({
+  open,
+  setOpen,
+}: {
+  open: boolean;
+  setOpen: (open: boolean) => void;
+}) {
   return (
     <StyledMenu open={open}>
       <List>
-        <ListItem>
+        <ListItem onClick={() => setOpen(!open)}>
           <Link scroll={false} href="/">
             Home
           </Link>
         </ListItem>
-        <ListItem>
+        <ListItem onClick={() => setOpen(!open)}>
           <Link scroll={false} href="/about">
             About Us
           </Link>
         </ListItem>
-        <ListItem>
+        <ListItem onClick={() => setOpen(!open)}>
           <Link scroll={false} href="/why-choose-us">
             Why Choose Us
           </Link>
         </ListItem>
-        <ListItem>
+        <ListItem onClick={() => setOpen(!open)}>
           <Link scroll={false} href="/our-team">
             Our Team
           </Link>
         </ListItem>
-        <ListItem>
+        <ListItem onClick={() => setOpen(!open)}>
           <Link scroll={false} href="/contact">
             Contact
           </Link>
