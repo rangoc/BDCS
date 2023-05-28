@@ -12,7 +12,7 @@ import phoneIcon from "../../public/phone.png";
 const Wrapper = styled.div`
   max-width: 1200px;
   margin: auto;
-  padding-inline-start: 16px;
+  padding-inline: 16px;
 `;
 
 const Articles = styled.section`
