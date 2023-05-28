@@ -5,6 +5,10 @@ import styled from "styled-components";
 import { QUERIES } from "../lib/constants";
 
 import logo from "../public/favicon.ico";
+import { Burger } from "./Burger";
+import { Menu } from "./Menu";
+import { useRef, useState } from "react";
+import { useOnClickOutside } from "../hooks/useOnClickOutside";
 
 const Wrapper = styled.header`
   display: flex;
@@ -14,6 +18,10 @@ const Wrapper = styled.header`
   gap: 2rem;
   background-color: white;
   padding-block-start: 32px;
+
+  @media ${QUERIES.mobileAndDown} {
+    padding-inline-start: 16px;
+  }
 `;
 
 const LogoWrapper = styled.div`
@@ -26,11 +34,14 @@ const LogoWrapper = styled.div`
 
   @media ${QUERIES.mobileAndDown} {
     width: 102px;
+    margin-right: auto;
   }
 `;
 
 const Navbar = styled.nav`
-  padding-inline: 8px;
+  @media ${QUERIES.mobileAndDown} {
+    display: none;
+  }
 `;
 
 const List = styled.ul`
@@ -73,6 +84,10 @@ const ListItem = styled.li`
 `;
 
 export function Header() {
+  const [open, setOpen] = useState(false);
+  const node = useRef<HTMLInputElement>(null);
+
+  useOnClickOutside(node, () => setOpen(false));
   return (
     <Wrapper>
       <LogoWrapper>
@@ -83,6 +98,11 @@ export function Header() {
           layout="responsive"
         />
       </LogoWrapper>
+      <div ref={node}>
+        <Burger open={open} setOpen={setOpen} />
+        <Menu open={open} />
+      </div>
+
       <Navbar>
         <List>
           <ListItem>
@@ -92,12 +112,17 @@ export function Header() {
           </ListItem>
           <ListItem>
             <Link scroll={false} href="/about">
-              About
+              About Us
             </Link>
           </ListItem>
           <ListItem>
             <Link scroll={false} href="/why-choose-us">
               Why Choose Us
+            </Link>
+          </ListItem>
+          <ListItem>
+            <Link scroll={false} href="/our-team">
+              Our Team
             </Link>
           </ListItem>
           <ListItem>

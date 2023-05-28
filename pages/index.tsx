@@ -44,7 +44,10 @@ const ImageWrapper = styled.div`
 const DescriptionWrapper = styled.div`
   max-width: 1024px;
   margin: auto;
-  text-align: center;
+
+  p:not(:first-child) {
+    margin-block-start: 3rem;
+  }
 `;
 
 const Description = styled.p`
@@ -56,7 +59,7 @@ const Description = styled.p`
   }
 
   @media ${QUERIES.mobileAndDown} {
-    padding-inline: 8px;
+    padding-inline: 16px;
   }
 `;
 
@@ -89,6 +92,15 @@ export default function Home() {
           beyond to make sure all of our clients’ needs are not only met, but
           exceeded. For more information about us, check out our website and get
           in touch today.
+        </Description>
+
+        <Description>
+          As an outsourcing firm located in Podgorica, Montenegro, we believe in
+          setting the bar high, with an unwavering commitment to our clients as
+          well as outstanding and uparalled service. We go above and beyond to
+          make sure all of our clients' needs are not only met, but exceeded.
+          For more information about us, check out our website and get in touch
+          today.
         </Description>
       </DescriptionWrapper>
     </Layout>
