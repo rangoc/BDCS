@@ -19,7 +19,9 @@ const Wrapper = styled.section`
 const Content = styled.div`
   display: flex;
   flex-direction: column;
-  padding-inline-start: 16px;
+  @media ${QUERIES.mobileAndDown} {
+    padding-inline: 16px;
+  }
 `;
 
 const Title = styled.h1`
