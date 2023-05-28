@@ -89,7 +89,7 @@ export default function OurTeam({ ...pageProps }) {
     <Layout>
       <SEO
         title="Our Team | BD Corporate Services d.o.o. Podgorica"
-        description=""
+        description="Meet our Team"
         ogUrl={pageProps.canonical}
       />
       <Wrapper>
