@@ -102,7 +102,7 @@ export default function About({ ...pageProps }) {
             gained at Big 4 firms. We offer a flexible hybrid team from junior
             to manager level that will be able to respond on various audit tasks
             at your request. With all the experience gained in auditing the
-            local Dutch companies reporting under Dutch GAAP, and the knowldge
+            local Dutch companies reporting under Dutch GAAP, and the knowledge
             of various IFRS experts, we can ensure that our clients receive
             great support.
           </Description>
