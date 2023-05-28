@@ -86,15 +86,6 @@ export default function Home() {
 
       <DescriptionWrapper>
         <Description>
-          Welcome to BD Corporate Services. As an outsourcing firm, we believe
-          in setting the bar high, with an unwavering commitment to our clients
-          as well as outstanding and unparalleled service. We go above and
-          beyond to make sure all of our clients’ needs are not only met, but
-          exceeded. For more information about us, check out our website and get
-          in touch today.
-        </Description>
-
-        <Description>
           As an outsourcing firm located in Podgorica, Montenegro, we believe in
           setting the bar high, with an unwavering commitment to our clients as
           well as outstanding and uparalled service. We go above and beyond to
