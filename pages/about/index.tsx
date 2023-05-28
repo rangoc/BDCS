@@ -98,7 +98,7 @@ export default function About({ ...pageProps }) {
           <Title>About BD Corporate Services</Title>
           <Description>
             BD Corporate services is an outsourcing firm consisting of highly
-            dedicated experienced staf with different knowledge within audit
+            dedicated experienced staff with different knowledge within audit
             gained at Big 4 firms. We offer a flexible hybrid team from junior
             to manager level that will be able to respond on various audit tasks
             at your request. With all the experience gained in auditing the
