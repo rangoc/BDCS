@@ -97,7 +97,7 @@ export default function OurTeam({ ...pageProps }) {
         <Articles>
           {OUR_TEAM.map(
             ({ name, bio, role, image, linkedin, email, phone }) => (
-              <Article>
+              <Article key={email}>
                 <ImageWrapper>
                   <Image src={image} />
                 </ImageWrapper>
