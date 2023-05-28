@@ -91,7 +91,7 @@ export default function OurTeam({ ...pageProps }) {
     <Layout>
       <SEO
         title="Our Team | BD Corporate Services d.o.o. Podgorica"
-        description="BD Corporate services is an outsourcing firm consisting of highly dedicated experienced staff with different knowledge within audit gained at Big 4 firms. We offer a flexible hybrid team from junior to manager level that will be able to respond on various audit tasks at your request. With all the experience gained in auditing the local Dutch companies reporting under Dutch GAAP, and the knowldge of various IFRS experts, we can ensure that our clients receive great support."
+        description="BD Corporate services is an outsourcing firm consisting of highly dedicated experienced staff with different knowledge within audit gained at Big 4 firms. We offer a flexible hybrid team from junior to manager level that will be able to respond on various audit tasks at your request. With all the experience gained in auditing the local Dutch companies reporting under Dutch GAAP, and the knowledge of various IFRS experts, we can ensure that our clients receive great support."
         ogUrl={pageProps.canonical}
       />
       <Wrapper>
