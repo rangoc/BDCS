@@ -8,6 +8,7 @@ import { OUR_TEAM, QUERIES } from "../../lib/constants";
 import mailIcon from "../../public/mail.png";
 import linkedinIcon from "../../public/linkedin.png";
 import phoneIcon from "../../public/phone.png";
+import Link from "next/link";
 
 const Wrapper = styled.div`
   max-width: 1200px;
@@ -113,21 +114,21 @@ export default function OurTeam({ ...pageProps }) {
 
                   <ArticleContact>
                     {linkedin && (
-                      <a href={linkedin}>
+                      <Link href={linkedin}>
                         <ArticleIconWrapper>
                           <Image src={linkedinIcon} />
                         </ArticleIconWrapper>
-                      </a>
+                      </Link>
                     )}
                     <ArticleIconWrapper>
-                      <a href={`tel:${phone}`}>
+                      <Link href={`tel:${phone}`}>
                         <Image src={phoneIcon} />
-                      </a>
+                      </Link>
                     </ArticleIconWrapper>
                     <ArticleIconWrapper>
-                      <a href={`mailto:${email}`}>
+                      <Link href={`mailto:${email}`}>
                         <Image src={mailIcon} />
-                      </a>
+                      </Link>
                     </ArticleIconWrapper>
                   </ArticleContact>
                 </ArticleInformation>
