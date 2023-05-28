@@ -81,6 +81,7 @@ export default function Home() {
           alt="Collegues walking together"
           layout="responsive"
           quality={100}
+          priority
         />
       </ImageWrapper>
 
