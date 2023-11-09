@@ -143,7 +143,7 @@ export const OUR_TEAM = [
     bio: `Petar Milaš is an ACCA Member with previous experience of more than 13 years with Big 4 firms, EY
     Serbia and EY Montenegro. In September 2023, Petar joined BDCS support team of Ruitenburg Audit
     B.V. (Netherlands) as an Engagement Manager. Petar provided assurance services to wide range of
-    international and local companies in various industry sectors such as clients in Oil&amp;Gas, Insurance,
+    international and local companies in various industry sectors such as clients in Oil&Gas, Insurance,
     Telecommunication, Customer products and services, Technology, Power and utilities, Professional
     services, Pharmaceuticals, Media and entertainment, Real estate, Mining, Diversified industrial
     products manufacturing. Petar has experience in audits reporting under IFRS, US GAAP, German
