@@ -1,7 +1,11 @@
-import dritan from "../public/DritanDragovic.jpeg";
-import boban from "../public/BobanCabarkapa.jpeg";
-import bojana from "../public/BojanaVucicevic.png";
-import marina from "../public/MarinaSukovic.png";
+import dritand from "../public/DritanDragovic.jpeg";
+import petarm from "../public/PetarMilas.jpg";
+import bojanav from "../public/BojanaVucicevic.png";
+import bojanab from "../public/BojanaBoskovic.jpg";
+import jovanaj from "../public/JovanaJanketic.jpg";
+import andjelinalar from "../public/AndjelinaRakcevic.jpg";
+import ksenijav from "../public/KsenijaVusurovic.jpg";
+import nadjab from "../public/NadjaBrnovic.jpg";
 
 const BREAKPOINTS = {
   mobileMax: 550,
@@ -121,7 +125,7 @@ export const ABOUT_US = [
 export const OUR_TEAM = [
   {
     name: "Dritan Dragović",
-    image: dritan,
+    image: dritand,
     role: "Co-Founder",
     bio: `Dritan Dragović (residing in the Netherlands) is a co-founder of BD Corporate Services with previous
     experience of more than 10 years with Big 4 firms, KPMG Netherlands and EY Montenegro. Dritan
@@ -132,39 +136,97 @@ export const OUR_TEAM = [
     phone: "+31 61 001 6808",
     email: "dritan.dragovic@bdcs.me",
   },
-  // {
-  //   name: "Boban Čabarkapa",
-  //   image: boban,
-  //   role: "Co-Founder",
-  //   bio: `Dritan Dragovic (residing in the Netherlands) is a co-founder of BD Corporate Services with previous
-  //   experience of more than 10 years with Big 4 firms, KPMG Netherlands and EY Montenegro. Dritan
-  //   provided assurance services to wide range of international and local Dutch clients in banking sector,
-  //   real estate and asset management. Dritan has experience in audits reporting under both Dutch
-  //   GAAP and IFRS.`,
-  //   linkedin: `https://www.linkedin.com/in/dritan-dragovic/`,
-  //   phone: "+31 61 001 6808",
-  //   email: "dritan.dragovic@bdcs.me",
-  // },
+  {
+    name: "Petar Milaš",
+    image: petarm,
+    role: "Audit Manager",
+    bio: `Petar Milaš is an ACCA Member with previous experience of more than 13 years with Big 4 firms, EY
+    Serbia and EY Montenegro. In September 2023, Petar joined BDCS support team of Ruitenburg Audit
+    B.V. (Netherlands) as an Engagement Manager. Petar provided assurance services to wide range of
+    international and local companies in various industry sectors such as clients in Oil&amp;Gas, Insurance,
+    Telecommunication, Customer products and services, Technology, Power and utilities, Professional
+    services, Pharmaceuticals, Media and entertainment, Real estate, Mining, Diversified industrial
+    products manufacturing. Petar has experience in audits reporting under IFRS, US GAAP, German
+    GAAP, Luxemburg GAAP and Belgium GAAP. Petar also has experience in performing buy-side due
+    diligence of insurance and telecommunication companies.`,
+    linkedin: `https://www.linkedin.com/in/petar-milas-acca-55053a6/`,
+    phone: "+381 62 800 9611",
+    email: "petar.milas@bdcs.me",
+  },
   {
     name: "Bojana Vučićević",
-    image: bojana,
-    role: "Assistant Auditor",
-    bio: `Bojana Vučićević is an audit assistant at BD Corporate Services. She has previous experience in
-    finance, accounting and audit amongst local and international companies operating in Europe.
-    Bojana is currently pursuing her master degree in Controlling at the Faculty of Economics in
-    Belgrade.`,
+    image: bojanav,
+    role: "Senior",
+    bio: `Bojana Vučićević is of May 2023 an Audit Senior of BDCS support team for Moos Accountants B.V.
+    (Netherlands) with previous experience in audit and accounting amongst international companies
+    operating in Serbia. She is an ACCA student and pursing for a master's degree at HWR in Berlin.`,
     linkedin: ``,
     phone: "+381 64 5215 935",
     email: "bojana.vucicevic@bdcs.me",
   },
-  // {
-  //   name: "Marina Šuković",
-  //   image: marina,
-  //   role: "Assistant Auditor",
-  //   bio: `Marina Šuković is an audit assistant at BD Corporate Services. She is currently pursuing her master
-  //   degree in Quantitative economics at the Faculty of Economics in Podgorica.`,
-  //   linkedin: `https://www.linkedin.com/in/marina-%C5%A1ukovi%C4%87-17014922b/`,
-  //   phone: "+382 68 013 288",
-  //   email: "marina.sukovic@bdcs.me",
-  // },
+  {
+    name: "Bojana Bošković",
+    image: bojanab,
+    role: "Senior",
+    bio: `Bojana Bošković is of September 2023 an Audit Senior of BDCS support team for Ruitenburg Audit
+    B.V. (Netherlands) with previous experience at Deloitte Montenegro. During her engagement at
+    Deloitte Montenegro, Bojana audited businesses and insurance companies from three countries
+    (Montenegro, Serbia, and North Macedonia). Bojana is an ACCA student. Also, Bojana is experienced
+    in project management in the NGO sector.`,
+    linkedin: `https://www.linkedin.com/in/bojana-bo%C5%A1kovi%C4%87-b5029222b/`,
+    phone: "+382 67 621 407",
+    email: "bojana.boskovic@bdcs.me",
+  },
+  {
+    name: "Jovana Janketić",
+    image: jovanaj,
+    role: "Junior Assistant",
+    bio: `Jovana Janketić joined BDCS in September 2023 and is part of Ruitenburg Audit B.V. (Netherlands)
+    support team as a Junior Assistant. Jovana completed three years of economics at the Faculty of
+    International Economics, Finance and Business at UDG, Montenegro. Through her previous
+    education, Jovana acquired knowledge in the fields of accounting, audit, economics and finance.`,
+    linkedin: ``,
+    phone: "+382 67 405 058",
+    email: "jovana.janketic@bdcs.me",
+  },
+  {
+    name: "Andjelina Rakčević",
+    image: andjelinalar,
+    role: "Junior Assistant",
+    bio: `Andjelina Rakčević joined BDCS in September in 2023 with previous experience in auditing with EY.
+    Andjelina is part of the Ruitenburg Audit B.V. (Netherlands) support team as a Junior Assistant.
+    Andjelina is also pursuing her master degree in Finance and Accounting at the Faculty of Economics
+    in Podgorica.`,
+    linkedin: ``,
+    phone: "+382 69 104 387",
+    email: "andjelina.rakcevic@bdcs.me",
+  },
+  {
+    name: "Ksenija Vušurović",
+    image: ksenijav,
+    role: "Junior Assistant",
+    bio: `Ksenija Vušurović joined BDCS in September 2023 and is part of the Ruitenburg Audit B.V.
+    (Netherlands) support team as a Junior Assistant. Ksenija has finished BSc in Finance Management as
+    one of the best students in generation. Ksenija has previous experience in Insurance sector in
+    international company operating in Montenegro. Ksenija has enrolled in MSc postgraduate
+    programme at the University of Montenegro, Faculty of Economics.`,
+    linkedin: `https://www.linkedin.com/in/ksenija-vusurovic-64321a228/`,
+    phone: "+382 69 536 603",
+    email: "ksenija.vusurovic@bdcs.me",
+  },
+  {
+    name: "Nađa Brnović",
+    image: nadjab,
+    role: "Junior Assistant",
+    bio: `Nađa Brnović is a Junior Assistant of BDCS support team for Moos Accountants B.V. (Netherlands).
+    Nađa started her career with BDCS in September 2023. As a dedicated and ambitious student at the
+    Faculty of Economics in Podgorica, Nađa is passionate about gaining insight into the dynamic world
+    of auditing. While currently pursuing her degree, Nadja has developed a solid foundation in
+    economic theories, financial analysis, and business management.
+    With a solid academic background, a passion for economics, and a strong desire to excel in auditing,
+    she is eager to take the first steps towards a successful career in audit field.`,
+    linkedin: `https://www.linkedin.com/in/na%C4%91a-brnovi%C4%87-891110297/`,
+    phone: "+382 69 830 600",
+    email: "nadja.brnovic@bdcs.me",
+  },
 ];

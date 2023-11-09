@@ -6,10 +6,66 @@ import { SEO } from "../components/SEO";
 import { QUERIES } from "../lib/constants";
 
 import home from "../public/home.webp";
+import moosLogo from "../public/MoosAccountantsLogo.png";
+import ruitenburgLogo from "../public/RuitenburgLogo.png";
 
 const HeadingWrapper = styled.div`
   text-align: center;
   margin-block-end: 3rem;
+`;
+
+const ColoredSection = styled.div`
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  width: 100vw;
+  background-color: #f0f0f0;
+  padding-block: 4rem;
+  margin-block-start: 3rem;
+`;
+
+const ColoredSectionContent = styled.div`
+  text-align: center;
+  margin: auto;
+  max-width: 1024px;
+  padding-inline: 64px;
+
+  @media ${QUERIES.mobileAndDown} {
+    padding-inline: 0;
+  }
+`;
+
+const PartnersTitle = styled.h2`
+  font-size: 2rem;
+  font-weight: 500;
+  margin-bottom: 3rem;
+
+  @media ${QUERIES.tabletAndDown} {
+    font-size: 1.5rem;
+  }
+`;
+
+const PartnersContainer = styled.div`
+  margin: auto;
+  max-width: 1024px;
+  display: flex;
+  align-items: center;
+
+  @media ${QUERIES.tabletAndDown} {
+    flex-direction: column;
+  }
+`;
+
+const PartnersImageWrapper = styled.div`
+  width: 350px;
+  margin-inline: auto;
+  margin-block-end: 3rem;
+
+  @media ${QUERIES.tabletAndDown} {
+    width: 250px;
+  }
 `;
 
 const Title = styled.h1`
@@ -95,6 +151,31 @@ export default function Home() {
           today.
         </Description>
       </DescriptionWrapper>
+
+      <ColoredSection>
+        <ColoredSectionContent>
+          <PartnersTitle>Our Partners</PartnersTitle>
+
+          <PartnersContainer>
+            <PartnersImageWrapper>
+              <Image
+                src={moosLogo}
+                alt="Moos Accountants"
+                layout="responsive"
+                quality={100}
+              />
+            </PartnersImageWrapper>
+            <PartnersImageWrapper>
+              <Image
+                src={ruitenburgLogo}
+                alt="Moos Accountants"
+                layout="responsive"
+                quality={100}
+              />
+            </PartnersImageWrapper>
+          </PartnersContainer>
+        </ColoredSectionContent>
+      </ColoredSection>
     </Layout>
   );
 }

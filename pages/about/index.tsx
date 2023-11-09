@@ -9,6 +9,7 @@ import { useState } from "react";
 
 const Wrapper = styled.div`
   max-width: 1200px;
+  padding-block-end: 64px;
   margin: auto;
 
   section:nth-child(2) {

@@ -13,12 +13,11 @@ const variants = {
 };
 
 const Content = styled(motion.main)`
-  padding-block: 64px;
+  padding-block-start: 64px;
   padding-inline: 64px;
-  margin-block-end: 6rem;
+  overflow-x: clip;
 
   @media ${QUERIES.mobileAndDown} {
-    /* padding-inline: 32px; */
     padding-inline: 0;
   }
 `;

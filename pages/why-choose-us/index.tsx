@@ -9,6 +9,7 @@ import whyResource from "../../public/chooseUs.webp";
 
 const Wrapper = styled.section`
   max-width: 1200px;
+  padding-block-end: 64px;
   display: flex;
   flex-direction: column;
   align-items: center;

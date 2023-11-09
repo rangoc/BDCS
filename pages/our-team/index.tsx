@@ -12,6 +12,7 @@ import Link from "next/link";
 
 const Wrapper = styled.div`
   max-width: 1200px;
+  padding-block-end: 64px;
   margin: auto;
   @media ${QUERIES.mobileAndDown} {
     padding-inline: 16px;
@@ -25,11 +26,12 @@ const Articles = styled.section`
 const ImageWrapper = styled.div`
   max-width: 300px;
   height: 300px;
+  overflow: clip;
 `;
 
 const Article = styled.article`
   display: flex;
-  gap: 16px;
+  gap: 32px;
 
   @media ${QUERIES.tabletAndDown} {
     flex-direction: column;
@@ -53,8 +55,10 @@ const ArticleRole = styled.span`
   font-weight: 300;
   font-size: 1.5rem;
   font-style: italic;
+  margin-inline-start: 0.5rem;
   @media ${QUERIES.mobileAndDown} {
     margin-block-start: 8px;
+    margin-inline-start: 0;
     display: block;
   }
 `;

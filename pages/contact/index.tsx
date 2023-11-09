@@ -34,6 +34,7 @@ const defaultValues: IFormInputs = {
 
 const Wrapper = styled.div`
   max-width: 1200px;
+  padding-block-end: 64px;
   display: flex;
   flex-direction: column;
   margin: auto;
