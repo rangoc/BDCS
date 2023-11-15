@@ -26,7 +26,7 @@ const Articles = styled.section`
 const ImageWrapper = styled.div`
   max-width: 300px;
   height: 300px;
-  overflow: clip;
+  overflow: hidden;
 `;
 
 const Article = styled.article`
