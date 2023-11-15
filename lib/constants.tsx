@@ -156,7 +156,7 @@ export const OUR_TEAM = [
   {
     name: "Bojana Vučićević",
     image: bojanav,
-    role: "Senior",
+    role: "Audit Senior",
     bio: `Bojana Vučićević is of May 2023 an Audit Senior of BDCS support team for Moos Accountants B.V.
     (Netherlands) with previous experience in audit and accounting amongst international companies
     operating in Serbia. She is an ACCA student and pursing for a master's degree at HWR in Berlin.`,
@@ -167,7 +167,7 @@ export const OUR_TEAM = [
   {
     name: "Bojana Bošković",
     image: bojanab,
-    role: "Senior",
+    role: "Audit Senior",
     bio: `Bojana Bošković is of September 2023 an Audit Senior of BDCS support team for Ruitenburg Audit
     B.V. (Netherlands) with previous experience at Deloitte Montenegro. During her engagement at
     Deloitte Montenegro, Bojana audited businesses and insurance companies from three countries
