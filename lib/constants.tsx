@@ -193,9 +193,9 @@ export const OUR_TEAM = [
     name: "Anđelina Rakčević",
     image: andjelinalar,
     role: "Junior Assistant",
-    bio: `Andjelina Rakčević joined BDCS in September in 2023 with previous experience in auditing with EY.
-    Andjelina is part of the Ruitenburg Audit B.V. (Netherlands) support team as a Junior Assistant.
-    Andjelina is also pursuing her master degree in Finance and Accounting at the Faculty of Economics
+    bio: `Anđelina Rakčević joined BDCS in September in 2023 with previous experience in auditing with EY.
+    Anđelina is part of the Ruitenburg Audit B.V. (Netherlands) support team as a Junior Assistant.
+    Anđelina is also pursuing her master degree in Finance and Accounting at the Faculty of Economics
     in Podgorica.`,
     linkedin: ``,
     phone: "+382 69 104 387",
