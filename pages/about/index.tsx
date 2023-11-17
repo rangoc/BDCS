@@ -72,7 +72,7 @@ const Switcher = styled.ul`
   list-style: none;
   align-items: center;
   justify-content: space-around;
-  margin-block-end: 3rem;
+  margin-block-end: 2rem;
   padding: 0;
 
   @media ${QUERIES.mobileAndDown} {
@@ -123,15 +123,17 @@ export default function About({ ...pageProps }) {
             ))}
           </Switcher>
 
-          {ABOUT_US.map((item) => (
-            <div key={item.description}>
-              {selectedItem === item.title && (
-                <Description
-                  dangerouslySetInnerHTML={{ __html: item.description }}
-                ></Description>
-              )}
-            </div>
-          ))}
+          <div style={{ minHeight: "100px" }}>
+            {ABOUT_US.map((item) => (
+              <div key={item.description}>
+                {selectedItem === item.title && (
+                  <Description
+                    dangerouslySetInnerHTML={{ __html: item.description }}
+                  ></Description>
+                )}
+              </div>
+            ))}
+          </div>
         </section>
         <section>
           <Image
