@@ -8,6 +8,7 @@ import { QUERIES } from "../lib/constants";
 import home from "../public/home.webp";
 import moosLogo from "../public/MoosAccountantsLogo.png";
 import ruitenburgLogo from "../public/RuitenburgLogo.png";
+import adviesLogo from "../public/AdviesGroep88Logo.png";
 
 const HeadingWrapper = styled.div`
   text-align: center;
@@ -100,6 +101,7 @@ const ImageWrapper = styled.div`
 const DescriptionWrapper = styled.div`
   max-width: 1024px;
   margin: auto;
+  text-align: justify;
 
   p:not(:first-child) {
     margin-block-start: 3rem;
@@ -168,7 +170,17 @@ export default function Home() {
             <PartnersImageWrapper>
               <Image
                 src={ruitenburgLogo}
-                alt="Moos Accountants"
+                alt="Ruitenburg"
+                layout="responsive"
+                quality={100}
+              />
+            </PartnersImageWrapper>
+          </PartnersContainer>
+          <PartnersContainer>
+            <PartnersImageWrapper>
+              <Image
+                src={adviesLogo}
+                alt="AdviesGroep88"
                 layout="responsive"
                 quality={100}
               />

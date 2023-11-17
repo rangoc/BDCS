@@ -56,6 +56,7 @@ const ListItem = styled.li<{ isSelected: boolean }>`
 export const Description = styled.p`
   font-size: 1.125rem;
   font-weight: 300;
+  text-align: justify;
 
   @media ${QUERIES.tabletAndDown} {
     font-size: 1rem;

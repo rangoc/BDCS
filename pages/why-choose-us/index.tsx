@@ -72,6 +72,7 @@ const ArticleDescription = styled.p`
   font-size: 1.125rem;
   font-weight: 300;
   margin-block-start: 1rem;
+  text-align: justify;
   @media ${QUERIES.tabletAndDown} {
     font-size: 1rem;
   }

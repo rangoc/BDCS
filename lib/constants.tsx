@@ -190,7 +190,7 @@ export const OUR_TEAM = [
     email: "jovana.janketic@bdcs.me",
   },
   {
-    name: "Andjelina Rakčević",
+    name: "Anđelina Rakčević",
     image: andjelinalar,
     role: "Junior Assistant",
     bio: `Andjelina Rakčević joined BDCS in September in 2023 with previous experience in auditing with EY.
