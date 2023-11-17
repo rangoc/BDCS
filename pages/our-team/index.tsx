@@ -72,8 +72,8 @@ const ArticleContact = styled.div`
 `;
 
 const ArticleIconWrapper = styled.div`
-  width: 25px;
-  height: 25px;
+  width: 24px;
+  height: 24px;
 `;
 
 const Title = styled.h1`
@@ -125,16 +125,22 @@ export default function OurTeam({ ...pageProps }) {
                         </ArticleIconWrapper>
                       </Link>
                     )}
-                    <ArticleIconWrapper>
+
+                    {phone && (
                       <Link href={`tel:${phone}`}>
-                        <Image src={phoneIcon} />
+                        <ArticleIconWrapper>
+                          <Image src={phoneIcon} />
+                        </ArticleIconWrapper>
                       </Link>
-                    </ArticleIconWrapper>
-                    <ArticleIconWrapper>
+                    )}
+
+                    {email && (
                       <Link href={`mailto:${email}`}>
-                        <Image src={mailIcon} />
+                        <ArticleIconWrapper>
+                          <Image src={mailIcon} />
+                        </ArticleIconWrapper>
                       </Link>
-                    </ArticleIconWrapper>
+                    )}
                   </ArticleContact>
                 </ArticleInformation>
               </Article>

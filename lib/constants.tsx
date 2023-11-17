@@ -150,7 +150,7 @@ export const OUR_TEAM = [
     GAAP, Luxemburg GAAP and Belgium GAAP. Petar also has experience in performing buy-side due
     diligence of insurance and telecommunication companies.`,
     linkedin: `https://www.linkedin.com/in/petar-milas-acca-55053a6/`,
-    phone: "+381 62 800 9611",
+    phone: "",
     email: "petar.milas@bdcs.me",
   },
   {
@@ -161,7 +161,7 @@ export const OUR_TEAM = [
     (Netherlands) with previous experience in audit and accounting amongst international companies
     operating in Serbia. She is an ACCA student and pursing for a master's degree at HWR in Berlin.`,
     linkedin: ``,
-    phone: "+381 64 5215 935",
+    phone: "",
     email: "bojana.vucicevic@bdcs.me",
   },
   {
@@ -174,7 +174,7 @@ export const OUR_TEAM = [
     (Montenegro, Serbia, and North Macedonia). Bojana is an ACCA student. Also, Bojana is experienced
     in project management in the NGO sector.`,
     linkedin: `https://www.linkedin.com/in/bojana-bo%C5%A1kovi%C4%87-b5029222b/`,
-    phone: "+382 67 621 407",
+    phone: "",
     email: "bojana.boskovic@bdcs.me",
   },
   {
@@ -186,7 +186,7 @@ export const OUR_TEAM = [
     International Economics, Finance and Business at UDG, Montenegro. Through her previous
     education, Jovana acquired knowledge in the fields of accounting, audit, economics and finance.`,
     linkedin: ``,
-    phone: "+382 67 405 058",
+    phone: "",
     email: "jovana.janketic@bdcs.me",
   },
   {
@@ -198,7 +198,7 @@ export const OUR_TEAM = [
     Anđelina is also pursuing her master degree in Finance and Accounting at the Faculty of Economics
     in Podgorica.`,
     linkedin: ``,
-    phone: "+382 69 104 387",
+    phone: "",
     email: "andjelina.rakcevic@bdcs.me",
   },
   {
@@ -211,7 +211,7 @@ export const OUR_TEAM = [
     international company operating in Montenegro. Ksenija has enrolled in MSc postgraduate
     programme at the University of Montenegro, Faculty of Economics.`,
     linkedin: `https://www.linkedin.com/in/ksenija-vusurovic-64321a228/`,
-    phone: "+382 69 536 603",
+    phone: "",
     email: "ksenija.vusurovic@bdcs.me",
   },
   {
@@ -226,7 +226,7 @@ export const OUR_TEAM = [
     With a solid academic background, a passion for economics, and a strong desire to excel in auditing,
     she is eager to take the first steps towards a successful career in audit field.`,
     linkedin: `https://www.linkedin.com/in/na%C4%91a-brnovi%C4%87-891110297/`,
-    phone: "+382 69 830 600",
+    phone: "",
     email: "nadja.brnovic@bdcs.me",
   },
 ];
