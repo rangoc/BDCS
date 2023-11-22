@@ -244,7 +244,7 @@ export default function Contact({ ...pageProps }) {
           contact form, we kindly request that you direct your queries,
           concerns, or requests to our dedicated email address:{" "}
           <Link style={{ color: "black" }} href="mailto:info@bdcs.me">
-            <strong>info@bdscs.me</strong>
+            <strong>info@bdcs.me</strong>
           </Link>
           .
         </Caption>
