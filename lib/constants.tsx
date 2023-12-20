@@ -1,5 +1,6 @@
 import dritand from "../public/DritanDragovic.jpeg";
 import petarm from "../public/PetarMilas.jpg";
+import dijanao from "../public/DijanaOpancina.jpg";
 import bojanav from "../public/BojanaVucicevic.png";
 import bojanab from "../public/BojanaBoskovic.jpg";
 import jovanaj from "../public/JovanaJanketic.jpg";
@@ -152,6 +153,16 @@ export const OUR_TEAM = [
     linkedin: `https://www.linkedin.com/in/petar-milas-acca-55053a6/`,
     phone: "",
     email: "petar.milas@bdcs.me",
+  },
+  {
+    name: "Dijana Opančina",
+    image: dijanao,
+    role: "Audit Assistant Manager",
+    bio: `Dijana Opančina is of December 2023 an Audit Assistant Manager of BDCS support team for the Dutch market with previous experience at Deloitte Montenegro. 
+    Before joining BDCS, she was part of Deloitte Montenegro for six years where she has acquired experience in performing audit of consolidated and statutory financial statements prepared in accordance with IFRS and local accounting standards.`,
+    linkedin: `https://www.linkedin.com/in/dijana-drobnjak-3b4693198/`,
+    phone: "",
+    email: "dijana.opancina@bdcs.me",
   },
   {
     name: "Bojana Vučićević",
