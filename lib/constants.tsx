@@ -196,7 +196,7 @@ export const OUR_TEAM = [
     support team as a Junior Assistant. Jovana completed three years of economics at the Faculty of
     International Economics, Finance and Business at UDG, Montenegro. Through her previous
     education, Jovana acquired knowledge in the fields of accounting, audit, economics and finance.`,
-    linkedin: ``,
+    linkedin: `https://www.linkedin.com/in/jovana-janketi%C4%87-a091aa2a6/`,
     phone: "",
     email: "jovana.janketic@bdcs.me",
   },
