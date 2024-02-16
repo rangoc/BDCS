@@ -225,19 +225,4 @@ export const OUR_TEAM = [
     phone: "",
     email: "ksenija.vusurovic@bdcs.me",
   },
-  {
-    name: "Nađa Brnović",
-    image: nadjab,
-    role: "Junior Assistant",
-    bio: `Nađa Brnović is a Junior Assistant of BDCS support team for Moos Accountants B.V. (Netherlands).
-    Nađa started her career with BDCS in September 2023. As a dedicated and ambitious student at the
-    Faculty of Economics in Podgorica, Nađa is passionate about gaining insight into the dynamic world
-    of auditing. While currently pursuing her degree, Nadja has developed a solid foundation in
-    economic theories, financial analysis, and business management.
-    With a solid academic background, a passion for economics, and a strong desire to excel in auditing,
-    she is eager to take the first steps towards a successful career in audit field.`,
-    linkedin: `https://www.linkedin.com/in/na%C4%91a-brnovi%C4%87-891110297/`,
-    phone: "",
-    email: "nadja.brnovic@bdcs.me",
-  },
 ];
