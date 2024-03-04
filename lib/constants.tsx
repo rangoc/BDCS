@@ -6,7 +6,7 @@ import bojanab from "../public/BojanaBoskovic.jpg";
 import jovanaj from "../public/JovanaJanketic.jpg";
 import andjelinalar from "../public/AndjelinaRakcevic.jpg";
 import ksenijav from "../public/KsenijaVusurovic.jpg";
-import nadjab from "../public/NadjaBrnovic.jpg";
+import bobanc from "../public/BobanCabarkapa.jpg";
 
 const BREAKPOINTS = {
   mobileMax: 550,
@@ -136,6 +136,19 @@ export const OUR_TEAM = [
     linkedin: `https://www.linkedin.com/in/dritan-dragovic/`,
     phone: "+31 61 001 6808",
     email: "dritan.dragovic@bdcs.me",
+  },
+  {
+    name: "Boban Čabarkapa",
+    image: bobanc,
+    role: "Co-Founder & CEO",
+    bio: `As a co-founder and CEO of BD Corporate Services (BDCS) Boban is experienced finance professional with more than 12 years of experience in auditing. 
+    He started his career at EY Montenegro in 2011 and before joining KC Audit he worked at Deloitte Montenegro in the role of audit executive director. 
+    In between Boban also worked in EY Stockholm for a period of one year at various companies which gives him a better insight in the challenges and focus areas of companies. 
+    He is ACCA member since 2018. Boban’s skill set includes strong practices of International Financial Reporting Standards (IFRS) and International Standards on Auditing (ISA) and Dutch GAAP. 
+    Besides, he was part of ISQM1 team for Deloitte Central Europe.`,
+    linkedin: `https://www.linkedin.com/in/boban-cabarkapa-acca-674b7388/`,
+    phone: "+382 69 340 084",
+    email: "boban.cabarkapa@bdcs.me",
   },
   {
     name: "Petar Milaš",
