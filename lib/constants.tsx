@@ -1,6 +1,7 @@
 import dritand from "../public/DritanDragovic.jpeg";
 import petarm from "../public/PetarMilas.jpg";
 import dijanao from "../public/DijanaOpancina.jpg";
+import nikolar from "../public/NikolaRadunovic.jpg";
 import bojanav from "../public/BojanaVucicevic.jpg";
 import bojanab from "../public/BojanaBoskovic.jpg";
 import jovanaj from "../public/JovanaJanketic.jpg";
@@ -166,6 +167,19 @@ export const OUR_TEAM = [
     linkedin: `https://www.linkedin.com/in/petar-milas-acca-55053a6/`,
     phone: "",
     email: "petar.milas@bdcs.me",
+  },
+  {
+    name: "Nikola Radunović",
+    image: nikolar,
+    role: "Audit Assistant Manager",
+    bio: `Nikola Radunović is a dedicated professional with a diverse background in audit and accounting. 
+    With 4 years of experience in external audit, 1 year in accounting, and 3 years in internal audit, Nikola has honed his expertise through roles at Deloitte and other companies in Montenegro. 
+    His work involves auditing statutory and consolidated financial statements for a variety of companies across sectors such as trade, hospitality, transportation, production and insurance, all in compliance with IFRS standards and local accounting regulations. 
+    During his tenure in internal auditing, Nikola acquired substantial expertise in risk management, internal controls and corporate governance, particularly within an insurance company and an investment fund. 
+    Nikola holds a European Master in Official Statistics and is also an ACCA student.`,
+    linkedin: `https://www.linkedin.com/in/nikola-radunovi%C4%87-31150730a/`,
+    phone: "",
+    email: "nikola.radunovic@bdcs.me",
   },
   {
     name: "Dijana Opančina",
