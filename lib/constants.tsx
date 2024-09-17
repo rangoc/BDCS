@@ -1,13 +1,14 @@
-import dritand from "../public/DritanDragovic.jpeg";
-import petarm from "../public/PetarMilas.jpg";
-import dijanao from "../public/DijanaOpancina.jpg";
-import nikolar from "../public/NikolaRadunovic.jpg";
-import bojanav from "../public/BojanaVucicevic.jpg";
-import bojanab from "../public/BojanaBoskovic.jpg";
-import jovanaj from "../public/JovanaJanketic.jpg";
 import andjelinalar from "../public/AndjelinaRakcevic.jpg";
-import ksenijav from "../public/KsenijaVusurovic.jpg";
 import bobanc from "../public/BobanCabarkapa.jpg";
+import bojanab from "../public/BojanaBoskovic.jpg";
+import bojanav from "../public/BojanaVucicevic.jpg";
+import dijanao from "../public/DijanaOpancina.jpg";
+import dritand from "../public/DritanDragovic.jpeg";
+import jovanaj from "../public/JovanaJanketic.jpg";
+import ksenijav from "../public/KsenijaVusurovic.jpg";
+import nikolar from "../public/NikolaRadunovic.jpg";
+import petarm from "../public/PetarMilas.jpg";
+import vjeraj from "../public/VjeraJovovic.jpg";
 
 const BREAKPOINTS = {
   mobileMax: 550,
@@ -218,7 +219,7 @@ export const OUR_TEAM = [
   {
     name: "Jovana Janketić",
     image: jovanaj,
-    role: "Junior Assistant",
+    role: "Audit Assistant",
     bio: `Jovana Janketić joined BDCS in September 2023 and is part of Ruitenburg Audit B.V. (Netherlands)
     support team as a Junior Assistant. Jovana completed three years of economics at the Faculty of
     International Economics, Finance and Business at UDG, Montenegro. Through her previous
@@ -230,7 +231,7 @@ export const OUR_TEAM = [
   {
     name: "Anđelina Rakčević",
     image: andjelinalar,
-    role: "Junior Assistant",
+    role: "Audit Assistant",
     bio: `Anđelina Rakčević joined BDCS in September in 2023 with previous experience in auditing with EY.
     Anđelina is part of the Ruitenburg Audit B.V. (Netherlands) support team as a Junior Assistant.
     Anđelina is also pursuing her master degree in Finance and Accounting at the Faculty of Economics
@@ -242,7 +243,7 @@ export const OUR_TEAM = [
   {
     name: "Ksenija Vušurović",
     image: ksenijav,
-    role: "Junior Assistant",
+    role: "Audit Assistant",
     bio: `Ksenija Vušurović joined BDCS in September 2023 and is part of the Ruitenburg Audit B.V.
     (Netherlands) support team as a Junior Assistant. Ksenija has finished BSc in Finance Management as
     one of the best students in generation. Ksenija has previous experience in Insurance sector in
@@ -251,5 +252,17 @@ export const OUR_TEAM = [
     linkedin: `https://www.linkedin.com/in/ksenija-vusurovic-64321a228/`,
     phone: "",
     email: "ksenija.vusurovic@bdcs.me",
+  },
+  {
+    name: "Vjera Jovović",
+    image: vjeraj,
+    role: "Junior Assistant",
+    bio: `Vjera Jovović is a finance professional with a bachelor’s degree at the University of Donja Gorica, Faculty of International Economics, Finance and Business.
+    Vjera started her career at Deloitte Montenegro. Before joining BDCS, Vjera acquired experience in external auditing as well as accounting practices for both IFRS and IFRS for SME’s clients.
+    Vjera is passionate about gaining insight into the dynamic world of auditing and has developed a solid foundation in economic theories, financial analysis, and business management.
+    Vjera enjoys travelling, taking on new challenges and spending time with family and friends.`,
+    linkedin: "https://www.linkedin.com/in/vjera-jovovic-807aa1231/",
+    phone: "",
+    email: "vjera.jovovic@bdcs.me",
   },
 ];
