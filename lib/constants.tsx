@@ -256,7 +256,7 @@ export const OUR_TEAM = [
   {
     name: "Vjera Jovović",
     image: vjeraj,
-    role: "Junior Assistant",
+    role: "Audit Assistant",
     bio: `Vjera Jovović is a finance professional with a bachelor’s degree at the University of Donja Gorica, Faculty of International Economics, Finance and Business.
     Vjera started her career at Deloitte Montenegro. Before joining BDCS, Vjera acquired experience in external auditing as well as accounting practices for both IFRS and IFRS for SME’s clients.
     Vjera is passionate about gaining insight into the dynamic world of auditing and has developed a solid foundation in economic theories, financial analysis, and business management.
