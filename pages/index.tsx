@@ -387,7 +387,7 @@ export default function Home() {
             </Link>
             <Link href="/why-choose-us" passHref legacyBehavior>
               <Button as="a" variant="outline" size="large">
-                Learn More
+                Why Choose Us
               </Button>
             </Link>
           </HeroCTA>
