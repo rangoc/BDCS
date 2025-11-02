@@ -1,11 +1,11 @@
+import { AnimatePresence } from "framer-motion";
 import type { AppProps } from "next/app";
+import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { GlobalStyles } from "../lib/globalStyles";
-import { AnimatePresence } from "framer-motion";
-import { useRouter } from "next/router";
 
-import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
+import { Header } from "../components/Header";
 import { SEO } from "../components/SEO";
 
 export default function App({ Component, pageProps, router }: AppProps) {
@@ -19,13 +19,13 @@ export default function App({ Component, pageProps, router }: AppProps) {
    */
   useEffect(() => {
     const handleRouteChange = () => {
-      window.scrollTo({ top: 0, behavior: 'instant' });
+      window.scrollTo(0, 0);
     };
 
-    routerInstance.events.on('routeChangeComplete', handleRouteChange);
-    
+    routerInstance.events.on("routeChangeComplete", handleRouteChange);
+
     return () => {
-      routerInstance.events.off('routeChangeComplete', handleRouteChange);
+      routerInstance.events.off("routeChangeComplete", handleRouteChange);
     };
   }, [routerInstance.events]);
 
