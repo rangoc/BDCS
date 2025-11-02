@@ -5,9 +5,10 @@
  * Features scroll-triggered animations and modern layout
  */
 
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/legacy/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import { Button } from "../components/Button";
@@ -28,7 +29,10 @@ import {
   typography,
 } from "../lib/theme";
 
-import home from "../public/assets/home.webp";
+import carousel1 from "../public/assets/carousel1.webp";
+import carousel2 from "../public/assets/carousel2.webp";
+import carousel3 from "../public/assets/carousel3.webp";
+import carousel4 from "../public/assets/carousel4.webp";
 import adviesLogo from "../public/partners/AdviesGroep88Logo.png";
 import moosLogo from "../public/partners/MoosAccountantsLogo.png";
 import ruitenburgLogo from "../public/partners/RuitenburgLogo.png";
@@ -132,9 +136,12 @@ const HeroCTA = styled(motion.div)`
 
 /**
  * Hero image container (right side)
+ * Aspect ratio maintains space for absolutely positioned images
  */
-const HeroImageWrapper = styled(motion.div)`
+const HeroImageWrapper = styled.div`
   position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
   border-radius: ${borderRadius["3xl"]};
   overflow: hidden;
   box-shadow: ${shadows.xl};
@@ -142,6 +149,18 @@ const HeroImageWrapper = styled(motion.div)`
   @media ${mediaQueries.tabletAndDown} {
     order: -1;
   }
+`;
+
+/**
+ * Individual carousel image wrapper
+ * Absolute positioning for smooth crossfade overlay
+ */
+const CarouselImage = styled(motion.div)`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 `;
 
 // ============================================================================
@@ -313,6 +332,27 @@ const PartnerLogo = styled.div`
 // ============================================================================
 
 export default function Home() {
+  // Hero carousel images
+  const heroImages = [
+    { src: carousel1, alt: "Professional team collaboration" },
+    { src: carousel2, alt: "Expert audit services" },
+    { src: carousel3, alt: "Quality and excellence" },
+    { src: carousel4, alt: "Dedicated professional team" },
+  ];
+
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  /**
+   * Auto-cycle through images every 5 seconds
+   */
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % heroImages.length);
+    }, 10000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <Layout>
       <SEO
@@ -353,19 +393,25 @@ export default function Home() {
           </HeroCTA>
         </HeroContent>
 
-        {/* Right side - Image */}
-        <HeroImageWrapper
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-        >
-          <Image
-            src={home}
-            alt="Professional team collaboration"
-            layout="responsive"
-            quality={100}
-            priority
-          />
+        {/* Right side - Auto-cycling Images */}
+        <HeroImageWrapper>
+          <AnimatePresence initial={false}>
+            <CarouselImage
+              key={currentImageIndex}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 1.2, ease: "easeInOut" }}
+            >
+              <Image
+                src={heroImages[currentImageIndex].src}
+                alt={heroImages[currentImageIndex].alt}
+                layout="responsive"
+                quality={100}
+                priority={currentImageIndex === 0}
+              />
+            </CarouselImage>
+          </AnimatePresence>
         </HeroImageWrapper>
       </HeroSection>
 

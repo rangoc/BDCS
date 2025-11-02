@@ -124,10 +124,15 @@ const ModalContent = styled.div`
  */
 const ImageSection = styled.div`
   position: relative;
+  width: 100%;
 
   @media ${mediaQueries.tabletAndDown} {
-    max-width: 300px;
+    width: 300px;
     margin: 0 auto;
+  }
+
+  @media ${mediaQueries.mobileAndDown} {
+    width: 200px;
   }
 `;
 
@@ -138,7 +143,8 @@ const ImageSection = styled.div`
 const ImageWrapper = styled.div`
   position: relative;
   width: 100%;
-  aspect-ratio: 1;
+  height: 0;
+  padding-bottom: 100%; /* 1:1 aspect ratio */
   border-radius: ${borderRadius["2xl"]};
   overflow: hidden;
   box-shadow: ${shadows.lg};
@@ -147,6 +153,11 @@ const ImageWrapper = styled.div`
   /* Ensure images crop from top, keeping heads visible */
   img {
     object-position: top center !important;
+  }
+
+  @media ${mediaQueries.mobileAndDown} {
+    border-radius: ${borderRadius.xl};
+    margin-bottom: ${spacing[3]};
   }
 `;
 

@@ -106,11 +106,14 @@ const TimelineContainer = styled.div`
 const TimelineSidebar = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   position: relative;
+  min-height: 400px;
 
   @media ${mediaQueries.mobileAndDown} {
     flex-direction: row;
     justify-content: space-around;
+    min-height: auto;
   }
 `;
 
@@ -120,8 +123,8 @@ const TimelineSidebar = styled.div`
 const TimelineLine = styled.div`
   position: absolute;
   left: 15px;
-  top: 30px;
-  bottom: 30px;
+  top: 16px;
+  bottom: 16px;
   width: 3px;
   background-color: ${colors.neutral.gray200};
 
@@ -132,18 +135,19 @@ const TimelineLine = styled.div`
 
 /**
  * Animated progress line
+ * Fills from first dot to current dot
  */
-const TimelineProgress = styled(motion.div)<{ $progress: number }>`
+const TimelineProgress = styled(motion.div)<{ $currentIndex: number }>`
   position: absolute;
   left: 15px;
-  top: 30px;
+  top: 16px;
   width: 3px;
   background: linear-gradient(
     to bottom,
     ${colors.accent.main},
     ${colors.complimentary.main}
   );
-  height: ${({ $progress }) => `${$progress}%`};
+  height: ${({ $currentIndex }) => `calc(${$currentIndex * 50}% - 15px)`};
   transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 
   @media ${mediaQueries.mobileAndDown} {
@@ -158,7 +162,6 @@ const TimelineItem = styled(motion.div)<{ $isActive: boolean }>`
   display: flex;
   align-items: center;
   gap: ${spacing[4]};
-  padding: ${spacing[4]} 0;
   cursor: pointer;
   position: relative;
   z-index: 1;
@@ -166,7 +169,6 @@ const TimelineItem = styled(motion.div)<{ $isActive: boolean }>`
   @media ${mediaQueries.mobileAndDown} {
     flex-direction: column;
     gap: ${spacing[2]};
-    padding: ${spacing[2]};
   }
 `;
 
@@ -216,23 +218,17 @@ const TimelineLabel = styled.div<{ $isActive: boolean }>`
 
 /**
  * Content area
+ * Uses relative positioning for natural flow
  */
 const ContentArea = styled.div`
   position: relative;
-  min-height: 400px;
-
-  @media ${mediaQueries.mobileAndDown} {
-    min-height: 300px;
-  }
 `;
 
 /**
  * Content container with animation
+ * Natural height to prevent overflow
  */
 const ContentContainer = styled(motion.div)`
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   background-color: ${colors.neutral.white};
   padding: ${spacing[8]};
@@ -315,11 +311,10 @@ export default function About({ ...pageProps }) {
     setSelectedItem(title);
   };
 
-  // Find current content and calculate progress
+  // Find current content and current index for progress line
   const currentIndex = ABOUT_US.findIndex(
     (item) => item.title === selectedItem
   );
-  const progress = currentIndex === 0 ? 0 : currentIndex === 1 ? 50 : 100;
   const currentContent = ABOUT_US.find((item) => item.title === selectedItem);
 
   return (
@@ -354,7 +349,7 @@ export default function About({ ...pageProps }) {
               {/* Timeline Sidebar */}
               <TimelineSidebar>
                 <TimelineLine />
-                <TimelineProgress $progress={progress} />
+                <TimelineProgress $currentIndex={currentIndex} />
 
                 {ABOUT_US.map((item, index) => {
                   const isActive = selectedItem === item.title;

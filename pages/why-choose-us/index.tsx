@@ -133,7 +133,6 @@ const CardHeader = styled.div`
  * Icon wrapper with gradient background
  */
 const IconWrapper = styled.div`
-  classname: icon-wrapper;
   width: 64px;
   height: 64px;
   display: flex;
