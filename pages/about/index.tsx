@@ -1,92 +1,326 @@
+/**
+ * About Us Page
+ *
+ * Company information with Mission, Vision, and Values switcher
+ * Features smooth animations and responsive design
+ */
+
+import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/legacy/image";
-import styled from "styled-components";
-import { Layout } from "../../components/Layout";
-
-import { SEO } from "../../components/SEO";
-import { ABOUT_US, QUERIES } from "../../lib/constants";
-import about from "../../public/about.webp";
 import { useState } from "react";
+import styled from "styled-components";
 
+import { Layout } from "../../components/Layout";
+import { SEO } from "../../components/SEO";
+import { ScrollReveal } from "../../components/ScrollReveal";
+import { ABOUT_US } from "../../lib/constants";
+import {
+  borderRadius,
+  colors,
+  mediaQueries,
+  shadows,
+  spacing,
+  typography,
+} from "../../lib/theme";
+import about from "../../public/assets/about.webp";
+
+// ============================================================================
+// STYLED COMPONENTS
+// ============================================================================
+
+/**
+ * Page wrapper
+ */
 const Wrapper = styled.div`
   max-width: 1200px;
-  padding-block-end: 64px;
-  margin: auto;
+  margin: 0 auto;
+`;
 
-  section:nth-child(2) {
-    margin-block-start: 8rem;
+/**
+ * Main intro section
+ */
+const IntroSection = styled.section`
+  margin-bottom: ${spacing[16]};
+`;
+
+/**
+ * Section title
+ */
+const SectionTitle = styled.h1`
+  font-size: ${typography.fontSize["4xl"]};
+  font-weight: ${typography.fontWeight.bold};
+  color: ${colors.primary.main};
+  margin-bottom: ${spacing[6]};
+
+  @media ${mediaQueries.tabletAndDown} {
+    font-size: ${typography.fontSize["3xl"]};
   }
 
-  section:nth-child(3) {
-    margin-block-start: 4rem;
+  @media ${mediaQueries.mobileAndDown} {
+    font-size: ${typography.fontSize["2xl"]};
   }
 `;
 
-const Title = styled.div`
-  font-size: 2rem;
-  font-weight: 700;
-  margin-block-end: 1rem;
-  @media ${QUERIES.mobileAndDown} {
-    padding-inline: 16px;
-  }
-`;
-const ListItem = styled.li<{ isSelected: boolean }>`
-  font-size: 2rem;
-  font-weight: 700;
-  position: relative;
-  cursor: pointer;
+/**
+ * Description text
+ */
+const Description = styled.p`
+  font-size: ${typography.fontSize.lg};
+  line-height: ${typography.lineHeight.relaxed};
+  color: ${colors.secondary.lighter};
 
-  &::after {
-    content: "";
-    position: absolute;
-    width: ${({ isSelected }) => (isSelected ? "100%" : "0%")};
-    transform: ${({ isSelected }) => (isSelected ? "scaleX(1)" : "scaleX(0)")};
-    height: 2px;
-    bottom: 0;
-    left: 0;
-    background-color: black;
-    transform-origin: bottom left;
-    transition: transform 0.25s ease-out;
-  }
-
-  @media ${QUERIES.mobileAndDown} {
-    font-size: 1.2rem;
+  @media ${mediaQueries.tabletAndDown} {
+    font-size: ${typography.fontSize.base};
   }
 `;
 
-export const Description = styled.p`
-  font-size: 1.125rem;
-  font-weight: 300;
-  text-align: justify;
+/**
+ * Mission/Vision/Values section
+ */
+const MVVSection = styled.section`
+  margin-bottom: ${spacing[16]};
+`;
 
-  @media ${QUERIES.tabletAndDown} {
-    font-size: 1rem;
+/**
+ * Timeline layout container
+ */
+const TimelineContainer = styled.div`
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: ${spacing[12]};
+
+  @media ${mediaQueries.tabletAndDown} {
+    grid-template-columns: 150px 1fr;
+    gap: ${spacing[8]};
   }
 
-  @media ${QUERIES.mobileAndDown} {
-    padding-inline: 16px;
+  @media ${mediaQueries.mobileAndDown} {
+    grid-template-columns: 1fr;
+    gap: ${spacing[6]};
   }
 `;
 
-const Switcher = styled.ul`
+/**
+ * Timeline sidebar with items
+ */
+const TimelineSidebar = styled.div`
   display: flex;
-  list-style: none;
-  align-items: center;
-  justify-content: space-around;
-  margin-block-end: 2rem;
-  padding: 0;
+  flex-direction: column;
+  position: relative;
 
-  @media ${QUERIES.mobileAndDown} {
-    padding-inline: 16px;
-    justify-content: space-between;
+  @media ${mediaQueries.mobileAndDown} {
+    flex-direction: row;
+    justify-content: space-around;
   }
 `;
+
+/**
+ * Vertical connecting line
+ */
+const TimelineLine = styled.div`
+  position: absolute;
+  left: 15px;
+  top: 30px;
+  bottom: 30px;
+  width: 3px;
+  background-color: ${colors.neutral.gray200};
+
+  @media ${mediaQueries.mobileAndDown} {
+    display: none;
+  }
+`;
+
+/**
+ * Animated progress line
+ */
+const TimelineProgress = styled(motion.div)<{ $progress: number }>`
+  position: absolute;
+  left: 15px;
+  top: 30px;
+  width: 3px;
+  background: linear-gradient(
+    to bottom,
+    ${colors.accent.main},
+    ${colors.complimentary.main}
+  );
+  height: ${({ $progress }) => `${$progress}%`};
+  transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+  @media ${mediaQueries.mobileAndDown} {
+    display: none;
+  }
+`;
+
+/**
+ * Individual timeline item
+ */
+const TimelineItem = styled(motion.div)<{ $isActive: boolean }>`
+  display: flex;
+  align-items: center;
+  gap: ${spacing[4]};
+  padding: ${spacing[4]} 0;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+
+  @media ${mediaQueries.mobileAndDown} {
+    flex-direction: column;
+    gap: ${spacing[2]};
+    padding: ${spacing[2]};
+  }
+`;
+
+/**
+ * Timeline dot indicator
+ */
+const TimelineDot = styled(motion.div)<{ $isActive: boolean }>`
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: ${({ $isActive }) =>
+    $isActive ? colors.accent.main : colors.neutral.white};
+  border: 3px solid
+    ${({ $isActive }) =>
+      $isActive ? colors.accent.main : colors.neutral.gray300};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.3s ease-out;
+  box-shadow: ${({ $isActive }) =>
+    $isActive ? shadows.accentGlow : shadows.sm};
+
+  /* Number inside dot */
+  color: ${({ $isActive }) =>
+    $isActive ? colors.neutral.white : colors.secondary.lighter};
+  font-weight: ${typography.fontWeight.bold};
+  font-size: ${typography.fontSize.sm};
+`;
+
+/**
+ * Timeline label
+ */
+const TimelineLabel = styled.div<{ $isActive: boolean }>`
+  font-size: ${typography.fontSize.lg};
+  font-weight: ${({ $isActive }) =>
+    $isActive ? typography.fontWeight.bold : typography.fontWeight.medium};
+  color: ${({ $isActive }) =>
+    $isActive ? colors.primary.main : colors.secondary.lighter};
+  transition: all 0.3s ease-out;
+
+  @media ${mediaQueries.mobileAndDown} {
+    font-size: ${typography.fontSize.sm};
+    text-align: center;
+  }
+`;
+
+/**
+ * Content area
+ */
+const ContentArea = styled.div`
+  position: relative;
+  min-height: 400px;
+
+  @media ${mediaQueries.mobileAndDown} {
+    min-height: 300px;
+  }
+`;
+
+/**
+ * Content container with animation
+ */
+const ContentContainer = styled(motion.div)`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: ${colors.neutral.white};
+  padding: ${spacing[8]};
+  border-radius: ${borderRadius["2xl"]};
+  box-shadow: ${shadows.lg};
+  border: 2px solid ${colors.accent.main};
+
+  @media ${mediaQueries.mobileAndDown} {
+    padding: ${spacing[6]};
+  }
+`;
+
+/**
+ * Content text with HTML support
+ */
+const ContentText = styled.div`
+  font-size: ${typography.fontSize.lg};
+  line-height: ${typography.lineHeight.relaxed};
+  color: ${colors.secondary.main};
+
+  strong {
+    color: ${colors.primary.main};
+    font-weight: ${typography.fontWeight.semibold};
+  }
+
+  br {
+    display: block;
+    margin-bottom: ${spacing[3]};
+  }
+
+  @media ${mediaQueries.tabletAndDown} {
+    font-size: ${typography.fontSize.base};
+  }
+`;
+
+/**
+ * Image section
+ */
+const ImageSection = styled.section`
+  border-radius: ${borderRadius["3xl"]};
+  overflow: hidden;
+  box-shadow: ${shadows.xl};
+`;
+
+// ============================================================================
+// ANIMATION VARIANTS
+// ============================================================================
+
+const contentVariants = {
+  hidden: {
+    opacity: 0,
+    y: 20,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.4,
+      ease: "easeOut",
+    },
+  },
+  exit: {
+    opacity: 0,
+    y: -20,
+    transition: {
+      duration: 0.3,
+      ease: "easeIn",
+    },
+  },
+};
+
+// ============================================================================
+// COMPONENT
+// ============================================================================
 
 export default function About({ ...pageProps }) {
-  const [selectedItem, setSelectedItem] = useState<string | null>("Mission");
+  const [selectedItem, setSelectedItem] = useState<string>("Mission");
 
   const handleClick = (title: string) => {
     setSelectedItem(title);
   };
+
+  // Find current content and calculate progress
+  const currentIndex = ABOUT_US.findIndex(
+    (item) => item.title === selectedItem
+  );
+  const progress = currentIndex === 0 ? 0 : currentIndex === 1 ? 50 : 100;
+  const currentContent = ABOUT_US.find((item) => item.title === selectedItem);
 
   return (
     <Layout>
@@ -96,52 +330,101 @@ export default function About({ ...pageProps }) {
         ogUrl={pageProps.canonical}
       />
       <Wrapper>
-        <section>
-          <Title>About BD Corporate Services</Title>
-          <Description>
-            BD Corporate services is an outsourcing firm consisting of highly
-            dedicated experienced staff with different knowledge within audit
-            gained at Big 4 firms. We offer a flexible hybrid team from junior
-            to manager level that will be able to respond on various audit tasks
-            at your request. With all the experience gained in auditing the
-            local Dutch companies reporting under Dutch GAAP, and the knowledge
-            of various IFRS experts, we can ensure that our clients receive
-            great support.
-          </Description>
-        </section>
+        {/* Intro Section */}
+        <ScrollReveal>
+          <IntroSection>
+            <SectionTitle>About BD Corporate Services</SectionTitle>
+            <Description>
+              BD Corporate services is an outsourcing firm consisting of highly
+              dedicated experienced staff with different knowledge within audit
+              gained at Big 4 firms. We offer a flexible hybrid team from junior
+              to manager level that will be able to respond on various audit
+              tasks at your request. With all the experience gained in auditing
+              the local Dutch companies reporting under Dutch GAAP, and the
+              knowledge of various IFRS experts, we can ensure that our clients
+              receive great support.
+            </Description>
+          </IntroSection>
+        </ScrollReveal>
 
-        <section>
-          <Switcher>
-            {ABOUT_US.map((item) => (
-              <ListItem
-                key={item.title}
-                onClick={() => handleClick(item.title)}
-                isSelected={selectedItem === item.title}
-              >
-                {item.title}
-              </ListItem>
-            ))}
-          </Switcher>
+        {/* Mission, Vision, Values Section - Timeline Style */}
+        <ScrollReveal>
+          <MVVSection>
+            <TimelineContainer>
+              {/* Timeline Sidebar */}
+              <TimelineSidebar>
+                <TimelineLine />
+                <TimelineProgress $progress={progress} />
 
-          <div style={{ minHeight: "100px" }}>
-            {ABOUT_US.map((item) => (
-              <div key={item.description}>
-                {selectedItem === item.title && (
-                  <Description
-                    dangerouslySetInnerHTML={{ __html: item.description }}
-                  ></Description>
-                )}
-              </div>
-            ))}
-          </div>
-        </section>
-        <section>
-          <Image
-            src={about}
-            alt="We care about our clients and products"
-            layout="responsive"
-          />
-        </section>
+                {ABOUT_US.map((item, index) => {
+                  const isActive = selectedItem === item.title;
+                  return (
+                    <TimelineItem
+                      key={item.title}
+                      $isActive={isActive}
+                      onClick={() => handleClick(item.title)}
+                      whileHover={{ x: 4 }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      <TimelineDot
+                        $isActive={isActive}
+                        animate={{
+                          scale: isActive ? 1.2 : 1,
+                        }}
+                        transition={{
+                          type: "spring",
+                          stiffness: 400,
+                          damping: 17,
+                        }}
+                      >
+                        {index + 1}
+                      </TimelineDot>
+                      <TimelineLabel $isActive={isActive}>
+                        {item.title}
+                      </TimelineLabel>
+                    </TimelineItem>
+                  );
+                })}
+              </TimelineSidebar>
+
+              {/* Content Area */}
+              <ContentArea>
+                <AnimatePresence mode="wait">
+                  {currentContent && (
+                    <ContentContainer
+                      key={currentContent.title}
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -20 }}
+                      transition={{
+                        duration: 0.4,
+                        ease: "easeOut",
+                      }}
+                    >
+                      <ContentText
+                        dangerouslySetInnerHTML={{
+                          __html: currentContent.description,
+                        }}
+                      />
+                    </ContentContainer>
+                  )}
+                </AnimatePresence>
+              </ContentArea>
+            </TimelineContainer>
+          </MVVSection>
+        </ScrollReveal>
+
+        {/* Image Section */}
+        <ScrollReveal>
+          <ImageSection>
+            <Image
+              src={about}
+              alt="We care about our clients and products"
+              layout="responsive"
+              quality={100}
+            />
+          </ImageSection>
+        </ScrollReveal>
       </Wrapper>
     </Layout>
   );

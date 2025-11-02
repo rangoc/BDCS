@@ -1,16 +1,22 @@
+/**
+ * Contact Page
+ * 
+ * Contact form with improved styling and user feedback
+ * Includes form validation and success/error states
+ */
+
 import { useEffect, useState } from "react";
-import Image from "next/legacy/image";
 import styled from "styled-components";
-import { useForm, SubmitHandler, useFormState } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
+import Link from "next/link";
+import { motion } from "framer-motion";
 
 import { SEO } from "../../components/SEO";
 import { Layout } from "../../components/Layout";
-import { QUERIES } from "../../lib/constants";
-
-import contact from "../../public/contact.webp";
+import { ScrollReveal } from "../../components/ScrollReveal";
+import { colors, spacing, typography, mediaQueries, borderRadius, shadows } from "../../lib/theme";
 import { Dialog } from "../../components/Dialog";
 import { Spinner } from "../../components/Spinner";
-import Link from "next/link";
 
 interface IFormInputs {
   name: string;
@@ -32,109 +38,221 @@ const defaultValues: IFormInputs = {
   message: "",
 };
 
+// ============================================================================
+// STYLED COMPONENTS
+// ============================================================================
+
+/**
+ * Page wrapper
+ */
 const Wrapper = styled.div`
   max-width: 1200px;
-  padding-block-end: 64px;
-  display: flex;
-  flex-direction: column;
-  margin: auto;
-  gap: 50px;
+  margin: 0 auto;
 `;
 
-const Title = styled.h1`
-  font-size: 2rem;
-  font-weight: 700;
+/**
+ * Page title
+ */
+const PageTitle = styled.h1`
+  font-size: ${typography.fontSize['4xl']};
+  font-weight: ${typography.fontWeight.bold};
+  color: ${colors.primary.main};
   text-align: center;
-  margin-block-end: 16px;
-`;
-
-const FormWrapper = styled.div`
-  width: 100%;
-  max-width: 720px;
-  margin: auto;
-  padding-inline: 16px;
-  padding-block-start: 16px;
-  padding-block-end: 32px;
-  border-radius: 1rem;
-  box-shadow: 0px 6px 10px 0px rgba(0, 0, 0, 0.25);
-
-  @media ${QUERIES.tabletAndDown} {
-    max-width: 512px;
+  margin-bottom: ${spacing[4]};
+  
+  @media ${mediaQueries.tabletAndDown} {
+    font-size: ${typography.fontSize['3xl']};
+  }
+  
+  @media ${mediaQueries.mobileAndDown} {
+    font-size: ${typography.fontSize['2xl']};
   }
 `;
+
+/**
+ * Page subtitle
+ */
+const PageSubtitle = styled.p`
+  font-size: ${typography.fontSize.lg};
+  color: ${colors.secondary.lighter};
+  text-align: center;
+  margin-bottom: ${spacing[12]};
+  
+  @media ${mediaQueries.mobileAndDown} {
+    font-size: ${typography.fontSize.base};
+  }
+`;
+
+/**
+ * Form container with card styling
+ */
+const FormWrapper = styled(motion.div)`
+  max-width: 720px;
+  margin: 0 auto ${spacing[8]};
+  background-color: ${colors.neutral.white};
+  padding: ${spacing[10]} ${spacing[8]};
+  border-radius: ${borderRadius['3xl']};
+  box-shadow: ${shadows.xl};
+  border: 1px solid ${colors.neutral.gray200};
+
+  @media ${mediaQueries.tabletAndDown} {
+    padding: ${spacing[8]} ${spacing[6]};
+  }
+  
+  @media ${mediaQueries.mobileAndDown} {
+    padding: ${spacing[6]} ${spacing[4]};
+  }
+`;
+
+/**
+ * Form element
+ */
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: 32px;
+  gap: ${spacing[6]};
 `;
 
+/**
+ * Form field wrapper
+ */
 const FormField = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
+  gap: ${spacing[2]};
 `;
 
+/**
+ * Form label
+ */
 const Label = styled.label`
-  font-size: 0.875rem;
+  font-size: ${typography.fontSize.sm};
+  font-weight: ${typography.fontWeight.semibold};
+  color: ${colors.primary.main};
 `;
+
+/**
+ * Text input
+ */
 const Input = styled.input`
-  padding: 8px;
-  border: 0;
-  border-bottom: 1px solid hsla(188, 100%, 3%, 0.4);
+  padding: ${spacing[3]} ${spacing[4]};
+  border: 2px solid ${colors.neutral.gray200};
+  border-radius: ${borderRadius.lg};
+  font-size: ${typography.fontSize.base};
+  color: ${colors.secondary.main};
+  background-color: ${colors.neutral.white};
+  transition: all 0.2s ease-out;
+  
+  &:focus {
+    outline: none;
+    border-color: ${colors.accent.main};
+    box-shadow: 0 0 0 3px ${colors.accent.main}22;
+  }
+  
+  &::placeholder {
+    color: ${colors.neutral.gray400};
+  }
 `;
 
+/**
+ * Textarea for message
+ */
 const Message = styled.textarea`
-  height: 150px;
-  padding: 8px;
-  resize: none;
-  border: 1px solid hsla(188, 100%, 3%, 0.4);
-  border-radius: 1rem;
+  min-height: 150px;
+  padding: ${spacing[3]} ${spacing[4]};
+  border: 2px solid ${colors.neutral.gray200};
+  border-radius: ${borderRadius.lg};
+  font-size: ${typography.fontSize.base};
+  color: ${colors.secondary.main};
+  background-color: ${colors.neutral.white};
+  resize: vertical;
+  font-family: ${typography.fontFamily.primary};
+  line-height: ${typography.lineHeight.relaxed};
+  transition: all 0.2s ease-out;
+  
+  &:focus {
+    outline: none;
+    border-color: ${colors.accent.main};
+    box-shadow: 0 0 0 3px ${colors.accent.main}22;
+  }
+  
+  &::placeholder {
+    color: ${colors.neutral.gray400};
+  }
 `;
 
+/**
+ * Error message
+ */
 const Error = styled.span`
-  color: red;
-  position: absolute;
-  left: 0;
-  bottom: -25px;
+  color: ${colors.error};
+  font-size: ${typography.fontSize.xs};
+  margin-top: ${spacing[1]};
 `;
 
-export const SubmitButton = styled.button`
+/**
+ * Submit button
+ */
+export const SubmitButton = styled(motion.button)`
   cursor: pointer;
+  width: 100%;
   max-width: 320px;
-  min-width: 240px;
-  height: 50px;
-  margin: auto;
-  padding: 8px;
-  background-color: black;
-  color: white;
-  font-weight: 700;
+  height: 56px;
+  margin: ${spacing[4]} auto 0;
+  padding: ${spacing[3]} ${spacing[6]};
+  background-color: ${colors.primary.main};
+  color: ${colors.neutral.white};
+  font-weight: ${typography.fontWeight.semibold};
+  font-size: ${typography.fontSize.base};
   text-transform: uppercase;
-  text-align: center;
-  border: 2px solid black;
-  transition: all 0.25s ease-out;
+  letter-spacing: ${typography.letterSpacing.wide};
+  border: 2px solid ${colors.primary.main};
+  border-radius: ${borderRadius.xl};
+  transition: all 0.3s ease-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: ${shadows.md};
+
+  &:hover:not(:disabled) {
+    background-color: ${colors.primary.light};
+    border-color: ${colors.primary.light};
+    box-shadow: ${shadows.lg};
+    transform: translateY(-2px);
+  }
+  
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
 
   &:disabled {
-    background-color: lightgray;
+    background-color: ${colors.neutral.gray300};
+    border-color: ${colors.neutral.gray300};
+    color: ${colors.neutral.gray500};
     cursor: not-allowed;
-    color: black;
-    border: 2px solid lightgray;
-  }
-
-  @media (hover: hover) and (pointer: fine) {
-    &:hover {
-      background-color: white;
-      color: revert;
-    }
+    box-shadow: none;
   }
 `;
 
-const Caption = styled.span`
-  font-weight: 300;
+/**
+ * Help text/caption
+ */
+const Caption = styled.p`
+  text-align: center;
+  font-size: ${typography.fontSize.sm};
+  color: ${colors.secondary.lighter};
   font-style: italic;
-
-  @media ${QUERIES.mobileAndDown} {
-    padding-inline: 16px;
+  margin-top: ${spacing[8]};
+  
+  a {
+    color: ${colors.accent.main};
+    font-weight: ${typography.fontWeight.semibold};
+    text-decoration: none;
+    
+    &:hover {
+      text-decoration: underline;
+    }
   }
 `;
 
@@ -187,68 +305,102 @@ export default function Contact({ ...pageProps }) {
     <Layout>
       <SEO
         title="Contact Us | BD Corporate Services d.o.o. Podgorica"
-        description="For more information about us, check out our website and get in touch today."
+        description="Get in touch with our team of experienced audit professionals. We're here to support your business needs."
         ogUrl={pageProps.canonical}
       />
       <Wrapper>
-        <FormWrapper>
-          <Title>Contact Us</Title>
-          <Form onSubmit={handleSubmit(onSubmit)}>
-            <FormField>
-              <Label htmlFor="name">Name*</Label>
-              <Input
-                type="text"
-                id="name"
-                placeholder="Enter your name"
-                {...register("name", { required: true })}
-              />
-              {errors.name && <Error>This field is required!</Error>}
-            </FormField>
-            <FormField>
-              <Label htmlFor="email">Email*</Label>
-              <Input
-                type="email"
-                id="email"
-                placeholder="Enter your email"
-                {...register("email", { required: true })}
-              />
-              {errors.email && <Error>This field is required!</Error>}
-            </FormField>
-            <FormField>
-              <Label htmlFor="subject">Subject*</Label>
-              <Input
-                type="text"
-                id="subject"
-                placeholder="Type the subject"
-                {...register("subject", { required: true })}
-              />
-              {errors.subject && <Error>This field is required!</Error>}
-            </FormField>
-            <FormField>
-              <Label htmlFor="message">Message*</Label>
-              <Message
-                id="message"
-                placeholder="Type your message here..."
-                {...register("message", { required: true })}
-              />
-              {errors.message && <Error>This field is required!</Error>}
-            </FormField>
+        {/* Page Header */}
+        <ScrollReveal>
+          <PageTitle>Get in Touch</PageTitle>
+          <PageSubtitle>
+            Have a question or want to work together? We'd love to hear from you.
+          </PageSubtitle>
+        </ScrollReveal>
 
-            <SubmitButton disabled={isFetching && true}>
-              {isFetching ? <Spinner /> : "Submit"}
-            </SubmitButton>
-          </Form>
-        </FormWrapper>
+        {/* Contact Form */}
+        <ScrollReveal>
+          <FormWrapper
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <Form onSubmit={handleSubmit(onSubmit)}>
+              <FormField>
+                <Label htmlFor="name">Name*</Label>
+                <Input
+                  type="text"
+                  id="name"
+                  placeholder="Your full name"
+                  {...register("name", { required: true })}
+                />
+                {errors.name && <Error>This field is required</Error>}
+              </FormField>
+
+              <FormField>
+                <Label htmlFor="email">Email*</Label>
+                <Input
+                  type="email"
+                  id="email"
+                  placeholder="your.email@example.com"
+                  {...register("email", { 
+                    required: true,
+                    pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
+                  })}
+                />
+                {errors.email && errors.email.type === "required" && (
+                  <Error>This field is required</Error>
+                )}
+                {errors.email && errors.email.type === "pattern" && (
+                  <Error>Please enter a valid email address</Error>
+                )}
+              </FormField>
+
+              <FormField>
+                <Label htmlFor="subject">Subject*</Label>
+                <Input
+                  type="text"
+                  id="subject"
+                  placeholder="How can we help you?"
+                  {...register("subject", { required: true })}
+                />
+                {errors.subject && <Error>This field is required</Error>}
+              </FormField>
+
+              <FormField>
+                <Label htmlFor="message">Message*</Label>
+                <Message
+                  id="message"
+                  placeholder="Tell us more about your inquiry..."
+                  {...register("message", { required: true, minLength: 10 })}
+                />
+                {errors.message && errors.message.type === "required" && (
+                  <Error>This field is required</Error>
+                )}
+                {errors.message && errors.message.type === "minLength" && (
+                  <Error>Message must be at least 10 characters</Error>
+                )}
+              </FormField>
+
+              <SubmitButton
+                type="submit"
+                disabled={isFetching}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                {isFetching ? <Spinner /> : "Send Message"}
+              </SubmitButton>
+            </Form>
+          </FormWrapper>
+        </ScrollReveal>
+
+        {/* Alternative Contact */}
         <Caption>
-          Should you experience any challenges in reaching us through our
-          contact form, we kindly request that you direct your queries,
-          concerns, or requests to our dedicated email address:{" "}
-          <Link style={{ color: "black" }} href="mailto:info@bdcs.me">
-            <strong>info@bdcs.me</strong>
-          </Link>
-          .
+          Having trouble with the form? You can also reach us directly at{" "}
+          <Link href="mailto:info@bdcs.me">info@bdcs.me</Link>
         </Caption>
       </Wrapper>
+
+      {/* Success Dialog */}
       <Dialog showModal={showModal} showModalSet={showModalSet} />
     </Layout>
   );

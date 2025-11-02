@@ -1,193 +1,440 @@
+/**
+ * Home Page
+ *
+ * Landing page with split-screen hero, company intro, and partners section
+ * Features scroll-triggered animations and modern layout
+ */
+
+import { motion } from "framer-motion";
 import Image from "next/legacy/image";
+import Link from "next/link";
 import styled from "styled-components";
 
+import { Button } from "../components/Button";
 import { Layout } from "../components/Layout";
+import {
+  ScrollReveal,
+  ScrollRevealContainer,
+  ScrollRevealItem,
+} from "../components/ScrollReveal";
 import { SEO } from "../components/SEO";
-import { QUERIES } from "../lib/constants";
+import { textStaggerContainer, textStaggerLine } from "../lib/animations";
+import {
+  borderRadius,
+  colors,
+  mediaQueries,
+  shadows,
+  spacing,
+  typography,
+} from "../lib/theme";
 
-import home from "../public/home.webp";
-import moosLogo from "../public/MoosAccountantsLogo.png";
-import ruitenburgLogo from "../public/RuitenburgLogo.png";
-import adviesLogo from "../public/AdviesGroep88Logo.png";
+import home from "../public/assets/home.webp";
+import adviesLogo from "../public/partners/AdviesGroep88Logo.png";
+import moosLogo from "../public/partners/MoosAccountantsLogo.png";
+import ruitenburgLogo from "../public/partners/RuitenburgLogo.png";
 
-const HeadingWrapper = styled.div`
-  text-align: center;
-  margin-block-end: 3rem;
+// ============================================================================
+// HERO SECTION - Split Screen
+// ============================================================================
+
+/**
+ * Hero container - split screen layout
+ */
+const HeroSection = styled.section`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: ${spacing[12]};
+  align-items: center;
+  min-height: calc(100vh - 200px);
+  margin-bottom: ${spacing[20]};
+
+  @media ${mediaQueries.tabletAndDown} {
+    grid-template-columns: 1fr;
+    gap: ${spacing[8]};
+    min-height: auto;
+  }
 `;
 
-const ColoredSection = styled.div`
+/**
+ * Hero content (left side)
+ */
+const HeroContent = styled(motion.div)`
+  display: flex;
+  flex-direction: column;
+  gap: ${spacing[6]};
+
+  @media ${mediaQueries.mobileAndDown} {
+    text-align: center;
+  }
+`;
+
+/**
+ * Hero title
+ */
+const HeroTitle = styled(motion.h1)`
+  font-size: ${typography.fontSize["6xl"]};
+  font-weight: ${typography.fontWeight.bold};
+  color: ${colors.primary.main};
+  line-height: ${typography.lineHeight.tight};
+  margin: 0;
+
+  @media ${mediaQueries.tabletAndDown} {
+    font-size: ${typography.fontSize["5xl"]};
+  }
+
+  @media ${mediaQueries.mobileAndDown} {
+    font-size: ${typography.fontSize["4xl"]};
+  }
+`;
+
+/**
+ * Hero subtitle/tagline
+ */
+const HeroSubtitle = styled(motion.h2)`
+  font-size: ${typography.fontSize["2xl"]};
+  font-weight: ${typography.fontWeight.light};
+  color: ${colors.accent.main};
+  letter-spacing: ${typography.letterSpacing.wide};
+  margin: 0;
+
+  @media ${mediaQueries.tabletAndDown} {
+    font-size: ${typography.fontSize.xl};
+  }
+`;
+
+/**
+ * Hero description
+ */
+const HeroDescription = styled(motion.p)`
+  font-size: ${typography.fontSize.lg};
+  line-height: ${typography.lineHeight.relaxed};
+  color: ${colors.secondary.lighter};
+  margin: ${spacing[4]} 0;
+
+  @media ${mediaQueries.mobileAndDown} {
+    font-size: ${typography.fontSize.base};
+  }
+`;
+
+/**
+ * Hero CTA buttons
+ */
+const HeroCTA = styled(motion.div)`
+  display: flex;
+  gap: ${spacing[4]};
+  margin-top: ${spacing[4]};
+
+  @media ${mediaQueries.mobileAndDown} {
+    flex-direction: column;
+    align-items: center;
+  }
+`;
+
+/**
+ * Hero image container (right side)
+ */
+const HeroImageWrapper = styled(motion.div)`
+  position: relative;
+  border-radius: ${borderRadius["3xl"]};
+  overflow: hidden;
+  box-shadow: ${shadows.xl};
+
+  @media ${mediaQueries.tabletAndDown} {
+    order: -1;
+  }
+`;
+
+// ============================================================================
+// INTRO SECTION
+// ============================================================================
+
+/**
+ * Intro section with centered content
+ */
+const IntroSection = styled.section`
+  max-width: 900px;
+  margin: 0 auto ${spacing[20]};
+  text-align: center;
+
+  @media ${mediaQueries.tabletAndDown} {
+    margin: 0;
+    text-align: left;
+  }
+
+  @media ${mediaQueries.mobileAndDown} {
+    text-align: center;
+  }
+`;
+
+/**
+ * Intro text
+ */
+const IntroText = styled.p`
+  font-size: ${typography.fontSize.xl};
+  line-height: ${typography.lineHeight.relaxed};
+  color: ${colors.secondary.lighter};
+
+  @media ${mediaQueries.tabletAndDown} {
+    font-size: ${typography.fontSize.lg};
+  }
+`;
+
+// ============================================================================
+// PARTNERS SECTION
+// ============================================================================
+
+/**
+ * Partners section with gray background
+ */
+const PartnersSection = styled.section`
   position: relative;
   left: 50%;
   right: 50%;
   margin-left: -50vw;
   margin-right: -50vw;
   width: 100vw;
-  background-color: #f0f0f0;
-  padding-block: 4rem;
-  margin-block-start: 3rem;
+  background-color: ${colors.neutral.gray50};
+  padding: ${spacing[20]} ${spacing[8]};
+  margin-top: ${spacing[20]};
+
+  @media ${mediaQueries.mobileAndDown} {
+    padding: ${spacing[12]} ${spacing[4]};
+  }
 `;
 
-const ColoredSectionContent = styled.div`
+/**
+ * Partners content container
+ */
+const PartnersContent = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
   text-align: center;
-  margin: auto;
-  max-width: 1024px;
-  padding-inline: 64px;
-
-  @media ${QUERIES.mobileAndDown} {
-    padding-inline: 0;
-  }
 `;
 
+/**
+ * Partners title
+ */
 const PartnersTitle = styled.h2`
-  font-size: 2rem;
-  font-weight: 500;
-  margin-bottom: 3rem;
+  font-size: ${typography.fontSize["4xl"]};
+  font-weight: ${typography.fontWeight.bold};
+  color: ${colors.primary.main};
+  margin-bottom: ${spacing[12]};
 
-  @media ${QUERIES.tabletAndDown} {
-    font-size: 1.5rem;
+  @media ${mediaQueries.tabletAndDown} {
+    font-size: ${typography.fontSize["3xl"]};
   }
 `;
 
-const PartnersContainer = styled.div`
-  margin: auto;
-  max-width: 1024px;
+/**
+ * Partners grid
+ * Responsive column layout with proper breakpoints
+ */
+const PartnersGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: ${spacing[8]};
+  align-items: center;
+  max-width: 900px;
+  margin: 0 auto;
+
+  @media ${mediaQueries.tabletAndDown} {
+    grid-template-columns: repeat(2, 1fr);
+    gap: ${spacing[6]};
+    max-width: 600px;
+  }
+
+  @media ${mediaQueries.tabletAndDown} {
+    grid-template-columns: 1fr;
+    max-width: 350px;
+  }
+`;
+
+/**
+ * Individual partner card
+ * Fixed aspect ratio with max-width constraint
+ */
+const PartnerCard = styled(motion.div)`
+  background-color: ${colors.complimentary.lightest};
+  padding: ${spacing[8]};
+  border-radius: ${borderRadius["2xl"]};
+  box-shadow: ${shadows.base};
+  transition: all 0.3s ease-out;
+  aspect-ratio: 1;
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
   display: flex;
   align-items: center;
+  justify-content: center;
 
-  @media ${QUERIES.tabletAndDown} {
-    flex-direction: column;
+  &:hover {
+    box-shadow: ${shadows.lg};
+    transform: translateY(-4px);
+  }
+
+  @media ${mediaQueries.tabletAndDown} {
+    max-width: 280px;
+    height: 140px;
+    padding: ${spacing[6]};
   }
 `;
 
-const PartnersImageWrapper = styled.div`
-  width: 350px;
-  margin-inline: auto;
-  margin-block-end: 3rem;
+/**
+ * Partner logo wrapper
+ * Fixed dimensions with proper Next.js Image support
+ */
+const PartnerLogo = styled.div`
+  width: 220px;
+  height: 220px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  @media ${QUERIES.tabletAndDown} {
-    width: 250px;
+  /* Next.js Image wrapper */
+  > span {
+    position: relative !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  img {
+    object-fit: contain !important;
+  }
+
+  @media ${mediaQueries.mobileAndDown} {
+    width: 150px;
+    height: 150px;
   }
 `;
 
-const Title = styled.h1`
-  font-size: 4rem;
-  font-weight: 700;
-
-  @media ${QUERIES.tabletAndDown} {
-    font-size: 2.5rem;
-  }
-
-  @media ${QUERIES.mobileAndDown} {
-    font-size: 2rem;
-  }
-`;
-
-const Subtitle = styled.h2`
-  font-size: 2rem;
-  font-weight: 300;
-  letter-spacing: 2px;
-
-  @media ${QUERIES.tabletAndDown} {
-    font-size: 1.5rem;
-  }
-`;
-
-const ImageWrapper = styled.div`
-  max-width: 1020px;
-  margin-inline: auto;
-  margin-block-end: 3rem;
-`;
-
-const DescriptionWrapper = styled.div`
-  max-width: 1024px;
-  margin: auto;
-  text-align: justify;
-
-  p:not(:first-child) {
-    margin-block-start: 3rem;
-  }
-`;
-
-const Description = styled.p`
-  font-size: 1.125rem;
-  font-weight: 300;
-
-  @media ${QUERIES.tabletAndDown} {
-    font-size: 1rem;
-  }
-
-  @media ${QUERIES.mobileAndDown} {
-    padding-inline: 16px;
-  }
-`;
+// ============================================================================
+// COMPONENT
+// ============================================================================
 
 export default function Home() {
   return (
     <Layout>
       <SEO
         title="Home | BD Corporate Services d.o.o. Podgorica"
-        description="As an outsourcing firm, we believe in setting the bar high. We go above and beyond to make sure all of our clients’ needs are not only met, but exceeded."
+        description="Professional audit and accounting outsourcing firm with experienced staff from Big 4 firms. We deliver quality, competitive pricing, and personalized attention."
       />
-      <HeadingWrapper>
-        <Title>BD Corporate Services</Title>
-        <Subtitle>Strive for quality</Subtitle>
-      </HeadingWrapper>
 
-      <ImageWrapper>
-        <Image
-          src={home}
-          alt="Collegues walking together"
-          layout="responsive"
-          quality={100}
-          priority
-        />
-      </ImageWrapper>
+      {/* Hero Section - Split Screen */}
+      <HeroSection>
+        {/* Left side - Content */}
+        <HeroContent
+          variants={textStaggerContainer}
+          initial="hidden"
+          animate="visible"
+        >
+          <HeroTitle variants={textStaggerLine}>
+            BD Corporate Services
+          </HeroTitle>
+          <HeroSubtitle variants={textStaggerLine}>
+            Strive for quality
+          </HeroSubtitle>
+          <HeroDescription variants={textStaggerLine}>
+            Professional audit and accounting outsourcing firm consisting of
+            highly dedicated experienced staff with expertise gained at Big 4
+            firms.
+          </HeroDescription>
+          <HeroCTA variants={textStaggerLine}>
+            <Link href="/contact" passHref legacyBehavior>
+              <Button as="a" variant="primary" size="large">
+                Get in Touch
+              </Button>
+            </Link>
+            <Link href="/why-choose-us" passHref legacyBehavior>
+              <Button as="a" variant="outline" size="large">
+                Learn More
+              </Button>
+            </Link>
+          </HeroCTA>
+        </HeroContent>
 
-      <DescriptionWrapper>
-        <Description>
-          As an outsourcing firm located in Podgorica, Montenegro, we believe in
-          setting the bar high, with an unwavering commitment to our clients as
-          well as outstanding and uparalled service. We go above and beyond to
-          make sure all of our clients' needs are not only met, but exceeded.
-          For more information about us, check out our website and get in touch
-          today.
-        </Description>
-      </DescriptionWrapper>
+        {/* Right side - Image */}
+        <HeroImageWrapper
+          initial={{ opacity: 0, x: 50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+        >
+          <Image
+            src={home}
+            alt="Professional team collaboration"
+            layout="responsive"
+            quality={100}
+            priority
+          />
+        </HeroImageWrapper>
+      </HeroSection>
 
-      <ColoredSection>
-        <ColoredSectionContent>
-          <PartnersTitle>Our Partners</PartnersTitle>
+      {/* Intro Section */}
+      <ScrollReveal>
+        <IntroSection>
+          <IntroText>
+            Based in Podgorica, Montenegro, we offer a flexible hybrid team from
+            junior to manager level, ready to respond to various audit tasks at
+            your request. With extensive experience in Dutch GAAP and IFRS, we
+            ensure our clients receive exceptional support.
+          </IntroText>
+        </IntroSection>
+      </ScrollReveal>
 
-          <PartnersContainer>
-            <PartnersImageWrapper>
-              <Image
-                src={moosLogo}
-                alt="Moos Accountants"
-                layout="responsive"
-                quality={100}
-              />
-            </PartnersImageWrapper>
-            <PartnersImageWrapper>
-              <Image
-                src={ruitenburgLogo}
-                alt="Ruitenburg"
-                layout="responsive"
-                quality={100}
-              />
-            </PartnersImageWrapper>
-          </PartnersContainer>
-          <PartnersContainer>
-            <PartnersImageWrapper>
-              <Image
-                src={adviesLogo}
-                alt="AdviesGroep88"
-                layout="responsive"
-                quality={100}
-              />
-            </PartnersImageWrapper>
-          </PartnersContainer>
-        </ColoredSectionContent>
-      </ColoredSection>
+      {/* Partners Section */}
+      <PartnersSection>
+        <PartnersContent>
+          <ScrollReveal>
+            <PartnersTitle>Our Partners</PartnersTitle>
+          </ScrollReveal>
+
+          <ScrollRevealContainer staggerDelay={0.2}>
+            <PartnersGrid>
+              <ScrollRevealItem>
+                <PartnerCard>
+                  <PartnerLogo>
+                    <Image
+                      src={moosLogo}
+                      alt="Moos Accountants"
+                      layout="fill"
+                      objectFit="contain"
+                      quality={100}
+                    />
+                  </PartnerLogo>
+                </PartnerCard>
+              </ScrollRevealItem>
+
+              <ScrollRevealItem>
+                <PartnerCard>
+                  <PartnerLogo>
+                    <Image
+                      src={ruitenburgLogo}
+                      alt="Ruitenburg"
+                      layout="fill"
+                      objectFit="contain"
+                      quality={100}
+                    />
+                  </PartnerLogo>
+                </PartnerCard>
+              </ScrollRevealItem>
+
+              <ScrollRevealItem>
+                <PartnerCard>
+                  <PartnerLogo>
+                    <Image
+                      src={adviesLogo}
+                      alt="AdviesGroep88"
+                      layout="fill"
+                      objectFit="contain"
+                      quality={100}
+                    />
+                  </PartnerLogo>
+                </PartnerCard>
+              </ScrollRevealItem>
+            </PartnersGrid>
+          </ScrollRevealContainer>
+        </PartnersContent>
+      </PartnersSection>
     </Layout>
   );
 }

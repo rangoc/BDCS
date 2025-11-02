@@ -1,82 +1,198 @@
+/**
+ * Why Choose Us Page
+ *
+ * Features our competitive advantages with interactive cards
+ * Includes hover effects and scroll animations
+ */
+
+import { motion } from "framer-motion";
 import Image from "next/legacy/image";
 import styled from "styled-components";
 
 import { Layout } from "../../components/Layout";
 import { SEO } from "../../components/SEO";
-import { QUERIES, WHY_CHOOSE_US } from "../../lib/constants";
+import {
+  ScrollReveal,
+  ScrollRevealContainer,
+  ScrollRevealItem,
+} from "../../components/ScrollReveal";
+import { WHY_CHOOSE_US } from "../../lib/constants";
+import {
+  borderRadius,
+  colors,
+  mediaQueries,
+  shadows,
+  spacing,
+  typography,
+} from "../../lib/theme";
 
-import whyResource from "../../public/chooseUs.webp";
+import whyResource from "../../public/assets/chooseUs.webp";
 
-const Wrapper = styled.section`
+// ============================================================================
+// STYLED COMPONENTS
+// ============================================================================
+
+/**
+ * Page wrapper
+ */
+const Wrapper = styled.div`
   max-width: 1200px;
-  padding-block-end: 64px;
+  margin: 0 auto;
+`;
+
+/**
+ * Page title
+ */
+const PageTitle = styled.h1`
+  font-size: ${typography.fontSize["4xl"]};
+  font-weight: ${typography.fontWeight.bold};
+  color: ${colors.primary.main};
+  text-align: center;
+  margin-bottom: ${spacing[16]};
+
+  @media ${mediaQueries.tabletAndDown} {
+    font-size: ${typography.fontSize["3xl"]};
+    margin-bottom: ${spacing[12]};
+  }
+
+  @media ${mediaQueries.mobileAndDown} {
+    font-size: ${typography.fontSize["2xl"]};
+  }
+`;
+
+/**
+ * Features grid
+ * All cards will have equal heights in their row
+ */
+const FeaturesGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: ${spacing[8]};
+  margin-bottom: ${spacing[16]};
+  grid-auto-rows: 1fr;
+
+  @media ${mediaQueries.tabletAndDown} {
+    grid-template-columns: 1fr;
+    gap: ${spacing[6]};
+  }
+`;
+
+/**
+ * Feature card with hover effects
+ * Flex layout ensures content fills the card height
+ */
+const FeatureCard = styled(motion.article)`
+  background-color: ${colors.neutral.white};
+  padding: ${spacing[8]};
+  border-radius: ${borderRadius["2xl"]};
+  border: 2px solid ${colors.neutral.gray200};
+  box-shadow: ${shadows.base};
+  transition: all 0.3s ease-out;
+  cursor: pointer;
   display: flex;
   flex-direction: column;
+  height: 100%;
+
+  &:hover {
+    border-color: ${colors.accent.main};
+    box-shadow: ${shadows.xl};
+    transform: translateY(-8px);
+
+    /* Icon animation on hover */
+    .icon-wrapper {
+      background: linear-gradient(
+        135deg,
+        ${colors.accent.main},
+        ${colors.complimentary.main}
+      );
+      transform: scale(1.1) rotate(5deg);
+    }
+
+    /* SVG color change on hover */
+    svg {
+      fill: ${colors.neutral.white};
+    }
+  }
+
+  @media ${mediaQueries.mobileAndDown} {
+    padding: ${spacing[6]};
+  }
+`;
+
+/**
+ * Card header with icon
+ */
+const CardHeader = styled.div`
+  display: flex;
   align-items: center;
-  margin: auto;
-  gap: 50px;
+  gap: ${spacing[4]};
+  margin-bottom: ${spacing[4]};
 `;
 
-const Content = styled.div`
+/**
+ * Icon wrapper with gradient background
+ */
+const IconWrapper = styled.div`
+  classname: icon-wrapper;
+  width: 64px;
+  height: 64px;
   display: flex;
-  flex-direction: column;
-  @media ${QUERIES.mobileAndDown} {
-    padding-inline: 16px;
-  }
-`;
-
-const Title = styled.h1`
-  font-size: 2rem;
-  font-weight: 700;
-  margin-block-end: 64px;
-`;
-
-const Articles = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-
-  article:not(:first-child) {
-    margin-block-start: 3rem;
-  }
-`;
-
-const Article = styled.article`
-  display: flex;
-  flex-direction: column;
-`;
-
-const Caption = styled.p`
-  font-size: 1.5rem;
-  font-weight: 500;
-  line-height: 2rem;
-`;
-
-const ArticleImage = styled.div`
-  width: 40px;
-  height: 40px;
+  align-items: center;
+  justify-content: center;
+  background-color: ${colors.primary.main};
+  border-radius: ${borderRadius.xl};
+  transition: all 0.3s ease-out;
+  flex-shrink: 0;
 
   svg {
-    width: 100%;
-    height: 100%;
+    width: 36px;
+    height: 36px;
+    fill: ${colors.neutral.white};
+    transition: fill 0.3s ease-out;
   }
 `;
 
-const ArticleHeader = styled.div`
-  display: flex;
-  align-items: flex-end;
-  gap: 18px;
-`;
+/**
+ * Feature title
+ */
+const FeatureTitle = styled.h2`
+  font-size: ${typography.fontSize.xl};
+  font-weight: ${typography.fontWeight.semibold};
+  color: ${colors.primary.main};
+  margin: 0;
 
-const ArticleDescription = styled.p`
-  font-size: 1.125rem;
-  font-weight: 300;
-  margin-block-start: 1rem;
-  text-align: justify;
-  @media ${QUERIES.tabletAndDown} {
-    font-size: 1rem;
+  @media ${mediaQueries.mobileAndDown} {
+    font-size: ${typography.fontSize.lg};
   }
 `;
+
+/**
+ * Feature description
+ */
+const FeatureDescription = styled.p`
+  font-size: ${typography.fontSize.base};
+  line-height: ${typography.lineHeight.relaxed};
+  color: ${colors.secondary.lighter};
+  margin: 0;
+
+  @media ${mediaQueries.mobileAndDown} {
+    font-size: ${typography.fontSize.sm};
+  }
+`;
+
+/**
+ * Image section
+ */
+const ImageSection = styled.section`
+  margin-top: ${spacing[16]};
+  border-radius: ${borderRadius["3xl"]};
+  overflow: hidden;
+  box-shadow: ${shadows.xl};
+`;
+
+// ============================================================================
+// COMPONENT
+// ============================================================================
 
 export default function WhyChooseUs({ ...pageProps }) {
   return (
@@ -87,25 +203,39 @@ export default function WhyChooseUs({ ...pageProps }) {
         ogUrl={pageProps.canonical}
       />
       <Wrapper>
-        <Content>
-          <Title>Why choose BD Corporate Services</Title>
-          <Articles>
-            {WHY_CHOOSE_US.map(({ title, description, image }) => (
-              <Article key={title}>
-                <ArticleHeader>
-                  <ArticleImage>{image}</ArticleImage>
-                  <Caption>{title}</Caption>
-                </ArticleHeader>
-                <ArticleDescription>{description}</ArticleDescription>
-              </Article>
-            ))}
-          </Articles>
-        </Content>
+        {/* Page Title */}
+        <ScrollReveal>
+          <PageTitle>Why choose BD Corporate Services</PageTitle>
+        </ScrollReveal>
 
-        <Image
-          src={whyResource}
-          alt="By choosing us, you won't make a mistake."
-        />
+        {/* Features Grid */}
+        <ScrollRevealContainer staggerDelay={0.15}>
+          <FeaturesGrid>
+            {WHY_CHOOSE_US.map(({ title, description, image }) => (
+              <ScrollRevealItem key={title}>
+                <FeatureCard>
+                  <CardHeader>
+                    <IconWrapper className="icon-wrapper">{image}</IconWrapper>
+                    <FeatureTitle>{title}</FeatureTitle>
+                  </CardHeader>
+                  <FeatureDescription>{description}</FeatureDescription>
+                </FeatureCard>
+              </ScrollRevealItem>
+            ))}
+          </FeaturesGrid>
+        </ScrollRevealContainer>
+
+        {/* Image Section */}
+        <ScrollReveal>
+          <ImageSection>
+            <Image
+              src={whyResource}
+              alt="By choosing us, you won't make a mistake"
+              layout="responsive"
+              quality={100}
+            />
+          </ImageSection>
+        </ScrollReveal>
       </Wrapper>
     </Layout>
   );

@@ -1,96 +1,195 @@
+/**
+ * Header Component
+ *
+ * Main navigation header with sticky behavior
+ * - Transparent on page load
+ * - Fills with primary color on scroll
+ * - Responsive with mobile menu
+ */
+
+import { motion } from "framer-motion";
 import Image from "next/legacy/image";
 import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
-import { QUERIES } from "../lib/constants";
-
-import logo from "../public/favicon.ico";
+import { useOnClickOutside } from "../hooks/useOnClickOutside";
+import {
+  colors,
+  mediaQueries,
+  shadows,
+  spacing,
+  transitions,
+  zIndex,
+} from "../lib/theme";
+import logo from "../public/logo.webp";
 import { Burger } from "./Burger";
 import { Menu } from "./Menu";
-import { useRef, useState } from "react";
-import { useOnClickOutside } from "../hooks/useOnClickOutside";
 
-const Wrapper = styled.header`
+// ============================================================================
+// STYLED COMPONENTS
+// ============================================================================
+
+/**
+ * Header wrapper - sticky positioning with background transition
+ */
+const Wrapper = styled(motion.header)<{ $isScrolled: boolean }>`
+  position: sticky;
+  top: 0;
+  z-index: ${zIndex.sticky};
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 2rem;
-  background-color: white;
-  padding-block-start: 32px;
+  justify-content: space-between;
+  padding: ${spacing[4]} ${spacing[8]};
+  background-color: ${({ $isScrolled }) =>
+    $isScrolled ? colors.primary.main : "transparent"};
+  color: ${({ $isScrolled }) =>
+    $isScrolled ? colors.neutral.white : colors.primary.main};
+  box-shadow: ${({ $isScrolled }) => ($isScrolled ? shadows.md : "none")};
+  transition: all 0.3s ease-in-out;
 
-  @media ${QUERIES.mobileAndDown} {
-    padding-inline-start: 16px;
+  @media ${mediaQueries.tabletAndDown} {
+    padding: ${spacing[4]} ${spacing[6]};
+  }
+
+  @media ${mediaQueries.mobileAndDown} {
+    padding: ${spacing[3]} ${spacing[4]};
   }
 `;
 
-const LogoWrapper = styled.div`
-  width: 302px;
-  background-color: white;
+/**
+ * Logo container with responsive sizing
+ */
+const LogoWrapper = styled(Link)`
+  display: block;
+  width: 180px;
+  cursor: pointer;
+  transition: ${transitions.fast};
 
-  @media ${QUERIES.tabletAndDown} {
-    width: 202px;
+  &:hover {
+    transform: scale(1.02);
   }
 
-  @media ${QUERIES.mobileAndDown} {
-    width: 102px;
-    margin-right: auto;
+  @media ${mediaQueries.tabletAndDown} {
+    width: 140px;
+  }
+
+  @media ${mediaQueries.mobileAndDown} {
+    width: 100px;
   }
 `;
 
+/**
+ * Desktop navigation
+ */
 const Navbar = styled.nav`
-  @media ${QUERIES.mobileAndDown} {
+  @media ${mediaQueries.tabletAndDown} {
     display: none;
   }
 `;
 
+/**
+ * Navigation list
+ */
 const List = styled.ul`
   display: flex;
+  align-items: center;
+  gap: ${spacing[8]};
   list-style: none;
+  margin: 0;
   padding: 0;
-  color: black;
+
+  @media ${mediaQueries.tabletAndDown} {
+    gap: ${spacing[6]};
+  }
 `;
 
-const ListItem = styled.li`
+/**
+ * Navigation list item with animated underline
+ */
+const ListItem = styled.li<{ $isScrolled: boolean }>`
   position: relative;
+
   a {
     color: inherit;
     text-decoration: none;
+    font-weight: 500;
+    font-size: 1rem;
+    padding: ${spacing[2]} 0;
+    transition: ${transitions.fast};
+
+    &:hover {
+      color: ${({ $isScrolled }) =>
+        $isScrolled ? colors.complimentary.light : colors.accent.main};
+    }
   }
 
-  &:not(:first-of-type) {
-    margin-inline-start: 30px;
-  }
-
+  /* Animated underline */
   &::after {
     content: "";
     position: absolute;
-    width: 100%;
-    transform: scaleX(0);
-    height: 2px;
     bottom: 0;
     left: 0;
-    background-color: black;
+    width: 100%;
+    height: 2px;
+    background-color: ${({ $isScrolled }) =>
+      $isScrolled ? colors.complimentary.main : colors.accent.main};
+    transform: scaleX(0);
     transform-origin: bottom right;
-    transition: transform 0.25s ease-out;
+    transition: transform 0.3s ease-out;
   }
 
-  &:hover {
-    &::after {
-      transform: scaleX(1);
-      transform-origin: bottom left;
-    }
+  &:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
   }
 `;
 
+/**
+ * Mobile menu container (positioned absolute)
+ */
+const MobileMenuWrapper = styled.div`
+  display: none;
+
+  @media ${mediaQueries.tabletAndDown} {
+    display: block;
+  }
+`;
+
+// ============================================================================
+// COMPONENT
+// ============================================================================
+
 export function Header() {
   const [open, setOpen] = useState(false);
-  const node = useRef<HTMLInputElement>(null);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const node = useRef<HTMLDivElement>(null);
 
+  // Close menu when clicking outside
   useOnClickOutside(node, () => setOpen(false));
+
+  /**
+   * Track scroll position to change header background
+   */
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      setIsScrolled(scrollPosition > 50);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <Wrapper>
-      <LogoWrapper>
+    <Wrapper
+      $isScrolled={isScrolled}
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ type: "spring", stiffness: 100, damping: 20 }}
+    >
+      {/* Logo */}
+      <LogoWrapper href="/">
         <Image
           src={logo}
           alt="BD Corporate Services"
@@ -98,40 +197,43 @@ export function Header() {
           layout="responsive"
         />
       </LogoWrapper>
-      <div ref={node}>
-        <Burger open={open} setOpen={setOpen} />
-        <Menu open={open} setOpen={setOpen} />
-      </div>
 
+      {/* Desktop Navigation */}
       <Navbar>
         <List>
-          <ListItem>
+          <ListItem $isScrolled={isScrolled}>
             <Link scroll={false} href="/">
               Home
             </Link>
           </ListItem>
-          <ListItem>
+          <ListItem $isScrolled={isScrolled}>
             <Link scroll={false} href="/about">
               About Us
             </Link>
           </ListItem>
-          <ListItem>
+          <ListItem $isScrolled={isScrolled}>
             <Link scroll={false} href="/why-choose-us">
               Why Choose Us
             </Link>
           </ListItem>
-          <ListItem>
+          <ListItem $isScrolled={isScrolled}>
             <Link scroll={false} href="/our-team">
               Our Team
             </Link>
           </ListItem>
-          <ListItem>
+          <ListItem $isScrolled={isScrolled}>
             <Link scroll={false} href="/contact">
               Contact
             </Link>
           </ListItem>
         </List>
       </Navbar>
+
+      {/* Mobile Menu Toggle and Menu */}
+      <MobileMenuWrapper ref={node}>
+        <Burger open={open} setOpen={setOpen} isScrolled={isScrolled} />
+        <Menu open={open} setOpen={setOpen} />
+      </MobileMenuWrapper>
     </Wrapper>
   );
 }

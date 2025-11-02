@@ -1,14 +1,12 @@
-import andjelinalar from "../public/AndjelinaRakcevic.jpg";
-import bobanc from "../public/BobanCabarkapa.jpg";
-import bojanab from "../public/BojanaBoskovic.jpg";
-import bojanav from "../public/BojanaVucicevic.jpg";
-import dijanao from "../public/DijanaOpancina.jpg";
-import dritand from "../public/DritanDragovic.jpeg";
-import jovanaj from "../public/JovanaJanketic.jpg";
-import ksenijav from "../public/KsenijaVusurovic.jpg";
-import nikolar from "../public/NikolaRadunovic.jpg";
-import petarm from "../public/PetarMilas.jpg";
-import vjeraj from "../public/VjeraJovovic.jpg";
+import andjelinalar from "../public/people/AndjelinaRakcevic.webp";
+import bobanc from "../public/people/BobanCabarkapa.webp";
+import bojanab from "../public/people/BojanaBoskovic.webp";
+import bojanav from "../public/people/BojanaVucicevic.webp";
+import dijanao from "../public/people/DijanaOpancina.webp";
+import dritand from "../public/people/DritanDragovic.webp";
+import jovanaj from "../public/people/JovanaJanketic.webp";
+import nikolar from "../public/people/NikolaRadunovic.webp";
+import petarm from "../public/people/PetarMilas.webp";
 
 const BREAKPOINTS = {
   mobileMax: 550,
@@ -239,30 +237,5 @@ export const OUR_TEAM = [
     linkedin: ``,
     phone: "",
     email: "andjelina.rakcevic@bdcs.me",
-  },
-  {
-    name: "Ksenija Vušurović",
-    image: ksenijav,
-    role: "Audit Assistant",
-    bio: `Ksenija Vušurović joined BDCS in September 2023 and is part of the Ruitenburg Audit B.V.
-    (Netherlands) support team as a Junior Assistant. Ksenija has finished BSc in Finance Management as
-    one of the best students in generation. Ksenija has previous experience in Insurance sector in
-    international company operating in Montenegro. Ksenija has enrolled in MSc postgraduate
-    programme at the University of Montenegro, Faculty of Economics.`,
-    linkedin: `https://www.linkedin.com/in/ksenija-vusurovic-64321a228/`,
-    phone: "",
-    email: "ksenija.vusurovic@bdcs.me",
-  },
-  {
-    name: "Vjera Jovović",
-    image: vjeraj,
-    role: "Audit Assistant",
-    bio: `Vjera Jovović is a finance professional with a bachelor’s degree at the University of Donja Gorica, Faculty of International Economics, Finance and Business.
-    Vjera started her career at Deloitte Montenegro. Before joining BDCS, Vjera acquired experience in external auditing as well as accounting practices for both IFRS and IFRS for SME’s clients.
-    Vjera is passionate about gaining insight into the dynamic world of auditing and has developed a solid foundation in economic theories, financial analysis, and business management.
-    Vjera enjoys travelling, taking on new challenges and spending time with family and friends.`,
-    linkedin: "https://www.linkedin.com/in/vjera-jovovic-807aa1231/",
-    phone: "",
-    email: "vjera.jovovic@bdcs.me",
   },
 ];

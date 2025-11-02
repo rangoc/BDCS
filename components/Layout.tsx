@@ -1,35 +1,63 @@
+/**
+ * Layout Component
+ * 
+ * Main layout wrapper for page content
+ * Handles page transitions and overall structure
+ */
+
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import { QUERIES } from "../lib/constants";
+import { spacing, mediaQueries } from "../lib/theme";
+import { pageTransition } from "../lib/animations";
 
-interface ILayoutProps {
+// ============================================================================
+// TYPES
+// ============================================================================
+
+interface LayoutProps {
   children: React.ReactNode;
 }
 
-const variants = {
-  hidden: { opacity: 0, x: 0, y: 0 },
-  enter: { opacity: 1, x: 0, y: 0 },
-  exit: { opacity: 0, x: 0, y: 0 },
-};
+// ============================================================================
+// STYLED COMPONENTS
+// ============================================================================
 
+/**
+ * Main content wrapper with animations
+ */
 const Content = styled(motion.main)`
-  padding-block-start: 64px;
-  padding-inline: 64px;
+  flex: 1;
+  width: 100%;
+  padding: ${spacing[16]} ${spacing[8]};
   overflow-x: clip;
+  
+  @media ${mediaQueries.tabletAndDown} {
+    padding: ${spacing[12]} ${spacing[6]};
+  }
 
-  @media ${QUERIES.mobileAndDown} {
-    padding-inline: 0;
+  @media ${mediaQueries.mobileAndDown} {
+    padding: ${spacing[8]} ${spacing[4]};
   }
 `;
 
-export function Layout({ children }: ILayoutProps) {
+// ============================================================================
+// COMPONENT
+// ============================================================================
+
+/**
+ * Layout wrapper with page transition animations
+ */
+export function Layout({ children }: LayoutProps) {
   return (
     <Content
       initial="hidden"
-      animate="enter"
+      animate="visible"
       exit="exit"
-      variants={variants}
-      transition={{ type: "linear" }}
+      variants={pageTransition}
+      transition={{
+        duration: 0.4,
+        ease: 'easeOut',
+      }}
     >
       {children}
     </Content>
