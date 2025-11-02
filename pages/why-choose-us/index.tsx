@@ -11,11 +11,7 @@ import styled from "styled-components";
 
 import { Layout } from "../../components/Layout";
 import { SEO } from "../../components/SEO";
-import {
-  ScrollReveal,
-  ScrollRevealContainer,
-  ScrollRevealItem,
-} from "../../components/ScrollReveal";
+import { ScrollReveal } from "../../components/ScrollReveal";
 import { WHY_CHOOSE_US } from "../../lib/constants";
 import {
   borderRadius,
@@ -74,6 +70,11 @@ const FeaturesGrid = styled.div`
     grid-template-columns: 1fr;
     gap: ${spacing[6]};
   }
+
+  /* Ensure visibility on mobile browsers */
+  @media ${mediaQueries.mobileAndDown} {
+    opacity: 1 !important;
+  }
 `;
 
 /**
@@ -91,6 +92,7 @@ const FeatureCard = styled(motion.article)`
   display: flex;
   flex-direction: column;
   height: 100%;
+
   &:hover {
     border-color: ${colors.accent.main};
     box-shadow: ${shadows.xl};
@@ -114,6 +116,8 @@ const FeatureCard = styled(motion.article)`
 
   @media ${mediaQueries.mobileAndDown} {
     padding: ${spacing[6]};
+    opacity: 1 !important;
+    transform: translateY(0) !important;
   }
 `;
 
@@ -206,21 +210,19 @@ export default function WhyChooseUs({ ...pageProps }) {
         </ScrollReveal>
 
         {/* Features Grid */}
-        <ScrollRevealContainer staggerDelay={0.15}>
-          <FeaturesGrid>
-            {WHY_CHOOSE_US.map(({ title, description, image }) => (
-              <ScrollRevealItem key={title}>
-                <FeatureCard>
-                  <CardHeader>
-                    <IconWrapper className="icon-wrapper">{image}</IconWrapper>
-                    <FeatureTitle>{title}</FeatureTitle>
-                  </CardHeader>
-                  <FeatureDescription>{description}</FeatureDescription>
-                </FeatureCard>
-              </ScrollRevealItem>
-            ))}
-          </FeaturesGrid>
-        </ScrollRevealContainer>
+        <FeaturesGrid>
+          {WHY_CHOOSE_US.map(({ title, description, image }) => (
+            <ScrollReveal key={title}>
+              <FeatureCard>
+                <CardHeader>
+                  <IconWrapper className="icon-wrapper">{image}</IconWrapper>
+                  <FeatureTitle>{title}</FeatureTitle>
+                </CardHeader>
+                <FeatureDescription>{description}</FeatureDescription>
+              </FeatureCard>
+            </ScrollReveal>
+          ))}
+        </FeaturesGrid>
 
         {/* Image Section */}
         <ScrollReveal>
