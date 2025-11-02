@@ -69,7 +69,6 @@ const FeaturesGrid = styled.div`
   grid-template-columns: repeat(2, 1fr);
   gap: ${spacing[8]};
   margin-bottom: ${spacing[16]};
-  grid-auto-rows: 1fr;
 
   @media ${mediaQueries.tabletAndDown} {
     grid-template-columns: 1fr;
@@ -92,7 +91,6 @@ const FeatureCard = styled(motion.article)`
   display: flex;
   flex-direction: column;
   height: 100%;
-
   &:hover {
     border-color: ${colors.accent.main};
     box-shadow: ${shadows.xl};
