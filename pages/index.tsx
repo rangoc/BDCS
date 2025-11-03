@@ -261,7 +261,7 @@ const PartnersTitle = styled.h2`
  */
 const PartnersGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(1, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: ${spacing[8]};
   align-items: center;
   max-width: 900px;
@@ -359,7 +359,7 @@ export default function Home() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImageIndex((prev) => (prev + 1) % heroImages.length);
-    }, 10000);
+    }, 3500);
 
     return () => clearInterval(interval);
   }, []);
