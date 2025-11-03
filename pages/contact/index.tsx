@@ -1,22 +1,29 @@
 /**
  * Contact Page
- * 
+ *
  * Contact form with improved styling and user feedback
  * Includes form validation and success/error states
  */
 
-import { useEffect, useState } from "react";
-import styled from "styled-components";
-import { useForm, SubmitHandler } from "react-hook-form";
-import Link from "next/link";
 import { motion } from "framer-motion";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import styled from "styled-components";
 
-import { SEO } from "../../components/SEO";
+import { Dialog } from "../../components/Dialog";
 import { Layout } from "../../components/Layout";
 import { ScrollReveal } from "../../components/ScrollReveal";
-import { colors, spacing, typography, mediaQueries, borderRadius, shadows } from "../../lib/theme";
-import { Dialog } from "../../components/Dialog";
+import { SEO } from "../../components/SEO";
 import { Spinner } from "../../components/Spinner";
+import {
+  borderRadius,
+  colors,
+  mediaQueries,
+  shadows,
+  spacing,
+  typography,
+} from "../../lib/theme";
 
 interface IFormInputs {
   name: string;
@@ -54,18 +61,18 @@ const Wrapper = styled.div`
  * Page title
  */
 const PageTitle = styled.h1`
-  font-size: ${typography.fontSize['4xl']};
+  font-size: ${typography.fontSize["4xl"]};
   font-weight: ${typography.fontWeight.bold};
   color: ${colors.primary.main};
   text-align: center;
   margin-bottom: ${spacing[4]};
-  
+
   @media ${mediaQueries.tabletAndDown} {
-    font-size: ${typography.fontSize['3xl']};
+    font-size: ${typography.fontSize["3xl"]};
   }
-  
+
   @media ${mediaQueries.mobileAndDown} {
-    font-size: ${typography.fontSize['2xl']};
+    font-size: ${typography.fontSize["2xl"]};
   }
 `;
 
@@ -77,7 +84,7 @@ const PageSubtitle = styled.p`
   color: ${colors.secondary.lighter};
   text-align: center;
   margin-bottom: ${spacing[12]};
-  
+
   @media ${mediaQueries.mobileAndDown} {
     font-size: ${typography.fontSize.base};
   }
@@ -91,14 +98,14 @@ const FormWrapper = styled(motion.div)`
   margin: 0 auto ${spacing[8]};
   background-color: ${colors.neutral.white};
   padding: ${spacing[10]} ${spacing[8]};
-  border-radius: ${borderRadius['3xl']};
+  border-radius: ${borderRadius["3xl"]};
   box-shadow: ${shadows.xl};
   border: 1px solid ${colors.neutral.gray200};
 
   @media ${mediaQueries.tabletAndDown} {
     padding: ${spacing[8]} ${spacing[6]};
   }
-  
+
   @media ${mediaQueries.mobileAndDown} {
     padding: ${spacing[6]} ${spacing[4]};
   }
@@ -143,13 +150,13 @@ const Input = styled.input`
   color: ${colors.secondary.main};
   background-color: ${colors.neutral.white};
   transition: all 0.2s ease-out;
-  
+
   &:focus {
     outline: none;
     border-color: ${colors.accent.main};
     box-shadow: 0 0 0 3px ${colors.accent.main}22;
   }
-  
+
   &::placeholder {
     color: ${colors.neutral.gray400};
   }
@@ -170,13 +177,13 @@ const Message = styled.textarea`
   font-family: ${typography.fontFamily.primary};
   line-height: ${typography.lineHeight.relaxed};
   transition: all 0.2s ease-out;
-  
+
   &:focus {
     outline: none;
     border-color: ${colors.accent.main};
     box-shadow: 0 0 0 3px ${colors.accent.main}22;
   }
-  
+
   &::placeholder {
     color: ${colors.neutral.gray400};
   }
@@ -221,7 +228,7 @@ export const SubmitButton = styled(motion.button)`
     box-shadow: ${shadows.lg};
     transform: translateY(-2px);
   }
-  
+
   &:active:not(:disabled) {
     transform: translateY(0);
   }
@@ -244,12 +251,12 @@ const Caption = styled.p`
   color: ${colors.secondary.lighter};
   font-style: italic;
   margin-top: ${spacing[8]};
-  
+
   a {
     color: ${colors.accent.main};
     font-weight: ${typography.fontWeight.semibold};
     text-decoration: none;
-    
+
     &:hover {
       text-decoration: underline;
     }
@@ -313,7 +320,8 @@ export default function Contact({ ...pageProps }) {
         <ScrollReveal>
           <PageTitle>Get in Touch</PageTitle>
           <PageSubtitle>
-            Have a question or want to work together? We'd love to hear from you.
+            Have a question or want to work together? We'd love to hear from
+            you.
           </PageSubtitle>
         </ScrollReveal>
 
@@ -342,9 +350,9 @@ export default function Contact({ ...pageProps }) {
                   type="email"
                   id="email"
                   placeholder="your.email@example.com"
-                  {...register("email", { 
+                  {...register("email", {
                     required: true,
-                    pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
+                    pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                   })}
                 />
                 {errors.email && errors.email.type === "required" && (

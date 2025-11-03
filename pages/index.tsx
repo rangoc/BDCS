@@ -128,9 +128,20 @@ const HeroCTA = styled(motion.div)`
   gap: ${spacing[4]};
   margin-top: ${spacing[4]};
 
+  /* Make buttons equal width */
+  > a {
+    flex: 1;
+    max-width: 200px;
+  }
+
   @media ${mediaQueries.mobileAndDown} {
     flex-direction: column;
     align-items: center;
+
+    > a {
+      width: 100%;
+      max-width: 280px;
+    }
   }
 `;
 
