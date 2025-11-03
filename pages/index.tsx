@@ -454,7 +454,7 @@ export default function Home() {
                 alt={heroImages[currentImageIndex].alt}
                 layout="responsive"
                 quality={100}
-                priority={currentImageIndex === 0}
+                priority={true}
                 fetchPriority="high"
               />
             </CarouselImage>
