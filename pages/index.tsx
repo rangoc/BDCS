@@ -431,10 +431,11 @@ export default function Home() {
       <ScrollReveal>
         <IntroSection>
           <IntroText>
-            Based in Podgorica, Montenegro, we offer a flexible hybrid team from
-            junior to manager level, ready to respond to various audit tasks at
-            your request. With extensive experience in Dutch GAAP and IFRS, we
-            ensure our clients receive exceptional support.
+            Operating from our offices in Podgorica, Montenegro, and Sarajevo,
+            Bosnia and Herzegovina, we offer a flexible hybrid team from junior
+            to manager level, ready to respond to various audit tasks at your
+            request. With extensive experience in Dutch GAAP and IFRS, we ensure
+            our clients receive exceptional support.
           </IntroText>
         </IntroSection>
       </ScrollReveal>
