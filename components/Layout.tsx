@@ -16,6 +16,8 @@ import { pageTransition } from "../lib/animations";
 
 interface LayoutProps {
   children: React.ReactNode;
+  /** Set padding-bottom to 0 */
+  noBottomPadding?: boolean;
 }
 
 // ============================================================================
@@ -25,18 +27,30 @@ interface LayoutProps {
 /**
  * Main content wrapper with animations
  */
-const Content = styled(motion.main)`
+const Content = styled(motion.main)<{ noBottomPadding?: boolean }>`
   flex: 1;
   width: 100%;
-  padding: ${spacing[16]} ${spacing[8]};
+  padding-top: ${spacing[16]};
+  padding-left: ${spacing[8]};
+  padding-right: ${spacing[8]};
+  padding-bottom: ${({ noBottomPadding }) =>
+    noBottomPadding ? "0" : spacing[16]};
   overflow-x: clip;
-  
+
   @media ${mediaQueries.tabletAndDown} {
-    padding: ${spacing[12]} ${spacing[6]};
+    padding-top: ${spacing[12]};
+    padding-left: ${spacing[6]};
+    padding-right: ${spacing[6]};
+    padding-bottom: ${({ noBottomPadding }) =>
+      noBottomPadding ? "0" : spacing[12]};
   }
 
   @media ${mediaQueries.mobileAndDown} {
-    padding: ${spacing[8]} ${spacing[4]};
+    padding-top: ${spacing[8]};
+    padding-left: ${spacing[4]};
+    padding-right: ${spacing[4]};
+    padding-bottom: ${({ noBottomPadding }) =>
+      noBottomPadding ? "0" : spacing[8]};
   }
 `;
 
@@ -47,9 +61,10 @@ const Content = styled(motion.main)`
 /**
  * Layout wrapper with page transition animations
  */
-export function Layout({ children }: LayoutProps) {
+export function Layout({ children, noBottomPadding }: LayoutProps) {
   return (
     <Content
+      noBottomPadding={noBottomPadding}
       initial="hidden"
       animate="visible"
       exit="exit"

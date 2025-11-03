@@ -35,7 +35,6 @@ import carousel3 from "../public/assets/carousel3.webp";
 import carousel4 from "../public/assets/carousel4.webp";
 import adviesLogo from "../public/partners/AdviesGroep88Logo.png";
 import moosLogo from "../public/partners/MoosAccountantsLogo.png";
-import ruitenburgLogo from "../public/partners/RuitenburgLogo.png";
 
 // ============================================================================
 // HERO SECTION - Split Screen
@@ -261,7 +260,7 @@ const PartnersTitle = styled.h2`
  */
 const PartnersGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(1, 1fr);
   gap: ${spacing[8]};
   align-items: center;
   max-width: 900px;
@@ -292,6 +291,7 @@ const PartnerCard = styled(motion.div)`
   aspect-ratio: 1;
   width: 100%;
   max-width: 300px;
+  height: 140px;
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -304,7 +304,6 @@ const PartnerCard = styled(motion.div)`
 
   @media ${mediaQueries.tabletAndDown} {
     max-width: 280px;
-    height: 140px;
     padding: ${spacing[6]};
   }
 `;
@@ -365,7 +364,7 @@ export default function Home() {
   }, []);
 
   return (
-    <Layout>
+    <Layout noBottomPadding>
       <SEO
         title="Home | BD Corporate Services d.o.o. Podgorica"
         description="Professional audit and accounting outsourcing firm with experienced staff from Big 4 firms. We deliver quality, competitive pricing, and personalized attention."
@@ -455,20 +454,6 @@ export default function Home() {
                     <Image
                       src={moosLogo}
                       alt="Moos Accountants"
-                      layout="fill"
-                      objectFit="contain"
-                      quality={100}
-                    />
-                  </PartnerLogo>
-                </PartnerCard>
-              </ScrollRevealItem>
-
-              <ScrollRevealItem>
-                <PartnerCard>
-                  <PartnerLogo>
-                    <Image
-                      src={ruitenburgLogo}
-                      alt="Ruitenburg"
                       layout="fill"
                       objectFit="contain"
                       quality={100}
