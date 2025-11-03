@@ -455,7 +455,7 @@ export default function Home() {
                 layout="responsive"
                 quality={100}
                 priority={currentImageIndex === 0}
-                fetchPriority={currentImageIndex === 0 ? "high" : "auto"}
+                fetchPriority="high"
               />
             </CarouselImage>
           </AnimatePresence>
