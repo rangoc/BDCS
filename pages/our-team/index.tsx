@@ -276,7 +276,9 @@ export default function OurTeam({ ...pageProps }) {
       <SEO
         title="Our Team | BD Corporate Services d.o.o. Podgorica"
         description="Meet our experienced team of audit professionals from Big 4 firms. From junior to manager level, ready to support your audit needs."
-        ogUrl={pageProps.canonical}
+        canonicalUrl="https://www.bdcs.me/our-team"
+        ogUrl="https://www.bdcs.me/our-team"
+        ogImgUrl="https://www.bdcs.me/logo.webp"
       />
       <Wrapper>
         {/* Page Title */}

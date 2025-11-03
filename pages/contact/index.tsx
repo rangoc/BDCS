@@ -313,7 +313,9 @@ export default function Contact({ ...pageProps }) {
       <SEO
         title="Contact Us | BD Corporate Services d.o.o. Podgorica"
         description="Get in touch with our team of experienced audit professionals. We're here to support your business needs."
-        ogUrl={pageProps.canonical}
+        canonicalUrl="https://www.bdcs.me/contact"
+        ogUrl="https://www.bdcs.me/contact"
+        ogImgUrl="https://www.bdcs.me/logo.webp"
       />
       <Wrapper>
         {/* Page Header */}

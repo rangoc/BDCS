@@ -322,7 +322,9 @@ export default function About({ ...pageProps }) {
       <SEO
         title="About Us | BD Corporate Services d.o.o. Podgorica"
         description="BDCS explores and realizes opportunities with the provision of high quality in accounting and audit services that go beyond cost reductions."
-        ogUrl={pageProps.canonical}
+        canonicalUrl="https://www.bdcs.me/about"
+        ogUrl="https://www.bdcs.me/about"
+        ogImgUrl="https://www.bdcs.me/logo.webp"
       />
       <Wrapper>
         {/* Intro Section */}

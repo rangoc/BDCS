@@ -1,0 +1,12 @@
+# robots.txt for BD Corporate Services
+# https://www.bdcs.me
+
+User-agent: *
+Allow: /
+
+# Disallow API routes
+Disallow: /api/
+
+# Sitemap location
+Sitemap: https://www.bdcs.me/sitemap.xml
+

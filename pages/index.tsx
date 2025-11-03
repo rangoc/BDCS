@@ -19,6 +19,7 @@ import {
   ScrollRevealItem,
 } from "../components/ScrollReveal";
 import { SEO } from "../components/SEO";
+import { StructuredData } from "../components/StructuredData";
 import { textStaggerContainer, textStaggerLine } from "../lib/animations";
 import {
   borderRadius,
@@ -363,12 +364,47 @@ export default function Home() {
     return () => clearInterval(interval);
   }, []);
 
+  // Structured data for Organization and WebSite
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "BD Corporate Services d.o.o. Podgorica",
+    url: "https://www.bdcs.me",
+    logo: "https://www.bdcs.me/logo.webp",
+    description:
+      "Professional audit and accounting outsourcing firm with experienced staff from Big 4 firms. We deliver quality, competitive pricing, and personalized attention.",
+    address: {
+      "@type": "PostalAddress",
+      addressCountry: "ME",
+      addressLocality: "Podgorica",
+      addressRegion: "Montenegro",
+    },
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "Customer Service",
+      email: "info@bdcs.me",
+    },
+  };
+
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "BD Corporate Services",
+    url: "https://www.bdcs.me",
+    description:
+      "Professional audit and accounting outsourcing firm with experienced staff from Big 4 firms.",
+  };
+
   return (
     <Layout noBottomPadding>
       <SEO
         title="Home | BD Corporate Services d.o.o. Podgorica"
         description="Professional audit and accounting outsourcing firm with experienced staff from Big 4 firms. We deliver quality, competitive pricing, and personalized attention."
+        canonicalUrl="https://www.bdcs.me"
+        ogUrl="https://www.bdcs.me"
+        ogImgUrl="https://www.bdcs.me/logo.webp"
       />
+      <StructuredData data={[organizationSchema, websiteSchema]} />
 
       {/* Hero Section - Split Screen */}
       <HeroSection>

@@ -201,7 +201,9 @@ export default function WhyChooseUs({ ...pageProps }) {
       <SEO
         title="Why Choose Us | BD Corporate Services d.o.o. Podgorica"
         description="Professional approach. Competitive pricing. Personalised attention. National standards."
-        ogUrl={pageProps.canonical}
+        canonicalUrl="https://www.bdcs.me/why-choose-us"
+        ogUrl="https://www.bdcs.me/why-choose-us"
+        ogImgUrl="https://www.bdcs.me/logo.webp"
       />
       <Wrapper>
         {/* Page Title */}

@@ -118,6 +118,7 @@ export function Footer() {
             staff from Big 4 firms.
           </Text>
           <Text>Podgorica, Montenegro</Text>
+          <Text>Sarajevo, Bosnia and Herzegovina</Text>
         </Section>
 
         {/* Quick Links */}
