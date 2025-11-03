@@ -45,8 +45,9 @@ const IntroSection = styled.section`
 
 /**
  * Section title
+ * Changed from h1 to h2 to avoid deprecation warning (h1 inside section)
  */
-const SectionTitle = styled.h1`
+const SectionTitle = styled.h2`
   font-size: ${typography.fontSize["4xl"]};
   font-weight: ${typography.fontWeight.bold};
   color: ${colors.primary.main};
