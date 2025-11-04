@@ -427,7 +427,7 @@ export default function Home() {
           </HeroDescription>
           <HeroCTA variants={textStaggerLine}>
             <Link href="/contact" passHref legacyBehavior>
-              <Button as="a" variant="primary" size="large">
+              <Button as="a" variant="accent" size="large">
                 Get in Touch
               </Button>
             </Link>
@@ -455,7 +455,6 @@ export default function Home() {
                 layout="responsive"
                 quality={100}
                 priority={true}
-                fetchPriority="high"
               />
             </CarouselImage>
           </AnimatePresence>

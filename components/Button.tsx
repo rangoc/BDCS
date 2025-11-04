@@ -105,6 +105,7 @@ export const Button = styled(motion.button)<ButtonProps>`
           
           &:hover:not(:disabled) {
             background-color: ${colors.accent.light};
+            color: ${colors.neutral.white};
             border-color: ${colors.accent.light};
             box-shadow: ${shadows.accentGlow};
           }
