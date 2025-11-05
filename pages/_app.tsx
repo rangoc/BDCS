@@ -11,7 +11,7 @@ import { SEO } from "../components/SEO";
 export default function App({ Component, pageProps, router }: AppProps) {
   const { asPath } = useRouter();
   const routerInstance = useRouter();
-  const url = `https://bdcs.me${asPath}`;
+  const url = `https://www.bdcs.me${asPath}`;
 
   /**
    * Scroll to top on route change
