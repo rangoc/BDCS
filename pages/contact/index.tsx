@@ -208,7 +208,7 @@ export const SubmitButton = styled(motion.button)`
   height: 56px;
   margin: ${spacing[4]} auto 0;
   padding: ${spacing[3]} ${spacing[6]};
-  background-color: ${colors.primary.main};
+  background-color: rgba(1, 24, 73, 0.95);
   color: ${colors.neutral.white};
   font-weight: ${typography.fontWeight.semibold};
   font-size: ${typography.fontSize.base};
@@ -223,7 +223,7 @@ export const SubmitButton = styled(motion.button)`
   box-shadow: ${shadows.md};
 
   &:hover:not(:disabled) {
-    background-color: ${colors.primary.light};
+    background-color: rgba(1, 24, 73, 0.9);
     border-color: ${colors.primary.light};
     box-shadow: ${shadows.lg};
     transform: translateY(-2px);

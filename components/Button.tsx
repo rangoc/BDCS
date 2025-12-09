@@ -122,7 +122,7 @@ export const Button = styled(motion.button)<ButtonProps>`
           border-color: ${colors.primary.main};
           
           &:hover:not(:disabled) {
-            background-color: ${colors.primary.main};
+            background-color: rgba(1, 24, 73, 0.95);
             color: ${colors.neutral.white};
             box-shadow: ${shadows.md};
           }
@@ -135,12 +135,12 @@ export const Button = styled(motion.button)<ButtonProps>`
       case "primary":
       default:
         return `
-          background-color: ${colors.primary.main};
+          background-color: rgba(1, 24, 73, 0.95);
           color: ${colors.neutral.white};
           border-color: ${colors.primary.main};
           
           &:hover:not(:disabled) {
-            background-color: ${colors.primary.light};
+            background-color: rgba(1, 24, 73, 0.9);
             border-color: ${colors.primary.light};
             box-shadow: ${shadows.primaryGlow};
           }

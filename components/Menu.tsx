@@ -1,51 +1,43 @@
 /**
  * Menu Component
- * 
+ *
  * Mobile slide-in navigation menu
  * Appears from the right side on mobile devices
  */
 
 import Link from "next/link";
+import { useEffect } from "react";
 import styled from "styled-components";
-import { colors, spacing, typography, zIndex, shadows } from "../lib/theme";
+import { colors, spacing, typography, zIndex } from "../lib/theme";
 
 // ============================================================================
 // STYLED COMPONENTS
 // ============================================================================
 
 /**
- * Mobile menu container - slides in from right
+ * Mobile menu container - full width overlay
  */
 export const StyledMenu = styled.nav<{ open: boolean }>`
   position: fixed;
   top: 0;
+  left: 0;
   right: 0;
+  bottom: 0;
   z-index: ${zIndex.modalBackdrop};
+  width: 100%;
   height: 100vh;
-  width: 280px;
-  background: ${colors.primary.main};
+  background: rgba(1, 24, 73, 1);
+  backdrop-filter: blur(10px) saturate(180%);
+  -webkit-backdrop-filter: blur(10px) saturate(180%);
   color: ${colors.neutral.white};
   padding: ${spacing[8]} ${spacing[6]};
   padding-top: ${spacing[20]};
-  box-shadow: ${shadows['2xl']};
-  
-  /* Slide animation */
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  /* Slide animation from right */
   transform: ${({ open }) => (open ? "translateX(0)" : "translateX(100%)")};
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  
-  /* Overlay effect when menu is open */
-  &::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 280px;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    opacity: ${({ open }) => (open ? 1 : 0)};
-    pointer-events: ${({ open }) => (open ? "all" : "none")};
-    transition: opacity 0.3s ease-in-out;
-  }
 `;
 
 /**
@@ -66,14 +58,14 @@ const List = styled.ul`
 const ListItem = styled.li`
   position: relative;
   width: max-content;
-  
+
   a {
     color: ${colors.neutral.white};
     text-decoration: none;
     font-size: ${typography.fontSize.lg};
     font-weight: ${typography.fontWeight.medium};
     transition: color 0.2s ease-out;
-    
+
     &:hover {
       color: ${colors.complimentary.light};
     }
@@ -116,6 +108,23 @@ export function Menu({
   const handleLinkClick = () => {
     setOpen(false);
   };
+
+  /**
+   * Close menu when pressing Escape key
+   */
+  useEffect(() => {
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape" && open) {
+        setOpen(false);
+      }
+    };
+
+    document.addEventListener("keydown", handleEscape);
+
+    return () => {
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, [open, setOpen]);
 
   return (
     <StyledMenu open={open}>

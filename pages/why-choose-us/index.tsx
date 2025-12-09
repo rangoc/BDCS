@@ -11,7 +11,6 @@ import styled from "styled-components";
 
 import { Layout } from "../../components/Layout";
 import { SEO } from "../../components/SEO";
-import { ScrollReveal } from "../../components/ScrollReveal";
 import { WHY_CHOOSE_US } from "../../lib/constants";
 import {
   borderRadius,
@@ -60,7 +59,7 @@ const PageTitle = styled.h1`
  * Features grid
  * All cards will have equal heights in their row
  */
-const FeaturesGrid = styled.div`
+const FeaturesGrid = styled(motion.div)`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: ${spacing[8]};
@@ -69,11 +68,6 @@ const FeaturesGrid = styled.div`
   @media ${mediaQueries.tabletAndDown} {
     grid-template-columns: 1fr;
     gap: ${spacing[6]};
-  }
-
-  /* Ensure visibility on mobile browsers */
-  @media ${mediaQueries.mobileAndDown} {
-    opacity: 1 !important;
   }
 `;
 
@@ -116,8 +110,6 @@ const FeatureCard = styled(motion.article)`
 
   @media ${mediaQueries.mobileAndDown} {
     padding: ${spacing[6]};
-    opacity: 1 !important;
-    transform: translateY(0) !important;
   }
 `;
 
@@ -196,6 +188,29 @@ const ImageSection = styled.section`
 // ============================================================================
 
 export default function WhyChooseUs({ ...pageProps }) {
+  // Animation variants for staggered card entrance
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut",
+      },
+    },
+  };
+
   return (
     <Layout>
       <SEO
@@ -207,36 +222,34 @@ export default function WhyChooseUs({ ...pageProps }) {
       />
       <Wrapper>
         {/* Page Title */}
-        <ScrollReveal>
-          <PageTitle>Why choose BD Corporate Services</PageTitle>
-        </ScrollReveal>
+        <PageTitle>Why choose BD Corporate Services</PageTitle>
 
         {/* Features Grid */}
-        <FeaturesGrid>
+        <FeaturesGrid
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
           {WHY_CHOOSE_US.map(({ title, description, image }) => (
-            <ScrollReveal key={title}>
-              <FeatureCard>
-                <CardHeader>
-                  <IconWrapper className="icon-wrapper">{image}</IconWrapper>
-                  <FeatureTitle>{title}</FeatureTitle>
-                </CardHeader>
-                <FeatureDescription>{description}</FeatureDescription>
-              </FeatureCard>
-            </ScrollReveal>
+            <FeatureCard key={title} variants={cardVariants}>
+              <CardHeader>
+                <IconWrapper className="icon-wrapper">{image}</IconWrapper>
+                <FeatureTitle>{title}</FeatureTitle>
+              </CardHeader>
+              <FeatureDescription>{description}</FeatureDescription>
+            </FeatureCard>
           ))}
         </FeaturesGrid>
 
         {/* Image Section */}
-        <ScrollReveal>
-          <ImageSection>
-            <Image
-              src={whyResource}
-              alt="By choosing us, you won't make a mistake"
-              layout="responsive"
-              quality={100}
-            />
-          </ImageSection>
-        </ScrollReveal>
+        <ImageSection>
+          <Image
+            src={whyResource}
+            alt="By choosing us, you won't make a mistake"
+            layout="responsive"
+            quality={100}
+          />
+        </ImageSection>
       </Wrapper>
     </Layout>
   );

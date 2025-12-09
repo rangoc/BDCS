@@ -34,10 +34,13 @@ export const GlobalStyles = createGlobalStyle`
     -webkit-text-size-adjust: 100%;
     /* Smooth scrolling for anchor links */
     scroll-behavior: smooth;
+    /* Prevent horizontal scrollbar */
+    overflow-x: hidden;
   }
 
   body {
-    height: 100%;
+    min-height: 100%;
+    margin: 0;
     font-family: ${typography.fontFamily.primary};
     font-size: ${typography.fontSize.base};
     font-weight: ${typography.fontWeight.normal};
@@ -48,6 +51,8 @@ export const GlobalStyles = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    /* Prevent horizontal scrollbar */
+    overflow-x: hidden;
   }
 
   /* ============================================================================
@@ -245,6 +250,16 @@ export const GlobalStyles = createGlobalStyle`
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    overflow-x: hidden;
+    padding-top: 112px;
+    
+    @media (max-width: 768px) {
+      padding-top: 96px; /* Smaller header on tablet */
+    }
+    
+    @media (max-width: 550px) {
+      padding-top: 72px; /* Even smaller on mobile */
+    }
   }
 
   /* ============================================================================
@@ -290,7 +305,7 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   ::-webkit-scrollbar-thumb {
-    background: ${colors.primary.light};
+    background: rgba(1, 24, 73, 0.95);
     border-radius: ${typography.fontSize.xs};
     
     &:hover {

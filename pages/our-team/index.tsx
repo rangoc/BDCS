@@ -1,21 +1,26 @@
 /**
  * Our Team Page
- * 
+ *
  * Displays team members in a grid with modal details
  * Handles 38+ team members efficiently with hover effects and animations
  */
 
-import { useState } from "react";
 import Image from "next/legacy/image";
+import { useState } from "react";
 import styled from "styled-components";
-import { motion } from "framer-motion";
 
 import { Layout } from "../../components/Layout";
 import { SEO } from "../../components/SEO";
-import { ScrollReveal, ScrollRevealContainer, ScrollRevealItem } from "../../components/ScrollReveal";
-import { TeamMemberModal, TeamMember } from "../../components/TeamMemberModal";
-import { colors, spacing, typography, mediaQueries, borderRadius, shadows } from "../../lib/theme";
+import { TeamMember, TeamMemberModal } from "../../components/TeamMemberModal";
 import { OUR_TEAM } from "../../lib/constants";
+import {
+  borderRadius,
+  colors,
+  mediaQueries,
+  shadows,
+  spacing,
+  typography,
+} from "../../lib/theme";
 
 // ============================================================================
 // STYLED COMPONENTS
@@ -33,19 +38,19 @@ const Wrapper = styled.div`
  * Page title
  */
 const PageTitle = styled.h1`
-  font-size: ${typography.fontSize['4xl']};
+  font-size: ${typography.fontSize["4xl"]};
   font-weight: ${typography.fontWeight.bold};
   color: ${colors.primary.main};
   text-align: center;
   margin-bottom: ${spacing[16]};
-  
+
   @media ${mediaQueries.tabletAndDown} {
-    font-size: ${typography.fontSize['3xl']};
+    font-size: ${typography.fontSize["3xl"]};
     margin-bottom: ${spacing[12]};
   }
-  
+
   @media ${mediaQueries.mobileAndDown} {
-    font-size: ${typography.fontSize['2xl']};
+    font-size: ${typography.fontSize["2xl"]};
   }
 `;
 
@@ -56,17 +61,17 @@ const TeamGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: ${spacing[8]};
-  
+
   @media ${mediaQueries.laptopAndDown} {
     grid-template-columns: repeat(3, 1fr);
     gap: ${spacing[6]};
   }
-  
+
   @media ${mediaQueries.tabletAndDown} {
     grid-template-columns: repeat(2, 1fr);
     gap: ${spacing[6]};
   }
-  
+
   @media ${mediaQueries.mobileAndDown} {
     display: none;
   }
@@ -77,7 +82,7 @@ const TeamGrid = styled.div`
  */
 const TeamList = styled.div`
   display: none;
-  
+
   @media ${mediaQueries.mobileAndDown} {
     display: flex;
     flex-direction: column;
@@ -88,22 +93,22 @@ const TeamList = styled.div`
 /**
  * Individual team member card (desktop/tablet)
  */
-const TeamCard = styled(motion.div)`
+const TeamCard = styled.div`
   background-color: ${colors.neutral.white};
-  border-radius: ${borderRadius['2xl']};
+  border-radius: ${borderRadius["2xl"]};
   overflow: hidden;
   box-shadow: ${shadows.base};
   cursor: pointer;
   transition: all 0.3s ease-out;
-  
+
   &:hover {
     box-shadow: ${shadows.xl};
     transform: translateY(-8px);
-    
+
     .image-wrapper {
       transform: scale(1.05);
     }
-    
+
     .member-name {
       color: ${colors.accent.main};
     }
@@ -113,7 +118,7 @@ const TeamCard = styled(motion.div)`
 /**
  * Team member row (mobile only)
  */
-const TeamRow = styled(motion.div)`
+const TeamRow = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -123,20 +128,20 @@ const TeamRow = styled(motion.div)`
   border: 1px solid ${colors.neutral.gray200};
   cursor: pointer;
   transition: all 0.2s ease-out;
-  
+
   &:hover {
-    background-color: ${colors.primary.main};
+    background-color: rgba(1, 24, 73, 0.95);
     border-color: ${colors.primary.main};
-    
+
     .row-name {
       color: ${colors.neutral.white};
     }
-    
+
     .row-role {
       color: ${colors.complimentary.light};
     }
   }
-  
+
   &:active {
     transform: scale(0.98);
   }
@@ -183,7 +188,7 @@ const ImageWrapper = styled.div`
   overflow: hidden;
   background-color: ${colors.neutral.gray100};
   transition: transform 0.3s ease-out;
-  
+
   /* Ensure images crop from top, keeping heads visible */
   img {
     object-position: top center !important;
@@ -247,7 +252,9 @@ export default function OurTeam({ ...pageProps }) {
    */
   const handlePrevious = () => {
     if (!selectedMember) return;
-    const currentIndex = OUR_TEAM.findIndex(m => m.email === selectedMember.email);
+    const currentIndex = OUR_TEAM.findIndex(
+      (m) => m.email === selectedMember.email
+    );
     if (currentIndex > 0) {
       setSelectedMember(OUR_TEAM[currentIndex - 1]);
     }
@@ -258,18 +265,22 @@ export default function OurTeam({ ...pageProps }) {
    */
   const handleNext = () => {
     if (!selectedMember) return;
-    const currentIndex = OUR_TEAM.findIndex(m => m.email === selectedMember.email);
+    const currentIndex = OUR_TEAM.findIndex(
+      (m) => m.email === selectedMember.email
+    );
     if (currentIndex < OUR_TEAM.length - 1) {
       setSelectedMember(OUR_TEAM[currentIndex + 1]);
     }
   };
 
   // Check if navigation is available
-  const currentIndex = selectedMember 
-    ? OUR_TEAM.findIndex(m => m.email === selectedMember.email)
+  const currentIndex = selectedMember
+    ? OUR_TEAM.findIndex((m) => m.email === selectedMember.email)
     : -1;
   const hasPrevious = currentIndex > 0;
   const hasNext = currentIndex < OUR_TEAM.length - 1;
+
+  console.log(OUR_TEAM);
 
   return (
     <Layout>
@@ -282,35 +293,32 @@ export default function OurTeam({ ...pageProps }) {
       />
       <Wrapper>
         {/* Page Title */}
-        <ScrollReveal>
-          <PageTitle>Meet our Team</PageTitle>
-        </ScrollReveal>
+        <PageTitle>Meet our Team</PageTitle>
 
         {/* Team Grid - Desktop/Tablet */}
-        <ScrollRevealContainer staggerDelay={0.05}>
-          <TeamGrid>
-            {OUR_TEAM.map((member) => (
-              <ScrollRevealItem key={member.email || member.name}>
-                <TeamCard onClick={() => handleCardClick(member)}>
-                  <ImageWrapper className="image-wrapper">
-                    <Image
-                      src={member.image}
-                      alt={member.name}
-                      layout="fill"
-                      objectFit="cover"
-                      objectPosition="top center"
-                      quality={90}
-                    />
-                  </ImageWrapper>
-                  <CardContent>
-                    <MemberName className="member-name">{member.name}</MemberName>
-                    <MemberRole>{member.role}</MemberRole>
-                  </CardContent>
-                </TeamCard>
-              </ScrollRevealItem>
-            ))}
-          </TeamGrid>
-        </ScrollRevealContainer>
+        <TeamGrid>
+          {OUR_TEAM.map((member) => (
+            <TeamCard
+              key={member.email || member.name}
+              onClick={() => handleCardClick(member)}
+            >
+              <ImageWrapper className="image-wrapper">
+                <Image
+                  src={member.image}
+                  alt={member.name}
+                  layout="fill"
+                  objectFit="cover"
+                  objectPosition="top center"
+                  quality={90}
+                />
+              </ImageWrapper>
+              <CardContent>
+                <MemberName className="member-name">{member.name}</MemberName>
+                <MemberRole>{member.role}</MemberRole>
+              </CardContent>
+            </TeamCard>
+          ))}
+        </TeamGrid>
 
         {/* Team List - Mobile Only */}
         <TeamList>
@@ -318,7 +326,6 @@ export default function OurTeam({ ...pageProps }) {
             <TeamRow
               key={member.email || member.name}
               onClick={() => handleCardClick(member)}
-              whileTap={{ scale: 0.98 }}
             >
               <RowContent>
                 <RowName className="row-name">{member.name}</RowName>

@@ -17,7 +17,6 @@ import { useOnClickOutside } from "../hooks/useOnClickOutside";
 import {
   colors,
   mediaQueries,
-  shadows,
   spacing,
   transitions,
   zIndex,
@@ -31,21 +30,30 @@ import { Menu } from "./Menu";
 // ============================================================================
 
 /**
- * Header wrapper - sticky positioning with background transition
+ * Header wrapper - fixed positioning with background transition
  */
 const Wrapper = styled(motion.header)<{ $isScrolled: boolean }>`
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: ${zIndex.sticky};
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: ${spacing[4]} ${spacing[8]};
   background-color: ${({ $isScrolled }) =>
-    $isScrolled ? colors.primary.main : "transparent"};
+    $isScrolled ? "rgba(1, 24, 73, 0.95)" : "transparent"};
+  backdrop-filter: ${({ $isScrolled }) =>
+    $isScrolled ? "blur(10px) saturate(180%)" : "none"};
+  -webkit-backdrop-filter: ${({ $isScrolled }) =>
+    $isScrolled ? "blur(10px) saturate(180%)" : "none"};
   color: ${({ $isScrolled }) =>
     $isScrolled ? colors.neutral.white : colors.primary.main};
-  box-shadow: ${({ $isScrolled }) => ($isScrolled ? shadows.md : "none")};
+  box-shadow: ${({ $isScrolled }) =>
+    $isScrolled ? "0 8px 32px 0 rgba(0, 0, 0, 0.1)" : "none"};
+  border-bottom: ${({ $isScrolled }) =>
+    $isScrolled ? "1px solid rgba(255, 255, 255, 0.1)" : "none"};
   transition: all 0.3s ease-in-out;
 
   @media ${mediaQueries.tabletAndDown} {
@@ -174,11 +182,18 @@ export function Header() {
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
-      setIsScrolled(scrollPosition > 50);
+      setIsScrolled(scrollPosition > 1);
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    // Check initial scroll position
+    handleScroll();
+
+    // Add scroll listener
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   return (

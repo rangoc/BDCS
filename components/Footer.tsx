@@ -14,13 +14,17 @@ import { colors, mediaQueries, spacing, typography } from "../lib/theme";
 // ============================================================================
 
 /**
- * Footer wrapper with primary background
+ * Footer wrapper with glassy transparent background
  */
 const Wrapper = styled.footer`
-  background-color: ${colors.primary.main};
+  background-color: rgba(1, 24, 73, 0.95);
+  backdrop-filter: blur(10px) saturate(180%);
+  -webkit-backdrop-filter: blur(10px) saturate(180%);
   color: ${colors.neutral.white};
   padding: ${spacing[12]} ${spacing[8]};
   margin-top: auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 -8px 32px 0 rgba(0, 0, 0, 0.1);
 
   @media ${mediaQueries.mobileAndDown} {
     padding: ${spacing[8]} ${spacing[4]};
