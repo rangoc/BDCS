@@ -454,7 +454,7 @@ export default function Home() {
                 alt={heroImages[currentImageIndex].alt}
                 layout="responsive"
                 quality={100}
-                priority={true}
+                priority={currentImageIndex === 0}
               />
             </CarouselImage>
           </AnimatePresence>

@@ -280,8 +280,6 @@ export default function OurTeam({ ...pageProps }) {
   const hasPrevious = currentIndex > 0;
   const hasNext = currentIndex < OUR_TEAM.length - 1;
 
-  console.log(OUR_TEAM);
-
   return (
     <Layout>
       <SEO
