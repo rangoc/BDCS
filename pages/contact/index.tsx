@@ -13,7 +13,6 @@ import styled from "styled-components";
 
 import { Dialog } from "../../components/Dialog";
 import { Layout } from "../../components/Layout";
-import { ScrollReveal } from "../../components/ScrollReveal";
 import { SEO } from "../../components/SEO";
 import { Spinner } from "../../components/Spinner";
 import {
@@ -50,9 +49,9 @@ const defaultValues: IFormInputs = {
 // ============================================================================
 
 /**
- * Page wrapper
+ * Page wrapper with load-in animation
  */
-const Wrapper = styled.div`
+const Wrapper = styled(motion.div)`
   max-width: 1200px;
   margin: 0 auto;
 `;
@@ -317,91 +316,90 @@ export default function Contact({ ...pageProps }) {
         ogUrl="https://www.bdcs.me/contact"
         ogImgUrl="https://www.bdcs.me/logo.webp"
       />
-      <Wrapper>
+      <Wrapper
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+      >
         {/* Page Header */}
-        <ScrollReveal>
-          <PageTitle>Get in Touch</PageTitle>
-          <PageSubtitle>
-            Have a question or want to work together? We'd love to hear from
-            you.
-          </PageSubtitle>
-        </ScrollReveal>
+        <PageTitle>Get in Touch</PageTitle>
+        <PageSubtitle>
+          Have a question or want to work together? We'd love to hear from you.
+        </PageSubtitle>
 
         {/* Contact Form */}
-        <ScrollReveal>
-          <FormWrapper
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
-            <Form onSubmit={handleSubmit(onSubmit)}>
-              <FormField>
-                <Label htmlFor="name">Name*</Label>
-                <Input
-                  type="text"
-                  id="name"
-                  placeholder="Your full name"
-                  {...register("name", { required: true })}
-                />
-                {errors.name && <Error>This field is required</Error>}
-              </FormField>
+        <FormWrapper
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          <Form onSubmit={handleSubmit(onSubmit)}>
+            <FormField>
+              <Label htmlFor="name">Name*</Label>
+              <Input
+                type="text"
+                id="name"
+                placeholder="Your full name"
+                {...register("name", { required: true })}
+              />
+              {errors.name && <Error>This field is required</Error>}
+            </FormField>
 
-              <FormField>
-                <Label htmlFor="email">Email*</Label>
-                <Input
-                  type="email"
-                  id="email"
-                  placeholder="your.email@example.com"
-                  {...register("email", {
-                    required: true,
-                    pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                  })}
-                />
-                {errors.email && errors.email.type === "required" && (
-                  <Error>This field is required</Error>
-                )}
-                {errors.email && errors.email.type === "pattern" && (
-                  <Error>Please enter a valid email address</Error>
-                )}
-              </FormField>
+            <FormField>
+              <Label htmlFor="email">Email*</Label>
+              <Input
+                type="email"
+                id="email"
+                placeholder="your.email@example.com"
+                {...register("email", {
+                  required: true,
+                  pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                })}
+              />
+              {errors.email && errors.email.type === "required" && (
+                <Error>This field is required</Error>
+              )}
+              {errors.email && errors.email.type === "pattern" && (
+                <Error>Please enter a valid email address</Error>
+              )}
+            </FormField>
 
-              <FormField>
-                <Label htmlFor="subject">Subject*</Label>
-                <Input
-                  type="text"
-                  id="subject"
-                  placeholder="How can we help you?"
-                  {...register("subject", { required: true })}
-                />
-                {errors.subject && <Error>This field is required</Error>}
-              </FormField>
+            <FormField>
+              <Label htmlFor="subject">Subject*</Label>
+              <Input
+                type="text"
+                id="subject"
+                placeholder="How can we help you?"
+                {...register("subject", { required: true })}
+              />
+              {errors.subject && <Error>This field is required</Error>}
+            </FormField>
 
-              <FormField>
-                <Label htmlFor="message">Message*</Label>
-                <Message
-                  id="message"
-                  placeholder="Tell us more about your inquiry..."
-                  {...register("message", { required: true, minLength: 10 })}
-                />
-                {errors.message && errors.message.type === "required" && (
-                  <Error>This field is required</Error>
-                )}
-                {errors.message && errors.message.type === "minLength" && (
-                  <Error>Message must be at least 10 characters</Error>
-                )}
-              </FormField>
+            <FormField>
+              <Label htmlFor="message">Message*</Label>
+              <Message
+                id="message"
+                placeholder="Tell us more about your inquiry..."
+                {...register("message", { required: true, minLength: 10 })}
+              />
+              {errors.message && errors.message.type === "required" && (
+                <Error>This field is required</Error>
+              )}
+              {errors.message && errors.message.type === "minLength" && (
+                <Error>Message must be at least 10 characters</Error>
+              )}
+            </FormField>
 
-              <SubmitButton
-                type="submit"
-                disabled={isFetching}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                {isFetching ? <Spinner /> : "Send Message"}
-              </SubmitButton>
-            </Form>
-          </FormWrapper>
-        </ScrollReveal>
+            <SubmitButton
+              type="submit"
+              disabled={isFetching}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              {isFetching ? <Spinner /> : "Send Message"}
+            </SubmitButton>
+          </Form>
+        </FormWrapper>
 
         {/* Alternative Contact */}
         <Caption>

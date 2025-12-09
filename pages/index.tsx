@@ -13,11 +13,6 @@ import styled from "styled-components";
 
 import { Button } from "../components/Button";
 import { Layout } from "../components/Layout";
-import {
-  ScrollReveal,
-  ScrollRevealContainer,
-  ScrollRevealItem,
-} from "../components/ScrollReveal";
 import { SEO } from "../components/SEO";
 import { StructuredData } from "../components/StructuredData";
 import { textStaggerContainer, textStaggerLine } from "../lib/animations";
@@ -256,10 +251,10 @@ const PartnersTitle = styled.h2`
 `;
 
 /**
- * Partners grid
+ * Partners grid with load-in animation
  * Responsive column layout with proper breakpoints
  */
-const PartnersGrid = styled.div`
+const PartnersGrid = styled(motion.div)`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: ${spacing[8]};
@@ -454,7 +449,7 @@ export default function Home() {
                 alt={heroImages[currentImageIndex].alt}
                 layout="responsive"
                 quality={100}
-                priority={currentImageIndex === 0}
+                priority={true}
               />
             </CarouselImage>
           </AnimatePresence>
@@ -462,56 +457,50 @@ export default function Home() {
       </HeroSection>
 
       {/* Intro Section */}
-      <ScrollReveal>
-        <IntroSection>
-          <IntroText>
-            Operating from our offices in Podgorica, Montenegro, and Sarajevo,
-            Bosnia and Herzegovina, we offer a flexible hybrid team from junior
-            to manager level, ready to respond to various audit tasks at your
-            request. With extensive experience in Dutch GAAP and IFRS, we ensure
-            our clients receive exceptional support.
-          </IntroText>
-        </IntroSection>
-      </ScrollReveal>
+      <IntroSection>
+        <IntroText>
+          Operating from our offices in Podgorica, Montenegro, and Sarajevo,
+          Bosnia and Herzegovina, we offer a flexible hybrid team from junior
+          to manager level, ready to respond to various audit tasks at your
+          request. With extensive experience in Dutch GAAP and IFRS, we ensure
+          our clients receive exceptional support.
+        </IntroText>
+      </IntroSection>
 
       {/* Partners Section */}
       <PartnersSection>
         <PartnersContent>
-          <ScrollReveal>
-            <PartnersTitle>Our Partners</PartnersTitle>
-          </ScrollReveal>
+          <PartnersTitle>Our Partners</PartnersTitle>
 
-          <ScrollRevealContainer staggerDelay={0.2}>
-            <PartnersGrid>
-              <ScrollRevealItem>
-                <PartnerCard>
-                  <PartnerLogo>
-                    <Image
-                      src={moosLogo}
-                      alt="Moos Accountants"
-                      layout="fill"
-                      objectFit="contain"
-                      quality={100}
-                    />
-                  </PartnerLogo>
-                </PartnerCard>
-              </ScrollRevealItem>
+          <PartnersGrid
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
+            <PartnerCard>
+              <PartnerLogo>
+                <Image
+                  src={moosLogo}
+                  alt="Moos Accountants"
+                  layout="fill"
+                  objectFit="contain"
+                  quality={100}
+                />
+              </PartnerLogo>
+            </PartnerCard>
 
-              <ScrollRevealItem>
-                <PartnerCard>
-                  <PartnerLogo>
-                    <Image
-                      src={adviesLogo}
-                      alt="AdviesGroep88"
-                      layout="fill"
-                      objectFit="contain"
-                      quality={100}
-                    />
-                  </PartnerLogo>
-                </PartnerCard>
-              </ScrollRevealItem>
-            </PartnersGrid>
-          </ScrollRevealContainer>
+            <PartnerCard>
+              <PartnerLogo>
+                <Image
+                  src={adviesLogo}
+                  alt="AdviesGroep88"
+                  layout="fill"
+                  objectFit="contain"
+                  quality={100}
+                />
+              </PartnerLogo>
+            </PartnerCard>
+          </PartnersGrid>
         </PartnersContent>
       </PartnersSection>
     </Layout>

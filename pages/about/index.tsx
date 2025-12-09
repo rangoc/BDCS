@@ -358,9 +358,9 @@ export default function About({ ...pageProps }) {
                   const isActive = selectedItem === item.title;
                   return (
                     <TimelineItem
-                      key={item.title}
+                key={item.title}
                       $isActive={isActive}
-                      onClick={() => handleClick(item.title)}
+                onClick={() => handleClick(item.title)}
                       whileHover={{ x: 4 }}
                       whileTap={{ scale: 0.98 }}
                     >
@@ -374,11 +374,11 @@ export default function About({ ...pageProps }) {
                           stiffness: 400,
                           damping: 17,
                         }}
-                      >
+              >
                         {index + 1}
                       </TimelineDot>
                       <TimelineLabel $isActive={isActive}>
-                        {item.title}
+                {item.title}
                       </TimelineLabel>
                     </TimelineItem>
                   );
@@ -405,7 +405,7 @@ export default function About({ ...pageProps }) {
                         }}
                       />
                     </ContentContainer>
-                  )}
+                )}
                 </AnimatePresence>
               </ContentArea>
             </TimelineContainer>
