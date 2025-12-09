@@ -12,7 +12,6 @@ import styled from "styled-components";
 
 import { Layout } from "../../components/Layout";
 import { SEO } from "../../components/SEO";
-import { ScrollReveal } from "../../components/ScrollReveal";
 import { ABOUT_US } from "../../lib/constants";
 import {
   borderRadius,
@@ -29,9 +28,9 @@ import about from "../../public/assets/about.webp";
 // ============================================================================
 
 /**
- * Page wrapper
+ * Page wrapper with load-in animation
  */
-const Wrapper = styled.div`
+const Wrapper = styled(motion.div)`
   max-width: 1200px;
   margin: 0 auto;
 `;
@@ -327,27 +326,28 @@ export default function About({ ...pageProps }) {
         ogUrl="https://www.bdcs.me/about"
         ogImgUrl="https://www.bdcs.me/logo.webp"
       />
-      <Wrapper>
+      <Wrapper
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+      >
         {/* Intro Section */}
-        <ScrollReveal>
-          <IntroSection>
-            <SectionTitle>About BD Corporate Services</SectionTitle>
-            <Description>
-              BD Corporate services is an outsourcing firm consisting of highly
-              dedicated experienced staff with different knowledge within audit
-              gained at Big 4 firms. We offer a flexible hybrid team from junior
-              to manager level that will be able to respond on various audit
-              tasks at your request. With all the experience gained in auditing
-              the local Dutch companies reporting under Dutch GAAP, and the
-              knowledge of various IFRS experts, we can ensure that our clients
-              receive great support.
-            </Description>
-          </IntroSection>
-        </ScrollReveal>
+        <IntroSection>
+          <SectionTitle>About BD Corporate Services</SectionTitle>
+          <Description>
+            BD Corporate services is an outsourcing firm consisting of highly
+            dedicated experienced staff with different knowledge within audit
+            gained at Big 4 firms. We offer a flexible hybrid team from junior
+            to manager level that will be able to respond on various audit
+            tasks at your request. With all the experience gained in auditing
+            the local Dutch companies reporting under Dutch GAAP, and the
+            knowledge of various IFRS experts, we can ensure that our clients
+            receive great support.
+          </Description>
+        </IntroSection>
 
         {/* Mission, Vision, Values Section - Timeline Style */}
-        <ScrollReveal>
-          <MVVSection>
+        <MVVSection>
             <TimelineContainer>
               {/* Timeline Sidebar */}
               <TimelineSidebar>
@@ -409,20 +409,17 @@ export default function About({ ...pageProps }) {
                 </AnimatePresence>
               </ContentArea>
             </TimelineContainer>
-          </MVVSection>
-        </ScrollReveal>
+        </MVVSection>
 
         {/* Image Section */}
-        <ScrollReveal>
-          <ImageSection>
-            <Image
-              src={about}
-              alt="We care about our clients and products"
-              layout="responsive"
-              quality={100}
-            />
-          </ImageSection>
-        </ScrollReveal>
+        <ImageSection>
+          <Image
+            src={about}
+            alt="We care about our clients and products"
+            layout="responsive"
+            quality={100}
+          />
+        </ImageSection>
       </Wrapper>
     </Layout>
   );
