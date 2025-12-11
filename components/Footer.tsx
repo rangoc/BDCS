@@ -148,10 +148,18 @@ export function Footer() {
           </Text>
           <Text>
             <a
-              href="tel:+38269340084"
+              href="tel:+38268811727"
               style={{ color: colors.neutral.white, textDecoration: "none" }}
             >
-              +382 69 340 084
+              +382 68 811 727
+            </a>
+          </Text>
+          <Text>
+            <a
+              href="tel:+31610016808"
+              style={{ color: colors.neutral.white, textDecoration: "none" }}
+            >
+              +31 61 001 6808
             </a>
           </Text>
         </Section>

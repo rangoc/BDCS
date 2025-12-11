@@ -155,19 +155,6 @@ export const ABOUT_US = [
 
 export const OUR_TEAM = [
   {
-    name: "Boban Čabarkapa",
-    image: bobanc,
-    role: "Co-Founder & CEO",
-    bio: `As a co-founder and CEO of BD Corporate Services (BDCS) Boban is experienced finance professional with more than 12 years of experience in auditing. 
-          He started his career at EY Montenegro in 2011 and before joining KC Audit he worked at Deloitte Montenegro in the role of audit executive director. 
-          In between Boban also worked in EY Stockholm for a period of one year at various companies which gives him a better insight in the challenges and focus areas of companies. 
-          He is ACCA member since 2018. Boban’s skill set includes strong practices of International Financial Reporting Standards (IFRS) and International Standards on Auditing (ISA) and Dutch GAAP. 
-          Besides, he was part of ISQM1 team for Deloitte Central Europe.`,
-    linkedin: `https://www.linkedin.com/in/boban-cabarkapa-acca-674b7388/`,
-    phone: "+382 69 340 084",
-    email: "boban.cabarkapa@bdcs.me",
-  },
-  {
     name: "Dritan Dragović",
     image: dritand,
     role: "Co-Founder",
@@ -177,8 +164,21 @@ export const OUR_TEAM = [
           real estate and asset management. Dritan has experience in audits reporting under both Dutch
           GAAP and IFRS.`,
     linkedin: `https://www.linkedin.com/in/dritan-dragovic/`,
-    phone: "+31 61 001 6808",
+    phone: "",
     email: "dritan.dragovic@bdcs.me",
+  },
+  {
+    name: "Boban Čabarkapa",
+    image: bobanc,
+    role: "Co-Founder & CEO",
+    bio: `As a co-founder and CEO of BD Corporate Services (BDCS) Boban is experienced finance professional with more than 12 years of experience in auditing. 
+          He started his career at EY Montenegro in 2011 and before joining KC Audit he worked at Deloitte Montenegro in the role of audit executive director. 
+          In between Boban also worked in EY Stockholm for a period of one year at various companies which gives him a better insight in the challenges and focus areas of companies. 
+          He is ACCA member since 2018. Boban’s skill set includes strong practices of International Financial Reporting Standards (IFRS) and International Standards on Auditing (ISA) and Dutch GAAP. 
+          Besides, he was part of ISQM1 team for Deloitte Central Europe.`,
+    linkedin: `https://www.linkedin.com/in/boban-cabarkapa-acca-674b7388/`,
+    phone: "",
+    email: "boban.cabarkapa@bdcs.me",
   },
   {
     name: "Eldar Berkovac",
@@ -196,7 +196,7 @@ export const OUR_TEAM = [
           manage complex projects and deliver strategic insights.`,
     linkedin: `https://www.linkedin.com/in/eldar-berkovac-acca-44b76763/`,
     phone: "",
-    email: "eldar.berkovac@bdcs.me",
+    email: "eldar.berkovac@bdcs.ba",
   },
   {
     name: "Nenad Vucinic",
@@ -216,6 +216,25 @@ export const OUR_TEAM = [
     linkedin: ``,
     phone: "",
     email: "nenad.vucinic@bdcs.me",
+  },
+  {
+    name: "Milka Jovanoviċ",
+    image: milkaj,
+    role: "Chief of Legal and HR department",
+    bio: `Milka Jovanović brings extensive experience in legal and
+          HR operations, supported by over a decade of work in
+          corporate governance and compliance. She holds a
+          degree in Legal Science from the University of
+          Montenegro and has developed strong expertise in
+          organizational development and regulatory compliance.
+          Milka’s professional background includes leadership
+          roles in managing internal processes and supporting
+          strategic initiatives. Her commitment to ethical standards
+          and organizational excellence makes her a valuable
+          contributor to corporate operations.`,
+    linkedin: ``,
+    phone: "",
+    email: "milka.jovanovic@bdcs.me",
   },
   {
     name: "Nikola Radunović",
@@ -429,7 +448,7 @@ export const OUR_TEAM = [
     name: "Emina Konak",
     image: eminak,
     role: "Senior",
-    bio: `Emina Konak holds a bachelor’s degree in Management
+    bio: `Emina Konak holds a master degree in Management
           – Accounting and Auditing from the University of
           Sarajevo and is completing her master’s studies in the
           same field. She has professional experience in auditing
@@ -597,7 +616,7 @@ export const OUR_TEAM = [
     image: milicaj,
     role: "Assistant",
     bio: `Milica Jarić holds a bachelor’s degree in Economics and
-          has xperience in external auditing, complemented by a
+          has experience in external auditing, complemented by a
           strong IT background. She has completed training in
           Cisco networking, Python programming, and data
           analysis tools such as Power BI. Milica’s combination of
@@ -624,7 +643,7 @@ export const OUR_TEAM = [
           high-quality results in every engagement.`,
     linkedin: ``,
     phone: "",
-    email: "nikolina.jankovic@bdcs.me",
+    email: "nina.jankovic@bdcs.me",
   },
   {
     name: "Nikolina Koljević",
@@ -725,7 +744,7 @@ export const OUR_TEAM = [
     image: ivanaz,
     role: "Junior",
     bio: `Ivana Zvicer is currently pursuing a bachelor’s degree at
-          the Faculty of Economics, University of Montenegro (UDG),
+          the Faculty of Economics, University of Montenegro (UCG),
           where she has developed a strong foundation in
           accounting, auditing, economics, and finance. Her
           academic journey has equipped her with analytical and
@@ -761,7 +780,7 @@ export const OUR_TEAM = [
     email: "jovana.popovic@bdcs.me",
   },
   {
-    name: "Milena Raicević",
+    name: "Milena Raičević",
     image: milenar,
     role: "Junior",
     bio: `Milena Raičević completed her bachelor’s degree at the
@@ -816,25 +835,6 @@ export const OUR_TEAM = [
     linkedin: ``,
     phone: "",
     email: "sabrina.lukovic@bdcs.me",
-  },
-  {
-    name: "Milka Jovanovic",
-    image: milkaj,
-    role: "Chief of Legal and HR department",
-    bio: `Milka Jovanović brings extensive experience in legal and
-          HR operations, supported by over a decade of work in
-          corporate governance and compliance. She holds a
-          degree in Legal Science from the University of
-          Montenegro and has developed strong expertise in
-          organizational development and regulatory compliance.
-          Milka’s professional background includes leadership
-          roles in managing internal processes and supporting
-          strategic initiatives. Her commitment to ethical standards
-          and organizational excellence makes her a valuable
-          contributor to corporate operations.`,
-    linkedin: ``,
-    phone: "",
-    email: "milka.jovanovic@bdcs.me",
   },
   {
     name: "Ivana Jovanović",
