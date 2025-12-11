@@ -389,11 +389,11 @@ export const OUR_TEAM = [
     name: "Bojana Vučićević",
     image: bojanav,
     role: "Senior",
-    bio: `Bojana Vucicevic is an Audit Senior with over four years
+    bio: `Bojana Vučićević is an Audit Senior with over four years
           of professional experience. She began her career in
           accounting and transitioned into audit, specializing in
-          IFRS and Dutch GAAP. Bojana holds a Bachelor&#39;s
-          degree in Accounting and Auditing and a Master&#39;s
+          IFRS and Dutch GAAP. Bojana holds a Bachelor's
+          degree in Accounting and Auditing and a Master's
           degree in Financial Controlling from the Faculty of
           Economics in Belgrade. She has also completed the F-
           level of the ACCA certification and is currently pursuing
@@ -402,7 +402,7 @@ export const OUR_TEAM = [
           companies, as well as manufacturing and fashion
           industries. Bojana brings valuable international exposure
           from her time working at BDO Germany and completing
-          her Master&#39;s studies at HWR Berlin.`,
+          her Master's studies at HWR Berlin.`,
     linkedin: ``,
     phone: "",
     email: "bojana.vucicevic@bdcs.me",
