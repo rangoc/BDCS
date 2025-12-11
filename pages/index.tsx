@@ -30,6 +30,7 @@ import carousel2 from "../public/assets/carousel2.webp";
 import carousel3 from "../public/assets/carousel3.webp";
 import carousel4 from "../public/assets/carousel4.webp";
 import adviesLogo from "../public/partners/AdviesGroep88Logo.png";
+import confinantLogo from "../public/partners/ConfinantLogo.webp";
 import moosLogo from "../public/partners/MoosAccountantsLogo.png";
 
 // ============================================================================
@@ -256,7 +257,7 @@ const PartnersTitle = styled.h2`
  */
 const PartnersGrid = styled(motion.div)`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: ${spacing[8]};
   align-items: center;
   max-width: 900px;
@@ -460,8 +461,8 @@ export default function Home() {
       <IntroSection>
         <IntroText>
           Operating from our offices in Podgorica, Montenegro, and Sarajevo,
-          Bosnia and Herzegovina, we offer a flexible hybrid team from junior
-          to manager level, ready to respond to various audit tasks at your
+          Bosnia and Herzegovina, we offer a flexible hybrid team from junior to
+          manager level, ready to respond to various audit tasks at your
           request. With extensive experience in Dutch GAAP and IFRS, we ensure
           our clients receive exceptional support.
         </IntroText>
@@ -494,6 +495,18 @@ export default function Home() {
                 <Image
                   src={adviesLogo}
                   alt="AdviesGroep88"
+                  layout="fill"
+                  objectFit="contain"
+                  quality={100}
+                />
+              </PartnerLogo>
+            </PartnerCard>
+
+            <PartnerCard>
+              <PartnerLogo>
+                <Image
+                  src={confinantLogo}
+                  alt="Confinant"
                   layout="fill"
                   objectFit="contain"
                   quality={100}
