@@ -29,9 +29,9 @@ import carousel1 from "../public/assets/carousel1.webp";
 import carousel2 from "../public/assets/carousel2.webp";
 import carousel3 from "../public/assets/carousel3.webp";
 import carousel4 from "../public/assets/carousel4.webp";
-import adviesLogo from "../public/partners/AdviesGroep88Logo.png";
 import confinantLogo from "../public/partners/ConfinantLogo.webp";
 import moosLogo from "../public/partners/MoosAccountantsLogo.png";
+import srlLogo from "../public/partners/SrlAccountatsLogo.webp";
 
 // ============================================================================
 // HERO SECTION - Split Screen
@@ -493,7 +493,7 @@ export default function Home() {
             <PartnerCard>
               <PartnerLogo>
                 <Image
-                  src={adviesLogo}
+                  src={srlLogo}
                   alt="AdviesGroep88"
                   layout="fill"
                   objectFit="contain"
