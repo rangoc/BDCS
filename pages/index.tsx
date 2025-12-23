@@ -30,6 +30,7 @@ import carousel2 from "../public/assets/carousel2.webp";
 import carousel3 from "../public/assets/carousel3.webp";
 import carousel4 from "../public/assets/carousel4.webp";
 import confinantLogo from "../public/partners/ConfinantLogo.webp";
+import metisLogo from "../public/partners/MetisAuditLogo.webp";
 import moosLogo from "../public/partners/MoosAccountantsLogo.png";
 import srlLogo from "../public/partners/SrlAccountatsLogo.webp";
 
@@ -257,80 +258,85 @@ const PartnersTitle = styled.h2`
  */
 const PartnersGrid = styled(motion.div)`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: ${spacing[8]};
+  grid-template-columns: repeat(2, 1fr);
+  gap: ${spacing[12]};
   align-items: center;
   max-width: 900px;
   margin: 0 auto;
+  overflow: visible;
 
   @media ${mediaQueries.tabletAndDown} {
     grid-template-columns: repeat(2, 1fr);
-    gap: ${spacing[6]};
+    gap: ${spacing[10]};
     max-width: 600px;
   }
 
-  @media ${mediaQueries.tabletAndDown} {
-    grid-template-columns: 1fr;
-    max-width: 350px;
+  @media ${mediaQueries.mobileAndDown} {
+    grid-template-columns: repeat(1, 1fr);
+    gap: ${spacing[6]};
+    max-width: 300px;
   }
 `;
 
 /**
- * Individual partner card
- * Fixed aspect ratio with max-width constraint
+ * Individual partner container
+ * Allows overflow for logo scale effect
  */
-const PartnerCard = styled(motion.div)`
-  background-color: ${colors.complimentary.lightest};
-  padding: ${spacing[8]};
-  border-radius: ${borderRadius["2xl"]};
-  box-shadow: ${shadows.base};
-  transition: all 0.3s ease-out;
-  aspect-ratio: 1;
-  width: 100%;
-  max-width: 300px;
-  height: 140px;
-  margin: 0 auto;
+const PartnerCard = styled.div`
+  padding: ${spacing[6]};
   display: flex;
   align-items: center;
   justify-content: center;
-
-  &:hover {
-    box-shadow: ${shadows.lg};
-    transform: translateY(-4px);
-  }
-
-  @media ${mediaQueries.tabletAndDown} {
-    max-width: 280px;
-    padding: ${spacing[6]};
-  }
+  overflow: visible;
 `;
 
 /**
  * Partner logo wrapper
- * Fixed dimensions with proper Next.js Image support
+ * Applies subtle tint and scale on hover
  */
 const PartnerLogo = styled.div`
-  width: 220px;
-  height: 220px;
+  width: 200px;
+  height: 120px;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: visible;
 
-  /* Next.js Image wrapper */
+  /* Next.js Image wrapper - allow overflow */
   > span {
     position: relative !important;
     width: 100% !important;
     height: 100% !important;
+    overflow: visible !important;
   }
 
   img {
     object-fit: contain !important;
+    filter: grayscale(100%) opacity(0.6);
+    transition: filter 0.3s ease-out, transform 0.3s ease-out;
+    transform-origin: center center;
+  }
+
+  /* Only apply hover on devices with hover capability */
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      img {
+        filter: grayscale(0%) opacity(1);
+        transform: scale(1.15);
+      }
+    }
   }
 
   @media ${mediaQueries.mobileAndDown} {
-    width: 150px;
-    height: 150px;
+    width: 180px;
+    height: 110px;
+
+    /* Show full color on mobile (no grayscale or scale) */
+    img {
+      filter: grayscale(0%) opacity(0.9);
+      transform: none !important;
+    }
   }
 `;
 
@@ -507,6 +513,17 @@ export default function Home() {
                 <Image
                   src={confinantLogo}
                   alt="Confinant"
+                  layout="fill"
+                  objectFit="contain"
+                  quality={100}
+                />
+              </PartnerLogo>
+            </PartnerCard>
+            <PartnerCard>
+              <PartnerLogo>
+                <Image
+                  src={metisLogo}
+                  alt="Metis Audit"
                   layout="fill"
                   objectFit="contain"
                   quality={100}
