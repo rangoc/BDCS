@@ -3,36 +3,72 @@
  *
  * Customizes the HTML document structure
  * Sets language, charset, and font preconnections
+ * Includes styled-components SSR support to prevent FOUC
  */
 
-import { Head, Html, Main, NextScript } from "next/document";
+import Document, {
+  DocumentContext,
+  Head,
+  Html,
+  Main,
+  NextScript,
+} from "next/document";
+import { ServerStyleSheet } from "styled-components";
 
-export default function Document() {
-  return (
-    <Html lang="en">
-      <Head>
-        {/* Charset */}
-        <meta charSet="utf-8" />
+export default class MyDocument extends Document {
+  static async getInitialProps(ctx: DocumentContext) {
+    const sheet = new ServerStyleSheet();
+    const originalRenderPage = ctx.renderPage;
 
-        {/* Favicon */}
-        <link rel="icon" href="/favicon.ico" />
+    try {
+      ctx.renderPage = () =>
+        originalRenderPage({
+          enhanceApp: (App) => (props) =>
+            sheet.collectStyles(<App {...props} />),
+        });
 
-        {/* Font Preconnect for Performance */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="false"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;700&display=swap"
-          rel="stylesheet"
-        />
-      </Head>
-      <body>
-        <Main />
-        <NextScript />
-      </body>
-    </Html>
-  );
+      const initialProps = await Document.getInitialProps(ctx);
+      return {
+        ...initialProps,
+        styles: (
+          <>
+            {initialProps.styles}
+            {sheet.getStyleElement()}
+          </>
+        ),
+      };
+    } finally {
+      sheet.seal();
+    }
+  }
+
+  render() {
+    return (
+      <Html lang="en">
+        <Head>
+          {/* Charset */}
+          <meta charSet="utf-8" />
+
+          {/* Favicon */}
+          <link rel="icon" href="/favicon.ico" />
+
+          {/* Font Preconnect for Performance */}
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link
+            rel="preconnect"
+            href="https://fonts.gstatic.com"
+            crossOrigin="false"
+          />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;700&display=swap"
+            rel="stylesheet"
+          />
+        </Head>
+        <body>
+          <Main />
+          <NextScript />
+        </body>
+      </Html>
+    );
+  }
 }
