@@ -86,25 +86,29 @@ const FeatureCard = styled(motion.article)`
   display: flex;
   flex-direction: column;
   height: 100%;
+  -webkit-tap-highlight-color: transparent;
 
-  &:hover {
-    border-color: ${colors.accent.main};
-    box-shadow: ${shadows.xl};
-    transform: translateY(-8px);
+  /* Only apply hover effects on devices with hover capability */
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      border-color: ${colors.accent.main};
+      box-shadow: ${shadows.xl};
+      transform: translateY(-8px);
 
-    /* Icon animation on hover */
-    .icon-wrapper {
-      background: linear-gradient(
-        135deg,
-        ${colors.accent.main},
-        ${colors.complimentary.main}
-      );
-      transform: scale(1.1) rotate(5deg);
-    }
+      /* Icon animation on hover */
+      .icon-wrapper {
+        background: linear-gradient(
+          135deg,
+          ${colors.accent.main},
+          ${colors.complimentary.main}
+        );
+        transform: scale(1.1) rotate(5deg);
+      }
 
-    /* SVG color change on hover */
-    svg {
-      fill: ${colors.neutral.white};
+      /* SVG color change on hover */
+      svg {
+        fill: ${colors.neutral.white};
+      }
     }
   }
 

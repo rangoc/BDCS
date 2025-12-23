@@ -6,7 +6,7 @@
  */
 
 import Link from "next/link";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { colors, spacing, typography, zIndex } from "../lib/theme";
 
@@ -17,7 +17,7 @@ import { colors, spacing, typography, zIndex } from "../lib/theme";
 /**
  * Mobile menu container - full width overlay
  */
-export const StyledMenu = styled.nav<{ open: boolean }>`
+export const StyledMenu = styled.nav<{ open: boolean; $mounted: boolean }>`
   position: fixed;
   top: 0;
   left: 0;
@@ -34,10 +34,18 @@ export const StyledMenu = styled.nav<{ open: boolean }>`
   padding-top: ${spacing[20]};
   overflow-y: auto;
   overflow-x: hidden;
+  visibility: ${({ open }) => (open ? "visible" : "hidden")};
 
   /* Slide animation from right */
   transform: ${({ open }) => (open ? "translateX(0)" : "translateX(100%)")};
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Only transition after mount to prevent flash */
+  transition: ${({ $mounted, open }) =>
+    $mounted
+      ? open
+        ? "transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), visibility 0s 0s"
+        : "transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), visibility 0s 0.3s"
+      : "none"};
 `;
 
 /**
@@ -102,6 +110,15 @@ export function Menu({
   open: boolean;
   setOpen: (open: boolean) => void;
 }) {
+  const [mounted, setMounted] = useState(false);
+
+  /**
+   * Mark as mounted to enable transitions
+   */
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   /**
    * Close menu when clicking a link
    */
@@ -127,7 +144,7 @@ export function Menu({
   }, [open, setOpen]);
 
   return (
-    <StyledMenu open={open}>
+    <StyledMenu open={open} $mounted={mounted}>
       <List>
         <ListItem onClick={handleLinkClick}>
           <Link scroll={false} href="/">

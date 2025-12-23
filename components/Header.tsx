@@ -197,12 +197,7 @@ export function Header() {
   }, []);
 
   return (
-    <Wrapper
-      $isScrolled={isScrolled}
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ type: "spring", stiffness: 100, damping: 20 }}
-    >
+    <Wrapper $isScrolled={isScrolled}>
       {/* Logo */}
       <LogoWrapper href="/">
         <Image
