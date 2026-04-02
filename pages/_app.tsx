@@ -14,9 +14,15 @@ export default function App({ Component, pageProps }: AppProps) {
   const { asPath } = useRouter();
   const url = `https://www.bdcs.me${asPath}`;
 
+  // Reset scroll position on route change (needed because #__next is the
+  // scroll container on mobile, so the browser doesn't auto-reset it)
   useEffect(() => {
-    // Skip Lenis on touch devices — native iOS/Android scrolling
-    // handles dynamic browser UI smoothly; Lenis fights with it
+    const nextEl = document.getElementById("__next");
+    if (nextEl) nextEl.scrollTop = 0;
+    window.scrollTo(0, 0);
+  }, [asPath]);
+
+  useEffect(() => {
     const isTouch = window.matchMedia("(pointer: coarse)").matches;
     if (isTouch) return;
 
