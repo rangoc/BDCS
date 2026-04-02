@@ -49,7 +49,7 @@ const Wrapper = styled(motion.header)<{ $isScrolled: boolean }>`
   padding: ${spacing[4]} ${spacing[8]};
   background: ${({ $isScrolled }) =>
     $isScrolled
-      ? `linear-gradient(180deg, ${colors.primary.darker} 0%, ${colors.primary.main} 100%)`
+      ? `linear-gradient(to bottom left, ${colors.primary.main} 0%, ${colors.primary.darker} 100%)`
       : "transparent"};
   backdrop-filter: ${({ $isScrolled }) =>
     $isScrolled ? "blur(12px) saturate(180%)" : "none"};
@@ -61,7 +61,28 @@ const Wrapper = styled(motion.header)<{ $isScrolled: boolean }>`
     $isScrolled ? "0 8px 32px 0 rgba(0, 0, 0, 0.1)" : "none"};
   border-bottom: ${({ $isScrolled }) =>
     $isScrolled ? `1px solid rgba(174, 151, 81, 0.15)` : "none"};
-  transition: all 0.6s ease-in-out;
+  transition: all ${({ $isScrolled }) => ($isScrolled ? "0.6s" : "0.3s")} ease-in-out;
+
+  /* Gold top line — matches sidebar menu */
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      ${colors.complimentary.main},
+      ${colors.complimentary.light},
+      ${colors.complimentary.main},
+      transparent
+    );
+    pointer-events: none;
+    opacity: ${({ $isScrolled }) => ($isScrolled ? 1 : 0)};
+    transition: opacity 0.6s ease-in-out;
+  }
 
   @media ${mediaQueries.tabletAndDown} {
     padding: ${spacing[4]} ${spacing[6]};
