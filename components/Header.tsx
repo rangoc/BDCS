@@ -47,8 +47,10 @@ const Wrapper = styled(motion.header)<{ $isScrolled: boolean }>`
   align-items: center;
   justify-content: space-between;
   padding: ${spacing[4]} ${spacing[8]};
-  background-color: ${({ $isScrolled }) =>
-    $isScrolled ? "rgba(10, 8, 25, 0.97)" : "transparent"};
+  background: ${({ $isScrolled }) =>
+    $isScrolled
+      ? `linear-gradient(160deg, ${colors.primary.darker} 0%, ${colors.primary.main} 40%, ${colors.primary.dark} 70%, ${colors.primary.darker} 100%)`
+      : "transparent"};
   backdrop-filter: ${({ $isScrolled }) =>
     $isScrolled ? "blur(12px) saturate(180%)" : "none"};
   -webkit-backdrop-filter: ${({ $isScrolled }) =>
