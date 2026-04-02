@@ -11,7 +11,7 @@ export const GlobalStyles = createGlobalStyle`
   /* ============================================================================
      CSS RESET & BOX-SIZING
      ============================================================================ */
-  
+
   /* Use a more-intuitive box-sizing model */
   *, *::before, *::after {
     box-sizing: border-box;
@@ -293,23 +293,16 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   /* ============================================================================
-     SCROLLBAR STYLING (Optional - for webkit browsers)
+     SCROLLBAR STYLING
      ============================================================================ */
-  
+
+  /* Firefox */
+  * {
+    scrollbar-width: none;
+  }
+
+  /* Webkit (Chrome, Safari, Edge) — hide native scrollbar entirely */
   ::-webkit-scrollbar {
-    width: 10px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: ${colors.neutral.gray100};
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: rgba(1, 24, 73, 0.95);
-    border-radius: ${typography.fontSize.xs};
-    
-    &:hover {
-      background: ${colors.primary.main};
-    }
+    display: none;
   }
 `;

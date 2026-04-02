@@ -2,6 +2,7 @@ import { AnimatePresence } from "framer-motion";
 import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import "../styles/fonts.css";
 import { GlobalStyles } from "../lib/globalStyles";
 
 import { Footer } from "../components/Footer";

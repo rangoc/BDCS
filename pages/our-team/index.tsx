@@ -1,75 +1,206 @@
 /**
- * Our Team Page
+ * Our Team Page — Redesigned (Variant B: Image Overlay)
  *
- * Displays team members in a grid with modal details
- * Handles 38+ team members efficiently with hover effects and animations
+ * Immersive dark hero, full-bleed image cards with gradient overlay,
+ * 3-column grid for visual impact, mobile list view preserved,
+ * scroll-triggered stagger animations.
+ *
+ * Uses scroll-triggered animations via framer-motion useInView.
+ * All design tokens from lib/theme.ts — no new dependencies.
  */
 
-import Image from "next/legacy/image";
-import { useState } from "react";
+import React, { useRef, useState } from "react";
 import styled from "styled-components";
+import { motion, useInView } from "framer-motion";
+import Image from "next/image";
 
-import { Layout } from "../../components/Layout";
+import dynamic from "next/dynamic";
 import { SEO } from "../../components/SEO";
-import { TeamMember, TeamMemberModal } from "../../components/TeamMemberModal";
-import { OUR_TEAM } from "../../lib/constants";
+import { StructuredData } from "../../components/StructuredData";
+import type { TeamMember } from "../../components/TeamMemberModal";
+import { OUR_TEAM } from "../../lib/team-data";
+
+const TeamMemberModal = dynamic(
+  () =>
+    import("../../components/TeamMemberModal").then(
+      (mod) => mod.TeamMemberModal
+    ),
+  { ssr: false }
+);
 import {
-  borderRadius,
   colors,
-  mediaQueries,
-  shadows,
-  spacing,
   typography,
+  spacing,
+  mediaQueries,
+  borderRadius,
+  transitions,
 } from "../../lib/theme";
+import heroImg from "../../public/assets/hero-team.webp";
 
 // ============================================================================
-// STYLED COMPONENTS
+// ANIMATION HELPERS
 // ============================================================================
 
-/**
- * Page wrapper
- */
-const Wrapper = styled.div`
-  max-width: 1400px;
-  margin: 0 auto;
+const fadeUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.8, ease: [0.25, 0.1, 0.25, 1] },
+  },
+};
+
+const staggerContainer = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.08,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+// ============================================================================
+// PAGE WRAPPER
+// ============================================================================
+
+const PageWrapper = styled(motion.main)`
+  width: 100%;
+  overflow-x: hidden;
+  font-family: ${typography.fontFamily.primary};
+
+  /* Negate #__next padding-top so hero sits flush under the fixed header */
+  margin-top: -112px;
+
+  @media (max-width: 768px) {
+    margin-top: -96px;
+  }
+
+  @media (max-width: 550px) {
+    margin-top: -72px;
+  }
 `;
 
-/**
- * Page title
- */
-const PageTitle = styled.h1`
-  font-size: ${typography.fontSize["4xl"]};
-  font-weight: ${typography.fontWeight.bold};
-  color: ${colors.primary.main};
-  text-align: center;
-  margin-bottom: ${spacing[16]};
+// ============================================================================
+// HERO SECTION
+// ============================================================================
+
+const HeroSection = styled.section`
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 600px;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  background: ${colors.primary.darker};
+
+  @media ${mediaQueries.mobileAndDown} {
+    min-height: 500px;
+    height: 100svh;
+  }
+`;
+
+const HeroImageWrapper = styled.div`
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+`;
+
+const HeroOverlay = styled.div`
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 8, 25, 0.55) 0%,
+    rgba(10, 8, 25, 0.65) 40%,
+    rgba(10, 8, 25, 0.82) 75%,
+    rgba(10, 8, 25, 0.94) 100%
+  );
+`;
+
+const HeroGoldGlow = styled.div`
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: radial-gradient(
+      ellipse 60% 50% at 70% 60%,
+      rgba(174, 151, 81, 0.06) 0%,
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 40% 40% at 20% 30%,
+      rgba(174, 151, 81, 0.03) 0%,
+      transparent 60%
+    );
+`;
+
+const HeroTexture = styled.div`
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  opacity: 0.025;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23AE9751' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+`;
+
+const HeroContent = styled.div`
+  position: relative;
+  z-index: 3;
+  padding: 0 ${spacing[12]} ${spacing[12]};
+  max-width: 1200px;
 
   @media ${mediaQueries.tabletAndDown} {
-    font-size: ${typography.fontSize["3xl"]};
-    margin-bottom: ${spacing[12]};
+    padding: 0 ${spacing[8]} ${spacing[10]};
   }
 
   @media ${mediaQueries.mobileAndDown} {
-    font-size: ${typography.fontSize["2xl"]};
+    padding: 0 ${spacing[6]} ${spacing[8]};
   }
 `;
 
-/**
- * Team members grid (desktop/tablet)
- */
-const TeamGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: ${spacing[8]};
+const HeroHeading = styled(motion.h1)`
+  font-family: ${typography.fontFamily.heading};
+  font-size: clamp(2.5rem, 5.5vw, ${typography.fontSize["7xl"]});
+  font-weight: ${typography.fontWeight.bold};
+  line-height: ${typography.lineHeight.tight};
+  letter-spacing: ${typography.letterSpacing.tight};
+  color: ${colors.neutral.white};
+  margin: 0 0 ${spacing[6]} 0;
+  max-width: 700px;
+`;
 
-  @media ${mediaQueries.laptopAndDown} {
-    grid-template-columns: repeat(3, 1fr);
-    gap: ${spacing[6]};
-  }
+const HeroGoldLine = styled(motion.div)`
+  width: 80px;
+  height: 2px;
+  background: ${colors.complimentary.main};
+  margin-bottom: ${spacing[5]};
+  transform-origin: left center;
+`;
+
+const HeroTagline = styled(motion.p)`
+  font-family: ${typography.fontFamily.primary};
+  font-size: ${typography.fontSize.lg};
+  font-weight: ${typography.fontWeight.light};
+  line-height: ${typography.lineHeight.relaxed};
+  color: ${colors.neutral.gray300};
+  margin: 0;
+  max-width: 520px;
+  letter-spacing: ${typography.letterSpacing.wide};
+`;
+
+// ============================================================================
+// TEAM GRID — Full-bleed image overlay cards
+// ============================================================================
+
+const TeamGridSection = styled.section`
+  padding: ${spacing[24]} ${spacing[8]};
+  background: ${colors.neutral.white};
 
   @media ${mediaQueries.tabletAndDown} {
-    grid-template-columns: repeat(2, 1fr);
-    gap: ${spacing[6]};
+    padding: ${spacing[16]} ${spacing[6]};
   }
 
   @media ${mediaQueries.mobileAndDown} {
@@ -77,284 +208,313 @@ const TeamGrid = styled.div`
   }
 `;
 
-/**
- * Team list (mobile only)
- */
-const TeamList = styled.div`
-  display: none;
+const TeamGrid = styled(motion.div)`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: ${spacing[5]};
+  max-width: 1200px;
+  margin: 0 auto;
 
-  @media ${mediaQueries.mobileAndDown} {
-    display: flex;
-    flex-direction: column;
-    gap: ${spacing[1]};
+  @media ${mediaQueries.tabletAndDown} {
+    grid-template-columns: repeat(2, 1fr);
   }
 `;
 
-/**
- * Individual team member card (desktop/tablet)
- */
-const TeamCard = styled.div`
-  background-color: ${colors.neutral.white};
-  border-radius: ${borderRadius["2xl"]};
-  overflow: hidden;
-  box-shadow: ${shadows.base};
-  cursor: pointer;
-  transition: all 0.3s ease-out;
-
-  &:hover {
-    box-shadow: ${shadows.xl};
-    transform: translateY(-8px);
-
-    .image-wrapper {
-      transform: scale(1.05);
-    }
-
-    .member-name {
-      color: ${colors.accent.main};
-    }
-  }
-`;
-
-/**
- * Team member row (mobile only)
- */
-const TeamRow = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: ${spacing[4]};
-  background-color: ${colors.neutral.white};
-  border-radius: ${borderRadius.lg};
-  border: 1px solid ${colors.neutral.gray200};
-  cursor: pointer;
-  transition: all 0.2s ease-out;
-
-  &:hover {
-    background-color: rgba(1, 24, 73, 0.95);
-    border-color: ${colors.primary.main};
-
-    .row-name {
-      color: ${colors.neutral.white};
-    }
-
-    .row-role {
-      color: ${colors.complimentary.light};
-    }
-  }
-
-  &:active {
-    transform: scale(0.98);
-  }
-`;
-
-/**
- * Row content wrapper
- */
-const RowContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: ${spacing[1]};
-`;
-
-/**
- * Row name
- */
-const RowName = styled.div`
-  font-size: ${typography.fontSize.base};
-  font-weight: ${typography.fontWeight.semibold};
-  color: ${colors.primary.main};
-  transition: color 0.2s ease-out;
-`;
-
-/**
- * Row role
- */
-const RowRole = styled.div`
-  font-size: ${typography.fontSize.xs};
-  font-weight: ${typography.fontWeight.medium};
-  color: ${colors.accent.main};
-  font-style: italic;
-  transition: color 0.2s ease-out;
-`;
-
-/**
- * Image container (desktop/tablet only)
- * Crops from top to keep faces visible
- */
-const ImageWrapper = styled.div`
+const TeamCard = styled(motion.div)`
   position: relative;
-  width: 100%;
-  aspect-ratio: 1;
+  border-radius: ${borderRadius.lg};
   overflow: hidden;
-  background-color: ${colors.neutral.gray100};
-  transition: transform 0.3s ease-out;
+  aspect-ratio: 3 / 4;
+  cursor: pointer;
+  background: ${colors.neutral.gray100};
 
-  /* Ensure images crop from top, keeping heads visible */
+  &:hover .card-img {
+    transform: scale(1.05);
+  }
+`;
+
+const CardImageWrap = styled.div`
+  position: absolute;
+  inset: 0;
+  transition: transform 0.5s ease;
+
   img {
     object-position: top center !important;
   }
 `;
 
-/**
- * Card content (desktop/tablet only)
- */
-const CardContent = styled.div`
-  padding: ${spacing[4]};
+const CardOverlay = styled.div`
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: ${spacing[6]};
+  background: linear-gradient(
+    180deg,
+    transparent 50%,
+    rgba(10, 8, 25, 0.7) 100%
+  );
 `;
 
-/**
- * Member name (desktop/tablet only)
- */
-const MemberName = styled.h2`
+const CardName = styled.h2`
+  font-family: ${typography.fontFamily.heading};
   font-size: ${typography.fontSize.lg};
-  font-weight: ${typography.fontWeight.semibold};
-  color: ${colors.primary.main};
-  margin: 0 0 ${spacing[2]} 0;
-  transition: color 0.2s ease-out;
+  font-weight: ${typography.fontWeight.bold};
+  color: ${colors.neutral.white};
+  margin: 0 0 ${spacing[1]};
 `;
 
-/**
- * Member role (desktop/tablet only)
- */
-const MemberRole = styled.p`
-  font-size: ${typography.fontSize.sm};
+const CardRole = styled.p`
+  font-size: ${typography.fontSize.xs};
   font-weight: ${typography.fontWeight.medium};
-  color: ${colors.accent.main};
-  font-style: italic;
+  color: ${colors.complimentary.light};
+  letter-spacing: ${typography.letterSpacing.wider};
+  text-transform: uppercase;
   margin: 0;
 `;
 
 // ============================================================================
-// COMPONENT
+// MOBILE LIST
 // ============================================================================
 
-export default function OurTeam({ ...pageProps }) {
+const TeamListSection = styled.section`
+  display: none;
+
+  @media ${mediaQueries.mobileAndDown} {
+    display: block;
+    padding: ${spacing[10]} ${spacing[4]};
+    background: ${colors.neutral.white};
+  }
+`;
+
+const TeamList = styled.div`
+  background: ${colors.neutral.white};
+  border-radius: ${borderRadius.xl};
+`;
+
+const TeamRow = styled.div`
+  display: flex;
+  align-items: center;
+  gap: ${spacing[4]};
+  padding: ${spacing[4]};
+  border-bottom: 1px solid ${colors.neutral.gray100};
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+
+  &:active {
+    background: ${colors.neutral.gray50};
+  }
+
+  &:last-child {
+    border-bottom: none;
+  }
+`;
+
+const RowAccent = styled.div`
+  width: 3px;
+  height: 36px;
+  border-radius: 2px;
+  background: ${colors.complimentary.main};
+  flex-shrink: 0;
+`;
+
+const RowContent = styled.div`
+  flex: 1;
+`;
+
+const RowName = styled.div`
+  font-size: ${typography.fontSize.base};
+  font-weight: ${typography.fontWeight.semibold};
+  color: ${colors.primary.main};
+  margin-bottom: 2px;
+`;
+
+const RowRole = styled.div`
+  font-size: ${typography.fontSize.xs};
+  color: ${colors.neutral.gray500};
+`;
+
+const RowChevron = styled.div`
+  color: ${colors.neutral.gray300};
+  flex-shrink: 0;
+`;
+
+// ============================================================================
+// MAIN COMPONENT
+// ============================================================================
+
+export default function OurTeam() {
+  const heroRef = useRef<HTMLDivElement>(null);
+  const heroInView = useInView(heroRef, { once: true });
+
+  const gridRef = useRef<HTMLDivElement>(null);
+  const gridInView = useInView(gridRef, { once: true, margin: "-50px" });
+
   const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  /**
-   * Open modal with selected team member
-   */
   const handleCardClick = (member: TeamMember) => {
     setSelectedMember(member);
     setIsModalOpen(true);
   };
 
-  /**
-   * Close modal
-   */
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
 
-  /**
-   * Navigate to previous team member
-   */
-  const handlePrevious = () => {
-    if (!selectedMember) return;
-    const currentIndex = OUR_TEAM.findIndex(
-      (m) => m.email === selectedMember.email
-    );
-    if (currentIndex > 0) {
-      setSelectedMember(OUR_TEAM[currentIndex - 1]);
-    }
-  };
-
-  /**
-   * Navigate to next team member
-   */
-  const handleNext = () => {
-    if (!selectedMember) return;
-    const currentIndex = OUR_TEAM.findIndex(
-      (m) => m.email === selectedMember.email
-    );
-    if (currentIndex < OUR_TEAM.length - 1) {
-      setSelectedMember(OUR_TEAM[currentIndex + 1]);
-    }
-  };
-
-  // Check if navigation is available
-  const currentIndex = selectedMember
-    ? OUR_TEAM.findIndex((m) => m.email === selectedMember.email)
-    : -1;
-  const hasPrevious = currentIndex > 0;
-  const hasNext = currentIndex < OUR_TEAM.length - 1;
-
   return (
-    <Layout>
+    <>
       <SEO
-        title="Our Team | BD Corporate Services d.o.o. Podgorica"
+        title="Our Team | BDCS - BD Corporate Services"
         description="Meet our experienced team of audit professionals from Big 4 firms. From junior to manager level, ready to support your audit needs."
         canonicalUrl="https://www.bdcs.me/our-team"
         ogUrl="https://www.bdcs.me/our-team"
-        ogImgUrl="https://www.bdcs.me/logo.webp"
+        ogImgUrl="https://www.bdcs.me/og/og-team.png"
       />
-      <Wrapper>
-        {/* Page Title */}
-        <PageTitle>Meet our Team</PageTitle>
+      <StructuredData
+        data={[
+          {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Home", item: "https://www.bdcs.me" },
+              { "@type": "ListItem", position: 2, name: "Our Team", item: "https://www.bdcs.me/our-team" },
+            ],
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            name: "Our Team",
+            url: "https://www.bdcs.me/our-team",
+            description: "Meet our experienced team of audit professionals from Big 4 firms. From junior to manager level, ready to support your audit needs.",
+            isPartOf: { "@type": "WebSite", url: "https://www.bdcs.me" },
+          },
+        ]}
+      />
+      <PageWrapper
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+      >
+        {/* Hero */}
+        <HeroSection ref={heroRef} aria-label="Team page hero">
+          <HeroImageWrapper>
+            <Image
+              src={heroImg}
+              alt="BD Corporate Services team"
+              fill
+              sizes="100vw"
+              style={{ objectFit: "cover" }}
+              quality={90}
+              priority
+            />
+          </HeroImageWrapper>
+          <HeroOverlay />
+          <HeroGoldGlow />
+          <HeroTexture />
 
-        {/* Team Grid - Desktop/Tablet */}
-        <TeamGrid>
-          {OUR_TEAM.map((member) => (
-            <TeamCard
-              key={member.email || member.name}
-              onClick={() => handleCardClick(member)}
+          <HeroContent>
+            <HeroHeading
+              variants={fadeUp}
+              initial="hidden"
+              animate={heroInView ? "visible" : "hidden"}
             >
-              <ImageWrapper className="image-wrapper">
-                <Image
-                  src={member.image}
-                  alt={member.name}
-                  layout="fill"
-                  objectFit="cover"
-                  objectPosition="top center"
-                  quality={90}
-                />
-              </ImageWrapper>
-              <CardContent>
-                <MemberName className="member-name">{member.name}</MemberName>
-                <MemberRole>{member.role}</MemberRole>
-              </CardContent>
-            </TeamCard>
-          ))}
-        </TeamGrid>
+              Meet our Team
+            </HeroHeading>
 
-        {/* Team List - Mobile Only */}
-        <TeamList>
-          {OUR_TEAM.map((member) => (
-            <TeamRow
-              key={member.email || member.name}
-              onClick={() => handleCardClick(member)}
+            <HeroGoldLine
+              initial={{ scaleX: 0 }}
+              animate={heroInView ? { scaleX: 1 } : { scaleX: 0 }}
+              transition={{
+                duration: 0.7,
+                delay: 0.2,
+                ease: [0.25, 0.46, 0.45, 0.94],
+              }}
+            />
+
+            <HeroTagline
+              variants={fadeUp}
+              initial="hidden"
+              animate={heroInView ? "visible" : "hidden"}
+              transition={{ delay: 0.25 }}
             >
-              <RowContent>
-                <RowName className="row-name">{member.name}</RowName>
-                <RowRole className="row-role">{member.role}</RowRole>
-              </RowContent>
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                style={{ flexShrink: 0, opacity: 0.5 }}
+              40+ professionals with Big 4 expertise, dedicated to delivering
+              excellence.
+            </HeroTagline>
+          </HeroContent>
+        </HeroSection>
+
+        {/* Team Grid — Desktop/Tablet */}
+        <TeamGridSection ref={gridRef} aria-label="Team members">
+          <TeamGrid
+            variants={staggerContainer}
+            initial="hidden"
+            animate={gridInView ? "visible" : "hidden"}
+          >
+            {OUR_TEAM.map((member) => (
+              <TeamCard
+                key={member.email || member.name}
+                variants={fadeUp}
+                onClick={() => handleCardClick(member)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    handleCardClick(member);
+                  }
+                }}
               >
-                <path d="M9 18l6-6-6-6" />
-              </svg>
-            </TeamRow>
-          ))}
-        </TeamList>
-      </Wrapper>
+                <CardImageWrap className="card-img">
+                  <Image
+                    src={member.image}
+                    alt={member.name}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    style={{ objectFit: "cover", objectPosition: "top center" }}
+                    quality={90}
+                  />
+                </CardImageWrap>
+                <CardOverlay>
+                  <CardName>{member.name}</CardName>
+                  <CardRole>{member.role}</CardRole>
+                </CardOverlay>
+              </TeamCard>
+            ))}
+          </TeamGrid>
+        </TeamGridSection>
+
+        {/* Mobile List */}
+        <TeamListSection aria-label="Team members">
+          <TeamList>
+            {OUR_TEAM.map((member) => (
+              <TeamRow
+                key={member.email || member.name}
+                onClick={() => handleCardClick(member)}
+              >
+                <RowAccent />
+                <RowContent>
+                  <RowName>{member.name}</RowName>
+                  <RowRole>{member.role}</RowRole>
+                </RowContent>
+                <RowChevron>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                    <path d="M9 18l6-6-6-6" />
+                  </svg>
+                </RowChevron>
+              </TeamRow>
+            ))}
+          </TeamList>
+        </TeamListSection>
+      </PageWrapper>
 
       {/* Team Member Modal */}
       <TeamMemberModal
         isOpen={isModalOpen}
         onClose={handleCloseModal}
         member={selectedMember}
-        onPrevious={handlePrevious}
-        onNext={handleNext}
-        hasPrevious={hasPrevious}
-        hasNext={hasNext}
       />
-    </Layout>
+    </>
   );
 }

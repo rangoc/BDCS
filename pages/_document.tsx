@@ -52,17 +52,15 @@ export default class MyDocument extends Document {
           {/* Favicon */}
           <link rel="icon" href="/favicon.ico" />
 
-          {/* Font Preconnect for Performance */}
-          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          {/* Font Preload */}
           <link
-            rel="preconnect"
-            href="https://fonts.gstatic.com"
-            crossOrigin="false"
+            rel="preload"
+            href="/fonts/alexandria-latin.woff2"
+            as="font"
+            type="font/woff2"
+            crossOrigin="anonymous"
           />
-          <link
-            href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;700&display=swap"
-            rel="stylesheet"
-          />
+
         </Head>
         <body>
           <Main />

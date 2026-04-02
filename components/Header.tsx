@@ -2,23 +2,28 @@
  * Header Component
  *
  * Main navigation header with sticky behavior
- * - Transparent on page load
- * - Fills with primary color on scroll
+ * - Transparent on page load, fills with primary color on scroll
  * - Responsive with mobile menu
+ * - CTA "Get in Touch" button separated from nav links
+ * - Active page indicator (gold underline bar)
  */
 
 import { motion } from "framer-motion";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
 import { useOnClickOutside } from "../hooks/useOnClickOutside";
 import {
+  borderRadius,
   colors,
   mediaQueries,
+  shadows,
   spacing,
   transitions,
+  typography,
   zIndex,
 } from "../lib/theme";
 import logo from "../public/logo.webp";
@@ -43,18 +48,18 @@ const Wrapper = styled(motion.header)<{ $isScrolled: boolean }>`
   justify-content: space-between;
   padding: ${spacing[4]} ${spacing[8]};
   background-color: ${({ $isScrolled }) =>
-    $isScrolled ? "rgba(1, 24, 73, 0.95)" : "transparent"};
+    $isScrolled ? "rgba(1, 24, 73, 0.97)" : "transparent"};
   backdrop-filter: ${({ $isScrolled }) =>
-    $isScrolled ? "blur(10px) saturate(180%)" : "none"};
+    $isScrolled ? "blur(12px) saturate(180%)" : "none"};
   -webkit-backdrop-filter: ${({ $isScrolled }) =>
-    $isScrolled ? "blur(10px) saturate(180%)" : "none"};
+    $isScrolled ? "blur(12px) saturate(180%)" : "none"};
   color: ${({ $isScrolled }) =>
     $isScrolled ? colors.neutral.white : colors.primary.main};
   box-shadow: ${({ $isScrolled }) =>
     $isScrolled ? "0 8px 32px 0 rgba(0, 0, 0, 0.1)" : "none"};
   border-bottom: ${({ $isScrolled }) =>
     $isScrolled ? "1px solid rgba(255, 255, 255, 0.1)" : "none"};
-  transition: all 0.3s ease-in-out;
+  transition: all 0.35s ease-in-out;
 
   @media ${mediaQueries.tabletAndDown} {
     padding: ${spacing[4]} ${spacing[6]};
@@ -70,20 +75,15 @@ const Wrapper = styled(motion.header)<{ $isScrolled: boolean }>`
  */
 const LogoWrapper = styled(Link)`
   display: block;
-  width: 180px;
+  width: 120px;
   cursor: pointer;
-  transition: ${transitions.fast};
-
-  &:hover {
-    transform: scale(1.02);
-  }
 
   @media ${mediaQueries.tabletAndDown} {
-    width: 140px;
+    width: 100px;
   }
 
   @media ${mediaQueries.mobileAndDown} {
-    width: 100px;
+    width: 80px;
   }
 `;
 
@@ -102,54 +102,120 @@ const Navbar = styled.nav`
 const List = styled.ul`
   display: flex;
   align-items: center;
-  gap: ${spacing[8]};
+  gap: ${spacing[1]};
   list-style: none;
   margin: 0;
   padding: 0;
-
-  @media ${mediaQueries.tabletAndDown} {
-    gap: ${spacing[6]};
-  }
 `;
 
 /**
- * Navigation list item with animated underline
+ * Navigation list item with active gold underline indicator
  */
-const ListItem = styled.li<{ $isScrolled: boolean }>`
+const ListItem = styled.li<{ $isScrolled: boolean; $active: boolean }>`
   position: relative;
 
   a {
-    color: inherit;
+    color: ${({ $isScrolled, $active }) => {
+      if ($isScrolled)
+        return $active ? colors.neutral.white : "rgba(255,255,255,0.8)";
+      return $active ? colors.neutral.white : "rgba(255,255,255,0.75)";
+    }};
     text-decoration: none;
-    font-weight: 500;
-    font-size: 1rem;
-    padding: ${spacing[2]} 0;
+    font-weight: ${({ $active }) =>
+      $active ? typography.fontWeight.semibold : typography.fontWeight.medium};
+    font-size: ${typography.fontSize.sm};
+    letter-spacing: ${typography.letterSpacing.wide};
+    padding: ${spacing[2]} ${spacing[3]};
+    display: inline-block;
     transition: ${transitions.fast};
 
-    &:hover {
-      color: ${({ $isScrolled }) =>
-        $isScrolled ? colors.complimentary.light : colors.accent.main};
+    @media (hover: hover) {
+      &:hover {
+        color: ${colors.neutral.white};
+      }
     }
   }
 
-  /* Animated underline */
+  /* Active indicator — gold underline bar */
   &::after {
     content: "";
     position: absolute;
     bottom: 0;
-    left: 0;
-    width: 100%;
+    left: ${spacing[3]};
+    right: ${spacing[3]};
     height: 2px;
     background-color: ${({ $isScrolled }) =>
       $isScrolled ? colors.complimentary.main : colors.accent.main};
-    transform: scaleX(0);
-    transform-origin: bottom right;
-    transition: transform 0.3s ease-out;
+    transform: scaleX(${({ $active }) => ($active ? 1 : 0)});
+    transform-origin: center;
+    transition: transform 0.25s ease-out;
   }
 
-  &:hover::after {
-    transform: scaleX(1);
-    transform-origin: bottom left;
+  @media (hover: hover) {
+    &:hover::after {
+      transform: scaleX(1);
+    }
+  }
+`;
+
+/**
+ * Right side group — CTA button + mobile burger
+ */
+const RightGroup = styled.div`
+  display: flex;
+  align-items: center;
+  gap: ${spacing[4]};
+`;
+
+/**
+ * CTA button — "Get in Touch"
+ */
+const CTAButton = styled(motion.a)<{ $isScrolled: boolean }>`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-family: ${typography.fontFamily.primary};
+  font-weight: ${typography.fontWeight.semibold};
+  font-size: ${typography.fontSize.sm};
+  letter-spacing: ${typography.letterSpacing.wider};
+  text-transform: uppercase;
+  padding: ${spacing[2]} ${spacing[5]};
+  border-radius: ${borderRadius.sm};
+  background: linear-gradient(
+    135deg,
+    ${colors.complimentary.main} 0%,
+    ${colors.complimentary.light} 100%
+  );
+  color: ${({ $isScrolled }) =>
+    $isScrolled ? colors.neutral.white : colors.primary.darker};
+  border: none;
+  cursor: pointer;
+  transition: box-shadow 0.15s ease, filter 0.15s ease;
+  min-height: 40px;
+  white-space: nowrap;
+
+  -webkit-tap-highlight-color: transparent;
+
+  @media (hover: hover) {
+    &:hover {
+      filter: brightness(1.1);
+      box-shadow: 0 2px 10px rgba(174, 151, 81, 0.15);
+    }
+  }
+
+  &:active {
+    filter: brightness(0.95);
+    box-shadow: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid ${colors.accent.main};
+    outline-offset: 3px;
+  }
+
+  @media ${mediaQueries.tabletAndDown} {
+    display: none;
   }
 `;
 
@@ -165,6 +231,17 @@ const MobileMenuWrapper = styled.div`
 `;
 
 // ============================================================================
+// NAV LINKS DATA
+// ============================================================================
+
+const navLinks = [
+  { href: "/", label: "Home" },
+  { href: "/about", label: "About Us" },
+  { href: "/why-choose-us", label: "Why Choose Us" },
+  { href: "/our-team", label: "Our Team" },
+];
+
+// ============================================================================
 // COMPONENT
 // ============================================================================
 
@@ -172,29 +249,35 @@ export function Header() {
   const [open, setOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const node = useRef<HTMLDivElement>(null);
+  const router = useRouter();
 
   // Close menu when clicking outside
   useOnClickOutside(node, () => setOpen(false));
 
+  // Only the homepage gets a transparent header — all other pages start filled
+  const isHomePage = router.pathname === "/";
+
   /**
    * Track scroll position to change header background
+   * On non-homepage routes, header is always in the "scrolled" (filled) state
    */
   useEffect(() => {
+    if (!isHomePage) {
+      setIsScrolled(true);
+      return;
+    }
+
     const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-      setIsScrolled(scrollPosition > 1);
+      setIsScrolled(window.scrollY > 1);
     };
 
-    // Check initial scroll position
     handleScroll();
-
-    // Add scroll listener
     window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [isHomePage]);
 
   return (
     <Wrapper $isScrolled={isScrolled}>
@@ -204,46 +287,45 @@ export function Header() {
           src={logo}
           alt="BD Corporate Services"
           priority={true}
-          layout="responsive"
+          sizes="120px"
+          style={{ width: "100%", height: "auto" }}
         />
       </LogoWrapper>
 
-      {/* Desktop Navigation */}
-      <Navbar>
+      {/* Desktop Navigation — 4 links (Contact moved to CTA) */}
+      <Navbar aria-label="Main navigation">
         <List>
-          <ListItem $isScrolled={isScrolled}>
-            <Link scroll={false} href="/">
-              Home
-            </Link>
-          </ListItem>
-          <ListItem $isScrolled={isScrolled}>
-            <Link scroll={false} href="/about">
-              About Us
-            </Link>
-          </ListItem>
-          <ListItem $isScrolled={isScrolled}>
-            <Link scroll={false} href="/why-choose-us">
-              Why Choose Us
-            </Link>
-          </ListItem>
-          <ListItem $isScrolled={isScrolled}>
-            <Link scroll={false} href="/our-team">
-              Our Team
-            </Link>
-          </ListItem>
-          <ListItem $isScrolled={isScrolled}>
-            <Link scroll={false} href="/contact">
-              Contact
-            </Link>
-          </ListItem>
+          {navLinks.map((link) => (
+            <ListItem
+              key={link.href}
+              $isScrolled={isScrolled}
+              $active={router.pathname === link.href}
+            >
+              <Link scroll={false} href={link.href}>
+                {link.label}
+              </Link>
+            </ListItem>
+          ))}
         </List>
       </Navbar>
 
-      {/* Mobile Menu Toggle and Menu */}
-      <MobileMenuWrapper ref={node}>
-        <Burger open={open} setOpen={setOpen} isScrolled={isScrolled} />
-        <Menu open={open} setOpen={setOpen} />
-      </MobileMenuWrapper>
+      {/* Right side — CTA + Mobile Menu */}
+      <RightGroup>
+        {/* Desktop CTA Button */}
+        <Link href="/contact" passHref legacyBehavior>
+          <CTAButton
+            $isScrolled={isScrolled}
+          >
+            Get in Touch
+          </CTAButton>
+        </Link>
+
+        {/* Mobile Menu Toggle and Menu */}
+        <MobileMenuWrapper ref={node}>
+          <Burger open={open} setOpen={setOpen} isScrolled={isScrolled} />
+          <Menu open={open} setOpen={setOpen} />
+        </MobileMenuWrapper>
+      </RightGroup>
     </Wrapper>
   );
 }
