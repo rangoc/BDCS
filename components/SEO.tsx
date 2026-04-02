@@ -21,10 +21,10 @@ interface ISEOProps {
 }
 
 export function SEO({
-  title = "BDCS | BD Corporate Services d.o.o. Podgorica",
+  title = "BDCS | BD Corporate Services",
   description = "Strive for quality",
   ogUrl = "https://www.bdcs.me",
-  ogImgUrl = "https://www.bdcs.me/logo.png",
+  ogImgUrl = "https://www.bdcs.me/og/og-home.png",
   canonicalUrl,
   robots = "index, follow",
   lang = "en",

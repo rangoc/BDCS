@@ -43,11 +43,7 @@ export const StyledBurger = styled.button<BurgerProps>`
   div {
     width: 2rem;
     height: 0.25rem;
-    background: ${({ open, isScrolled }) => {
-      if (open) return colors.neutral.white;
-      if (isScrolled) return colors.neutral.white;
-      return colors.primary.main;
-    }};
+    background: ${colors.neutral.white};
     border-radius: 10px;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;

@@ -22,7 +22,7 @@ import {
 interface ButtonProps {
   variant?: "primary" | "secondary" | "accent" | "outline";
   size?: "small" | "medium" | "large";
-  fullWidth?: boolean;
+  $fullWidth?: boolean;
 }
 
 // ============================================================================
@@ -153,8 +153,8 @@ export const Button = styled(motion.button)<ButtonProps>`
   }}
   
   /* Full width option */
-  ${({ fullWidth }) =>
-    fullWidth &&
+  ${({ $fullWidth }) =>
+    $fullWidth &&
     `
     width: 100%;
   `}

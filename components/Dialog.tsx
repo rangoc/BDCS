@@ -15,9 +15,9 @@ import {
   mediaQueries,
   shadows,
   spacing,
+  transitions,
   typography,
 } from "../lib/theme";
-import { Button } from "./Button";
 
 // ============================================================================
 // TYPES
@@ -60,7 +60,7 @@ const Modal = styled(motion.div)`
   width: 100%;
   max-width: 480px;
   background-color: ${colors.neutral.white};
-  border-radius: ${borderRadius["3xl"]};
+  border-radius: ${borderRadius.xl};
   box-shadow: ${shadows["2xl"]};
   padding: ${spacing[10]} ${spacing[8]};
   display: flex;
@@ -150,6 +150,42 @@ const Message = styled.p`
   }
 `;
 
+const CloseButton = styled.button`
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: ${spacing[4]} ${spacing[8]};
+  font-family: ${typography.fontFamily.primary};
+  font-size: ${typography.fontSize.sm};
+  font-weight: ${typography.fontWeight.semibold};
+  letter-spacing: ${typography.letterSpacing.wider};
+  text-transform: uppercase;
+  color: ${colors.neutral.white};
+  background: ${colors.primary.main};
+  border: none;
+  border-radius: ${borderRadius.sm};
+  cursor: pointer;
+  transition: ${transitions.default};
+  min-height: 44px;
+  -webkit-tap-highlight-color: transparent;
+
+  @media (hover: hover) {
+    &:hover {
+      background: ${colors.primary.darker};
+    }
+  }
+
+  &:active {
+    filter: brightness(0.95);
+  }
+
+  &:focus-visible {
+    outline: 2px solid ${colors.accent.main};
+    outline-offset: 3px;
+  }
+`;
+
 // ============================================================================
 // COMPONENT
 // ============================================================================
@@ -194,6 +230,7 @@ export function Dialog({ showModal, showModalSet }: IDialogProps) {
     <AnimatePresence>
       {showModal && (
         <ModalOverlay
+          data-lenis-prevent
           variants={backdropFade}
           initial="hidden"
           animate="visible"
@@ -241,14 +278,7 @@ export function Dialog({ showModal, showModalSet }: IDialogProps) {
             </Content>
 
             {/* Close Button */}
-            <Button
-              variant="primary"
-              size="large"
-              onClick={handleClose}
-              fullWidth
-            >
-              Close
-            </Button>
+            <CloseButton onClick={handleClose}>Close</CloseButton>
           </Modal>
         </ModalOverlay>
       )}

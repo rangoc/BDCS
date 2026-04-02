@@ -11,49 +11,10 @@ import Head from "next/head";
 // TYPES
 // ============================================================================
 
-interface OrganizationSchema {
-  "@context": string;
-  "@type": string;
-  name: string;
-  url: string;
-  logo?: string;
-  description?: string;
-  address?: {
-    "@type": string;
-    addressCountry: string;
-    addressLocality: string;
-    addressRegion?: string;
-  };
-  contactPoint?: {
-    "@type": string;
-    contactType: string;
-    email: string;
-  };
-}
-
-interface WebSiteSchema {
-  "@context": string;
-  "@type": string;
-  name: string;
-  url: string;
-  description?: string;
-}
-
-interface BreadcrumbListSchema {
-  "@context": string;
-  "@type": string;
-  itemListElement: Array<{
-    "@type": string;
-    position: number;
-    name: string;
-    item: string;
-  }>;
-}
-
-type StructuredData = OrganizationSchema | WebSiteSchema | BreadcrumbListSchema;
+type JsonLdObject = Record<string, unknown>;
 
 interface StructuredDataProps {
-  data: StructuredData | StructuredData[];
+  data: JsonLdObject | JsonLdObject[];
 }
 
 // ============================================================================
@@ -64,7 +25,7 @@ interface StructuredDataProps {
  * Structured Data component for JSON-LD markup
  */
 export function StructuredData({ data }: StructuredDataProps) {
-  const jsonLd = Array.isArray(data) ? data : [data];
+  const jsonLd: JsonLdObject[] = Array.isArray(data) ? data : [data];
 
   return (
     <Head>
