@@ -15,7 +15,7 @@ const resend = new Resend(
 );
 const FROM_ADDRESS = isDev
   ? "Dev Contact Form <onboarding@resend.dev>"
-  : "BDCS Contact Form <noreply@send.bdcs.me>";
+  : "BDCS Contact Form <noreply@bdcs.me>";
 const TO_ADDRESS = isDev ? "cabarkapa.goran@gmail.com" : "info@bdcs.me";
 
 const MAX_NAME_LENGTH = 200;
