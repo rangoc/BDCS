@@ -532,7 +532,7 @@ function MVVBlock({
         variants={fadeUp}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
+        viewport={{ once: true }}
       >
         <MVVTitleColumn>
           <MVVTitle>{section.title}</MVVTitle>
@@ -657,7 +657,7 @@ export default function About() {
             variants={staggerContainer}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true }}
           >
             {STATS.map((stat, i) => (
               <React.Fragment key={stat.label}>

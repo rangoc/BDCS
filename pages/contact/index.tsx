@@ -492,7 +492,7 @@ export default function Contact() {
               variants={staggerContainer}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, margin: "-200px" }}
+              viewport={{ once: true }}
             >
               <GoldLine
                 initial={{ scaleX: 0 }}
@@ -545,7 +545,7 @@ export default function Contact() {
               variants={fadeUp}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, margin: "-200px" }}
+              viewport={{ once: true }}
               transition={{ delay: 0.3 }}
             >
               <Form onSubmit={handleSubmit(onSubmit)}>

@@ -450,7 +450,7 @@ function AdvantageRow({
         <SectionDivider
           initial={{ scaleX: 0 }}
           whileInView={{ scaleX: 1 }}
-          viewport={{ once: true, margin: "-200px" }}
+          viewport={{ once: true }}
           transition={{
             duration: 0.7,
             ease: [0.25, 0.46, 0.45, 0.94],
@@ -464,7 +464,7 @@ function AdvantageRow({
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-200px" }}
+          viewport={{ once: true }}
         >
           <NumberTitleColumn $reversed={isEven} variants={fadeUp}>
             <BigNumber aria-hidden="true">{advantage.number}</BigNumber>
@@ -578,7 +578,7 @@ export default function WhyChooseUs() {
               variants={fadeUp}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, margin: "-200px" }}
+              viewport={{ once: true }}
             >
               <ClosingText>
                 <ClosingTitle>
