@@ -258,6 +258,14 @@ export const GlobalStyles = createGlobalStyle`
     
     @media (max-width: 550px) {
       padding-top: 72px; /* Even smaller on mobile */
+      /* Fixed wrapper trick: scroll inside a viewport-locked container
+         so the browser never sees document-level scrolling and keeps
+         its UI (URL bar, bottom nav) permanently visible */
+      position: fixed;
+      inset: 0;
+      overflow-y: auto;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
     }
   }
 
