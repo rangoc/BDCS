@@ -110,6 +110,7 @@ const Container = styled.div`
 const HeroSection = styled.section`
   position: relative;
   min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   align-items: center;
   background: linear-gradient(
@@ -1206,7 +1207,7 @@ export default function Home() {
           <motion.div
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-300px" }}
+            viewport={{ once: true, margin: "-100px" }}
             variants={staggerContainer}
           >
             <SectionHeader>
@@ -1249,7 +1250,7 @@ export default function Home() {
           <motion.div
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-300px" }}
+            viewport={{ once: true, margin: "-100px" }}
             variants={staggerContainer}
           >
             <SectionHeader>

@@ -248,6 +248,7 @@ export const GlobalStyles = createGlobalStyle`
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    min-height: 100dvh;
     overflow-x: hidden;
     padding-top: 112px;
     
