@@ -1,5 +1,130 @@
 # Learnings
 
+## Mobile Viewport & Browser UI
+
+### `vh` vs `svh` vs `dvh` vs `lvh`
+
+- **`100vh`** on iOS equals the **large viewport** (browser UI hidden). Fixed, doesn't change dynamically. Causes content to overflow when browser UI is visible.
+- **`100svh`** (small viewport height) — viewport with all browser UI **visible**. Fixed and stable. Best for hero sections and layout containers where you don't want resizing.
+- **`100dvh`** (dynamic viewport height) — tracks the actual viewport in real-time as browser UI shows/hides. **Causes content jumping** because elements actively resize during scroll. Avoid for layout elements.
+- **`100lvh`** (large viewport height) — equivalent to what `100vh` has always meant. Use for modals/overlays that should cover the full screen.
+
+**Rule of thumb:** Use `svh` for layout stability. Use `dvh` only for static app shells. Never use `dvh` on animated or transitioning elements.
+
+### `html { height: 100% }` is dynamic on mobile
+
+On mobile browsers, `height: 100%` on `html` resolves to the **dynamic viewport** — it changes when the URL bar appears/disappears. This propagates down through `body` (`min-height: 100%`) and causes content to jump. Remove percentage-based height chains on `html`/`body` when using `svh`/`dvh` units on the root container.
+
+### The `position: fixed` wrapper trick
+
+To prevent mobile browser UI (URL bar, bottom nav) from hiding/showing during scroll:
+
+```css
+#__next {
+  position: fixed;
+  inset: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+```
+
+The browser only hides/shows its UI based on **document-level scrolling**. Overflow scrolling inside a fixed container is not detected as document scrolling, so the browser UI stays permanently visible. No hiding = no resizing = no content jumping.
+
+**Side effects that must be handled:**
+
+1. **Flex children compress** — Add `flex-shrink: 0` to all direct children (`& > * { flex-shrink: 0; }`) to prevent content from being squeezed into the viewport height.
+2. **`window.scrollY` is always 0** — Any scroll detection (e.g., header background on scroll) must listen to the container's `scrollTop` instead of `window.scrollY`.
+3. **Scroll position persists across routes** — The browser doesn't auto-reset scroll for non-document containers. Manually reset `container.scrollTop = 0` on route change.
+4. **`position: fixed` children still work** — A `position: fixed` parent does NOT create a new containing block for fixed children (unlike `transform` or `filter`). Fixed headers inside the container still position relative to the viewport.
+
+### `overscroll-behavior-y: none`
+
+Prevents rubber-band overscroll on iOS that can reveal the body background below the footer. Supported in iOS Safari 16+. Does NOT prevent the URL bar from hiding/showing — only prevents the bounce effect.
+
+### `viewport-fit=cover` + `env(safe-area-inset-bottom)`
+
+Required for notched iPhones (X and later). `env(safe-area-inset-bottom)` values are always `0px` unless `viewport-fit=cover` is set in the viewport meta tag:
+
+```html
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+```
+
+```css
+footer {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+```
+
+---
+
+## Framer Motion Animations
+
+### Negative viewport margins break on small screens
+
+Framer Motion's `viewport={{ margin: "-300px" }}` shrinks the intersection detection zone by 300px on all sides. On an iPhone with ~700-850px viewport height, `-300px` means the element must be 300px inside the viewport before the animation triggers — often 35-40% of the screen. The animation may never fire if the user scrolls past naturally.
+
+**Fix:** Remove negative viewport margins entirely. Use `viewport={{ once: true }}` without a margin. Animations trigger as soon as elements enter the viewport, which works on every screen size.
+
+### `whileInView` with fixed scroll containers
+
+Framer Motion's `whileInView` uses `IntersectionObserver` with the document viewport as root by default. When using the `position: fixed` wrapper trick, the scroll happens inside the container, but elements still move in and out of the document viewport — so `IntersectionObserver` still works correctly.
+
+---
+
+## Lenis Smooth Scroll
+
+### Lenis amplifies content jumping on mobile
+
+Lenis uses `window.innerHeight` for scroll calculations. On mobile, `window.innerHeight` changes dynamically when the browser UI appears/disappears. This causes Lenis to recalculate scroll limits mid-animation, producing visible content jumps.
+
+**Fix:** Disable Lenis on touch devices. Native iOS/Android scrolling is already smooth and handles dynamic browser UI correctly.
+
+```javascript
+const isTouch = window.matchMedia("(pointer: coarse)").matches;
+if (isTouch) return; // skip Lenis initialization
+```
+
+`pointer: coarse` targets touch devices (phones/tablets). Laptops with touchscreens still match `pointer: fine` (primary pointer is mouse/trackpad) and get Lenis.
+
+### Lenis CSS overrides
+
+Lenis sets `html.lenis, html.lenis body { height: auto; }` which overrides any `height` set on `html`/`body` in global styles. Be aware of this when debugging height issues.
+
+---
+
+## Resend Email API
+
+### From address must match verified domain exactly
+
+If your Resend domain is `bdcs.me`, you can only send from `*@bdcs.me`. Sending from `*@send.bdcs.me` returns a 403 error — subdomains must be separately verified. The error message explicitly states which domain is unauthorized.
+
+---
+
+## CSS Transitions
+
+### Gradient-to-transparent transitions
+
+`transition: all` on `background` between a `linear-gradient(...)` and `transparent` may not animate smoothly across all browsers. Some browsers fade the gradient smoothly, others snap. For guaranteed smooth transitions, consider using `opacity` on a pseudo-element with the gradient instead of transitioning the gradient itself.
+
+---
+
+## General Mobile Web Development
+
+### Always test on real devices
+
+Chrome DevTools mobile emulation does NOT simulate:
+- Dynamic browser UI (URL bar hide/show)
+- Safe area insets
+- `overscroll-behavior` effects
+- Touch-specific scroll behaviors
+- Actual viewport height variations across different phone models
+
+### Different phones, different viewport heights
+
+Phone screens vary significantly in height. A viewport margin or min-height that works on an iPhone 15 Pro Max (932px) may fail completely on an older or smaller phone (~700px). Design animations and layouts to work without assumptions about available viewport height.
+
+---
+
 ## Performance Optimizations
 
 ### Starting Point
