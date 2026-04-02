@@ -656,7 +656,7 @@ export default function About() {
             variants={staggerContainer}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-200px" }}
+            viewport={{ once: true, margin: "-100px" }}
           >
             {STATS.map((stat, i) => (
               <React.Fragment key={stat.label}>

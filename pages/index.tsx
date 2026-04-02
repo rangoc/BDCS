@@ -1137,7 +1137,7 @@ export default function Home() {
         <StatsInner
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-200px" }}
+          viewport={{ once: true, margin: "-100px" }}
           variants={staggerContainer}
         >
           {stats.map((stat, i) => (
