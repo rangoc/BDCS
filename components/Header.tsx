@@ -49,7 +49,7 @@ const Wrapper = styled(motion.header)<{ $isScrolled: boolean }>`
   padding: ${spacing[4]} ${spacing[8]};
   background: ${({ $isScrolled }) =>
     $isScrolled
-      ? `linear-gradient(160deg, ${colors.primary.darker} 0%, ${colors.primary.main} 40%, ${colors.primary.dark} 70%, ${colors.primary.darker} 100%)`
+      ? `linear-gradient(180deg, ${colors.primary.darker} 0%, ${colors.primary.main} 100%)`
       : "transparent"};
   backdrop-filter: ${({ $isScrolled }) =>
     $isScrolled ? "blur(12px) saturate(180%)" : "none"};
@@ -60,8 +60,8 @@ const Wrapper = styled(motion.header)<{ $isScrolled: boolean }>`
   box-shadow: ${({ $isScrolled }) =>
     $isScrolled ? "0 8px 32px 0 rgba(0, 0, 0, 0.1)" : "none"};
   border-bottom: ${({ $isScrolled }) =>
-    $isScrolled ? "1px solid rgba(255, 255, 255, 0.1)" : "none"};
-  transition: all 0.35s ease-in-out;
+    $isScrolled ? `1px solid rgba(174, 151, 81, 0.15)` : "none"};
+  transition: all 0.6s ease-in-out;
 
   @media ${mediaQueries.tabletAndDown} {
     padding: ${spacing[4]} ${spacing[6]};
