@@ -110,7 +110,7 @@ const Container = styled.div`
 const HeroSection = styled.section`
   position: relative;
   min-height: 100vh;
-  min-height: 100dvh;
+  min-height: 100svh;
   display: flex;
   align-items: center;
   background: linear-gradient(
@@ -121,6 +121,10 @@ const HeroSection = styled.section`
     ${colors.primary.darker} 100%
   );
   overflow: hidden;
+
+  @media ${mediaQueries.mobileAndDown} {
+    min-height: 100svh;
+  }
 `;
 
 const HeroOverlay = styled.div`
@@ -1179,7 +1183,7 @@ export default function Home() {
           <IntroGoldLine
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
             style={{ transformOrigin: "left" }}
           />

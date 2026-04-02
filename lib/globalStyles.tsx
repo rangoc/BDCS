@@ -34,6 +34,8 @@ export const GlobalStyles = createGlobalStyle`
     -webkit-text-size-adjust: 100%;
     /* Prevent horizontal scrollbar */
     overflow-x: hidden;
+    /* Prevent overscroll rubber-banding that reveals body bg below footer */
+    overscroll-behavior-y: none;
   }
 
   body {
@@ -248,8 +250,9 @@ export const GlobalStyles = createGlobalStyle`
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    min-height: 100dvh;
+    min-height: 100svh;
     overflow-x: hidden;
+    background: ${colors.primary.darker};
     padding-top: 112px;
     
     @media (max-width: 768px) {

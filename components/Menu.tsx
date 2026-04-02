@@ -35,7 +35,7 @@ export const StyledMenu = styled.nav<{ open: boolean; $mounted: boolean }>`
   z-index: ${zIndex.modalBackdrop};
   width: 100%;
   height: 100vh;
-  height: 100dvh;
+  height: 100svh;
   background: linear-gradient(
     180deg,
     ${colors.primary.darker} 0%,
