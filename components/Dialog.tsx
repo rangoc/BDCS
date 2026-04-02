@@ -230,6 +230,7 @@ export function Dialog({ showModal, showModalSet }: IDialogProps) {
     <AnimatePresence>
       {showModal && (
         <ModalOverlay
+          data-lenis-prevent
           variants={backdropFade}
           initial="hidden"
           animate="visible"

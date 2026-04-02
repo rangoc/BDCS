@@ -9,9 +9,9 @@
  * All design tokens from lib/theme.ts — no new dependencies.
  */
 
-import React, { useRef } from "react";
+import React from "react";
 import styled from "styled-components";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import Image from "next/image";
 
 import { SEO } from "../../components/SEO";
@@ -136,15 +136,6 @@ const HeroGoldGlow = styled.div`
       rgba(174, 151, 81, 0.03) 0%,
       transparent 60%
     );
-`;
-
-const HeroTexture = styled.div`
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  opacity: 0.025;
-  pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23AE9751' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 `;
 
 const HeroContent = styled.div`
@@ -531,18 +522,16 @@ function MVVBlock({
   section: (typeof MVV_CONTENT)[number];
   index: number;
 }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-
   return (
-    <MVVSection ref={ref}>
+    <MVVSection>
       <MVVDivider />
       <MVVGoldGlow />
 
       <MVVGrid
         variants={fadeUp}
         initial="hidden"
-        animate={isInView ? "visible" : "hidden"}
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
       >
         <MVVTitleColumn>
           <MVVTitle>{section.title}</MVVTitle>
@@ -578,12 +567,6 @@ function MVVBlock({
 // ============================================================================
 
 export default function About() {
-  const heroRef = useRef<HTMLDivElement>(null);
-  const heroInView = useInView(heroRef, { once: true });
-
-  const statsRef = useRef<HTMLDivElement>(null);
-  const statsInView = useInView(statsRef, { once: true, margin: "-100px" });
-
   return (
     <>
       <SEO
@@ -619,7 +602,7 @@ export default function About() {
         transition={{ duration: 0.6, ease: "easeOut" }}
       >
         {/* Hero — Immersive image background */}
-        <HeroSection ref={heroRef}>
+        <HeroSection>
           <HeroImageWrapper>
             <Image
               src={about}
@@ -632,20 +615,21 @@ export default function About() {
           </HeroImageWrapper>
           <HeroOverlay />
           <HeroGoldGlow />
-          <HeroTexture />
 
           <HeroContent>
             <HeroHeading
               variants={fadeUp}
               initial="hidden"
-              animate={heroInView ? "visible" : "hidden"}
+              whileInView="visible"
+              viewport={{ once: true }}
             >
               About BD Corporate Services
             </HeroHeading>
 
             <HeroGoldLine
               initial={{ scaleX: 0 }}
-              animate={heroInView ? { scaleX: 1 } : { scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
               transition={{
                 duration: 0.7,
                 delay: 0.2,
@@ -656,7 +640,8 @@ export default function About() {
             <HeroTagline
               variants={fadeUp}
               initial="hidden"
-              animate={heroInView ? "visible" : "hidden"}
+              whileInView="visible"
+              viewport={{ once: true }}
               transition={{ delay: 0.25 }}
             >
               Premium accounting and audit outsourcing, delivered by Big 4
@@ -666,11 +651,12 @@ export default function About() {
         </HeroSection>
 
         {/* Stats */}
-        <StatsSection ref={statsRef}>
+        <StatsSection>
           <StatsInner
             variants={staggerContainer}
             initial="hidden"
-            animate={statsInView ? "visible" : "hidden"}
+            whileInView="visible"
+            viewport={{ once: true, margin: "-200px" }}
           >
             {STATS.map((stat, i) => (
               <React.Fragment key={stat.label}>

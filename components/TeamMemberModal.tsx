@@ -179,6 +179,7 @@ export const TeamMemberModal: React.FC<TeamMemberModalProps> = ({
     <AnimatePresence>
       {isOpen && (
         <Backdrop
+          data-lenis-prevent
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}

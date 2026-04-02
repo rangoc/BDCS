@@ -301,7 +301,7 @@ export function Header() {
               $isScrolled={isScrolled}
               $active={router.pathname === link.href}
             >
-              <Link scroll={false} href={link.href}>
+              <Link href={link.href}>
                 {link.label}
               </Link>
             </ListItem>

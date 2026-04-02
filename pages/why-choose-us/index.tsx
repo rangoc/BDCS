@@ -10,9 +10,9 @@
  * All design tokens from lib/theme.ts — no new dependencies.
  */
 
-import React, { useRef } from "react";
+import React from "react";
 import styled from "styled-components";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import Image from "next/image";
 
 import Link from "next/link";
@@ -130,13 +130,6 @@ const HeroOverlay = styled.div`
       rgba(10, 8, 25, 0.85) 100%
     );
 
-  &::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23AE9751' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-    opacity: 0.025;
-  }
 `;
 
 const HeroContent = styled(motion.div)`
@@ -448,8 +441,6 @@ function AdvantageRow({
   advantage: { number: string; title: string; description: string };
   index: number;
 }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
   const isEven = index % 2 !== 0;
 
   return (
@@ -457,7 +448,8 @@ function AdvantageRow({
       {index > 0 && (
         <SectionDivider
           initial={{ scaleX: 0 }}
-          animate={isInView ? { scaleX: 1 } : { scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          viewport={{ once: true, margin: "-200px" }}
           transition={{
             duration: 0.7,
             ease: [0.25, 0.46, 0.45, 0.94],
@@ -465,12 +457,13 @@ function AdvantageRow({
           style={{ transformOrigin: "center" }}
         />
       )}
-      <AdvantageBlock ref={ref}>
+      <AdvantageBlock>
         <AdvantageInner
           $reversed={isEven}
           variants={staggerContainer}
           initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
+          whileInView="visible"
+          viewport={{ once: true, margin: "-200px" }}
         >
           <NumberTitleColumn $reversed={isEven} variants={fadeUp}>
             <BigNumber aria-hidden="true">{advantage.number}</BigNumber>
@@ -493,12 +486,6 @@ function AdvantageRow({
 // ============================================================================
 
 export default function WhyChooseUs() {
-  const heroRef = useRef<HTMLDivElement>(null);
-  const heroInView = useInView(heroRef, { once: true });
-
-  const closingRef = useRef<HTMLDivElement>(null);
-  const closingInView = useInView(closingRef, { once: true, margin: "-60px" });
-
   return (
     <>
       <SEO
@@ -534,7 +521,7 @@ export default function WhyChooseUs() {
         transition={{ duration: 0.6, ease: "easeOut" }}
       >
         {/* Hero */}
-        <HeroSection ref={heroRef}>
+        <HeroSection>
           <HeroImageWrapper>
             <Image
               src={heroImg}
@@ -549,11 +536,13 @@ export default function WhyChooseUs() {
 
           <HeroContent
             initial="hidden"
-            animate={heroInView ? "visible" : "hidden"}
+            whileInView="visible"
+            viewport={{ once: true }}
           >
             <HeroGoldLine
               initial={{ scaleX: 0 }}
-              animate={heroInView ? { scaleX: 1 } : { scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
               transition={{
                 duration: 0.7,
                 delay: 0.2,
@@ -563,7 +552,7 @@ export default function WhyChooseUs() {
             <HeroHeading variants={fadeUp}>
               Why Choose BD Corporate Services
             </HeroHeading>
-            <HeroTagline variants={fadeUp} transition={{ delay: 0.15 }}>
+            <HeroTagline variants={fadeUp} transition={{ delay: 0.3 }}>
               Discover why leading businesses trust us with their accounting and
               audit needs.
             </HeroTagline>
@@ -582,12 +571,13 @@ export default function WhyChooseUs() {
         </AdvantagesWrapper>
 
         {/* Closing strip */}
-        <ClosingStrip ref={closingRef}>
+        <ClosingStrip>
           <ClosingInner>
             <ClosingRow
               variants={fadeUp}
               initial="hidden"
-              animate={closingInView ? "visible" : "hidden"}
+              whileInView="visible"
+              viewport={{ once: true, margin: "-200px" }}
             >
               <ClosingText>
                 <ClosingTitle>

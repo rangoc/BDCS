@@ -242,7 +242,7 @@ export function Menu({
     <StyledMenu open={open} $mounted={mounted}>
       <List>
         <ListItem $active={router.pathname === "/"} onClick={handleLinkClick}>
-          <Link scroll={false} href="/">
+          <Link href="/">
             Home
           </Link>
         </ListItem>
@@ -250,7 +250,7 @@ export function Menu({
           $active={router.pathname === "/about"}
           onClick={handleLinkClick}
         >
-          <Link scroll={false} href="/about">
+          <Link href="/about">
             About Us
           </Link>
         </ListItem>
@@ -258,7 +258,7 @@ export function Menu({
           $active={router.pathname === "/why-choose-us"}
           onClick={handleLinkClick}
         >
-          <Link scroll={false} href="/why-choose-us">
+          <Link href="/why-choose-us">
             Why Choose Us
           </Link>
         </ListItem>
@@ -266,7 +266,7 @@ export function Menu({
           $active={router.pathname === "/our-team"}
           onClick={handleLinkClick}
         >
-          <Link scroll={false} href="/our-team">
+          <Link href="/our-team">
             Our Team
           </Link>
         </ListItem>
@@ -274,7 +274,7 @@ export function Menu({
           $active={router.pathname === "/contact"}
           onClick={handleLinkClick}
         >
-          <Link scroll={false} href="/contact">
+          <Link href="/contact">
             Contact
           </Link>
         </ListItem>

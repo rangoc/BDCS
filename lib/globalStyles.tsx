@@ -32,8 +32,6 @@ export const GlobalStyles = createGlobalStyle`
     height: 100%;
     /* Prevent font size adjustment on orientation change (iOS) */
     -webkit-text-size-adjust: 100%;
-    /* Smooth scrolling for anchor links */
-    scroll-behavior: smooth;
     /* Prevent horizontal scrollbar */
     overflow-x: hidden;
   }

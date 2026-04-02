@@ -9,9 +9,9 @@
  * All design tokens from lib/theme.ts — no new dependencies.
  */
 
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import Image from "next/image";
 
 import dynamic from "next/dynamic";
@@ -47,16 +47,6 @@ const fadeUp = {
     opacity: 1,
     y: 0,
     transition: { duration: 0.8, ease: [0.25, 0.1, 0.25, 1] },
-  },
-};
-
-const staggerContainer = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.08,
-      delayChildren: 0.1,
-    },
   },
 };
 
@@ -137,15 +127,6 @@ const HeroGoldGlow = styled.div`
     );
 `;
 
-const HeroTexture = styled.div`
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  opacity: 0.025;
-  pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23AE9751' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-`;
-
 const HeroContent = styled.div`
   position: relative;
   z-index: 3;
@@ -208,7 +189,7 @@ const TeamGridSection = styled.section`
   }
 `;
 
-const TeamGrid = styled(motion.div)`
+const TeamGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: ${spacing[5]};
@@ -220,7 +201,7 @@ const TeamGrid = styled(motion.div)`
   }
 `;
 
-const TeamCard = styled(motion.div)`
+const TeamCard = styled.div`
   position: relative;
   border-radius: ${borderRadius.lg};
   overflow: hidden;
@@ -345,12 +326,6 @@ const RowChevron = styled.div`
 // ============================================================================
 
 export default function OurTeam() {
-  const heroRef = useRef<HTMLDivElement>(null);
-  const heroInView = useInView(heroRef, { once: true });
-
-  const gridRef = useRef<HTMLDivElement>(null);
-  const gridInView = useInView(gridRef, { once: true, margin: "-50px" });
-
   const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -398,7 +373,7 @@ export default function OurTeam() {
         transition={{ duration: 0.6, ease: "easeOut" }}
       >
         {/* Hero */}
-        <HeroSection ref={heroRef} aria-label="Team page hero">
+        <HeroSection aria-label="Team page hero">
           <HeroImageWrapper>
             <Image
               src={heroImg}
@@ -412,20 +387,21 @@ export default function OurTeam() {
           </HeroImageWrapper>
           <HeroOverlay />
           <HeroGoldGlow />
-          <HeroTexture />
 
           <HeroContent>
             <HeroHeading
               variants={fadeUp}
               initial="hidden"
-              animate={heroInView ? "visible" : "hidden"}
+              whileInView="visible"
+              viewport={{ once: true }}
             >
               Meet our Team
             </HeroHeading>
 
             <HeroGoldLine
               initial={{ scaleX: 0 }}
-              animate={heroInView ? { scaleX: 1 } : { scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
               transition={{
                 duration: 0.7,
                 delay: 0.2,
@@ -436,7 +412,8 @@ export default function OurTeam() {
             <HeroTagline
               variants={fadeUp}
               initial="hidden"
-              animate={heroInView ? "visible" : "hidden"}
+              whileInView="visible"
+              viewport={{ once: true }}
               transition={{ delay: 0.25 }}
             >
               40+ professionals with Big 4 expertise, dedicated to delivering
@@ -446,16 +423,11 @@ export default function OurTeam() {
         </HeroSection>
 
         {/* Team Grid — Desktop/Tablet */}
-        <TeamGridSection ref={gridRef} aria-label="Team members">
-          <TeamGrid
-            variants={staggerContainer}
-            initial="hidden"
-            animate={gridInView ? "visible" : "hidden"}
-          >
+        <TeamGridSection aria-label="Team members">
+          <TeamGrid>
             {OUR_TEAM.map((member) => (
               <TeamCard
                 key={member.email || member.name}
-                variants={fadeUp}
                 onClick={() => handleCardClick(member)}
                 role="button"
                 tabIndex={0}

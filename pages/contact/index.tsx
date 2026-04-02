@@ -9,9 +9,9 @@
  * All design tokens from lib/theme.ts — no new dependencies.
  */
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 import { Dialog } from "../../components/Dialog";
@@ -398,9 +398,6 @@ const SubmitButton = styled(motion.button)`
 // ============================================================================
 
 export default function Contact() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const sectionInView = useInView(sectionRef, { once: true, margin: "-50px" });
-
   const {
     register,
     handleSubmit,
@@ -484,7 +481,7 @@ export default function Contact() {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
       >
-        <DarkSection ref={sectionRef}>
+        <DarkSection>
           <DarkTexture />
           <DarkGoldGlow />
 
@@ -493,11 +490,13 @@ export default function Contact() {
             <InfoColumn
               variants={staggerContainer}
               initial="hidden"
-              animate={sectionInView ? "visible" : "hidden"}
+              whileInView="visible"
+              viewport={{ once: true, margin: "-200px" }}
             >
               <GoldLine
                 initial={{ scaleX: 0 }}
-                animate={sectionInView ? { scaleX: 1 } : { scaleX: 0 }}
+                whileInView={{ scaleX: 1 }}
+                viewport={{ once: true }}
                 transition={{
                   duration: 0.7,
                   delay: 0.2,
@@ -544,7 +543,8 @@ export default function Contact() {
             <FormCard
               variants={fadeUp}
               initial="hidden"
-              animate={sectionInView ? "visible" : "hidden"}
+              whileInView="visible"
+              viewport={{ once: true, margin: "-200px" }}
               transition={{ delay: 0.3 }}
             >
               <Form onSubmit={handleSubmit(onSubmit)}>
