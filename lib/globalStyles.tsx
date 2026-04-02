@@ -266,6 +266,11 @@ export const GlobalStyles = createGlobalStyle`
       overflow-y: auto;
       overflow-x: hidden;
       -webkit-overflow-scrolling: touch;
+
+      /* Prevent flex from compressing children to fit viewport */
+      & > * {
+        flex-shrink: 0;
+      }
     }
   }
 

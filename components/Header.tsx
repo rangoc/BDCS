@@ -268,14 +268,21 @@ export function Header() {
     }
 
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 1);
+      // On mobile, #__next is the scroll container (position: fixed wrapper)
+      // so window.scrollY is always 0. Check #__next's scrollTop instead.
+      const nextEl = document.getElementById("__next");
+      const scrollY = nextEl ? Math.max(window.scrollY, nextEl.scrollTop) : window.scrollY;
+      setIsScrolled(scrollY > 1);
     };
 
     handleScroll();
+    const nextEl = document.getElementById("__next");
     window.addEventListener("scroll", handleScroll, { passive: true });
+    nextEl?.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
+      nextEl?.removeEventListener("scroll", handleScroll);
     };
   }, [isHomePage]);
 
