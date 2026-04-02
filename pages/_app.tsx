@@ -15,6 +15,11 @@ export default function App({ Component, pageProps }: AppProps) {
   const url = `https://www.bdcs.me${asPath}`;
 
   useEffect(() => {
+    // Skip Lenis on touch devices — native iOS/Android scrolling
+    // handles dynamic browser UI smoothly; Lenis fights with it
+    const isTouch = window.matchMedia("(pointer: coarse)").matches;
+    if (isTouch) return;
+
     const lenis = new Lenis({
       lerp: 0.15,
       wheelMultiplier: 0.5,

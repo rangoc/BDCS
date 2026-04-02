@@ -48,7 +48,7 @@ const Wrapper = styled(motion.header)<{ $isScrolled: boolean }>`
   justify-content: space-between;
   padding: ${spacing[4]} ${spacing[8]};
   background-color: ${({ $isScrolled }) =>
-    $isScrolled ? "rgba(1, 24, 73, 0.97)" : "transparent"};
+    $isScrolled ? "rgba(10, 8, 25, 0.97)" : "transparent"};
   backdrop-filter: ${({ $isScrolled }) =>
     $isScrolled ? "blur(12px) saturate(180%)" : "none"};
   -webkit-backdrop-filter: ${({ $isScrolled }) =>
