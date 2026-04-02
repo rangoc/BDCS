@@ -27,9 +27,7 @@ export const GlobalStyles = createGlobalStyle`
      HTML & BODY
      ============================================================================ */
   
-  /* Allow percentage-based heights and set base font */
   html {
-    height: 100%;
     /* Prevent font size adjustment on orientation change (iOS) */
     -webkit-text-size-adjust: 100%;
     /* Prevent horizontal scrollbar */
@@ -39,7 +37,6 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   body {
-    min-height: 100%;
     margin: 0;
     font-family: ${typography.fontFamily.primary};
     font-size: ${typography.fontSize.base};
