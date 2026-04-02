@@ -50,6 +50,7 @@ const FooterWrapper = styled.footer`
   font-family: ${typography.fontFamily.primary};
   overflow: hidden;
   margin-top: auto;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
 `;
 
 const GoldRadialOverlay = styled.div`
