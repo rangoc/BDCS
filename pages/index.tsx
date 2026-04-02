@@ -157,7 +157,7 @@ const HeroContent = styled.div`
   }
 
   @media ${mediaQueries.mobileAndDown} {
-    padding: ${spacing[10]} ${spacing[4]} ${spacing[16]};
+    padding: calc(72px + ${spacing[8]}) ${spacing[4]} ${spacing[16]};
   }
 `;
 
