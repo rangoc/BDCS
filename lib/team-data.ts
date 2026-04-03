@@ -33,8 +33,6 @@ import nikolam from "../public/people/NikolaMaric.webp";
 import nikolar from "../public/people/NikolaRadunovic.webp";
 import nikolinaj from "../public/people/NikolinaJankovic.webp";
 import nikolinak from "../public/people/NikolinaKoljevic.webp";
-import petarm from "../public/people/PetarMilas.webp";
-import sabrinal from "../public/people/SabrinaLukovic.webp";
 import stefanp from "../public/people/StefanPavlovic.webp";
 import zerinas from "../public/people/ZerinaSikira.webp";
 
@@ -57,7 +55,7 @@ export const OUR_TEAM = [
     image: bobanc,
     role: "Co-Founder & CEO",
     bio: `As a co-founder and CEO of BD Corporate Services (BDCS) Boban is experienced finance professional with more than 12 years of experience in auditing. 
-          He started his career at EY Montenegro in 2011 and before joining KC Audit he worked at Deloitte Montenegro in the role of audit executive director. 
+          He started his career at EY Montenegro in 2011 and before joining Moore DRV Audit he worked at Deloitte Montenegro in the role of audit executive director. 
           In between Boban also worked in EY Stockholm for a period of one year at various companies which gives him a better insight in the challenges and focus areas of companies. 
           He is ACCA member since 2018. Boban’s skill set includes strong practices of International Financial Reporting Standards (IFRS) and International Standards on Auditing (ISA) and Dutch GAAP. 
           Besides, he was part of ISQM1 team for Deloitte Central Europe.`,
@@ -154,23 +152,7 @@ export const OUR_TEAM = [
     phone: "",
     email: "drazen.milic@bdcs.me",
   },
-  {
-    name: "Petar Milaš",
-    image: petarm,
-    role: "Manager",
-    bio: `Petar Milaš is an ACCA Member with previous experience of more than 13 years with Big 4 firms, EY
-          Serbia and EY Montenegro. In September 2023, Petar joined BDCS support team of Ruitenburg Audit
-          B.V. (Netherlands) as an Engagement Manager. Petar provided assurance services to wide range of
-          international and local companies in various industry sectors such as clients in Oil&Gas, Insurance,
-          Telecommunication, Customer products and services, Technology, Power and utilities, Professional
-          services, Pharmaceuticals, Media and entertainment, Real estate, Mining, Diversified industrial
-          products manufacturing. Petar has experience in audits reporting under IFRS, US GAAP, German
-          GAAP, Luxemburg GAAP and Belgium GAAP. Petar also has experience in performing buy-side due
-          diligence of insurance and telecommunication companies.`,
-    linkedin: `https://www.linkedin.com/in/petar-milas-acca-55053a6/`,
-    phone: "",
-    email: "petar.milas@bdcs.me",
-  },
+
   {
     name: "Nikola Marić",
     image: nikolam,
@@ -701,25 +683,6 @@ export const OUR_TEAM = [
     linkedin: ``,
     phone: "",
     email: "nemanja.kljajevic@bdcs.me",
-  },
-  {
-    name: "Sabrina Luković",
-    image: sabrinal,
-    role: "Junior",
-    bio: `Sabrina Luković is currently pursuing a degree in
-          Finance at the University of Donja Gorica, supported by
-          a strong academic foundation in economics and English.
-          She has gained practical experience in accounts
-          payable and finance operations through work with
-          international companies, which strengthened her
-          understanding of financial processes. Sabrina combines
-          academic knowledge with hands-on experience,
-          demonstrating adaptability and attention to detail. She is
-          eager to continue developing her skills in auditing and
-          financial management.`,
-    linkedin: ``,
-    phone: "",
-    email: "sabrina.lukovic@bdcs.me",
   },
   {
     name: "Ivana Jovanović",
