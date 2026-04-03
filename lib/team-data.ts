@@ -84,7 +84,7 @@ export const OUR_TEAM = [
     email: "eldar.berkovac@bdcs.ba",
   },
   {
-    name: "Nenad Vucinic",
+    name: "Nenad Vučinić",
     image: nenadv,
     role: "Partner",
     bio: `Nenad Vučinić holds a bachelor’s degree in Economics
@@ -135,7 +135,7 @@ export const OUR_TEAM = [
     email: "nikola.radunovic@bdcs.me",
   },
   {
-    name: "Drazen Milić",
+    name: "Dražen Milić",
     image: drazenm,
     role: "Manager",
     bio: `Dražen Milić is an experienced audit professional with
@@ -220,10 +220,10 @@ export const OUR_TEAM = [
     email: "hasija.isakovic@bdcs.ba",
   },
   {
-    name: "Milos Vuletić",
+    name: "Miloš Vuletić",
     image: milosv,
     role: "Assistant Manager",
-    bio: `Milos Vuletić brings six years of professional experience
+    bio: `Miloš Vuletić brings six years of professional experience
           from EY assurance services, supported by a strong
           academic background in economics and finance. He has
           worked extensively on audits and financial reporting
