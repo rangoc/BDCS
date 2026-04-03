@@ -16,14 +16,12 @@ import React, { useRef } from "react";
 import styled from "styled-components";
 
 import { InteractiveTexture } from "../components/InteractiveTexture";
-import { Layout } from "../components/Layout";
 import { SEO } from "../components/SEO";
 import { StructuredData } from "../components/StructuredData";
 import {
   borderRadius,
   colors,
   mediaQueries,
-  shadows,
   spacing,
   transitions,
   typography,
@@ -33,7 +31,6 @@ import introImage from "../public/assets/hero-home.webp";
 import confinantLogo from "../public/partners/ConfinantLogo.webp";
 import metisLogo from "../public/partners/MetisAuditLogo.webp";
 import moosLogo from "../public/partners/MoosAccountantsLogo.png";
-import srlLogo from "../public/partners/SrlAccountatsLogo.webp";
 
 // ============================================================================
 // ANIMATION VARIANTS
@@ -695,12 +692,12 @@ const PartnersSection = styled.section`
 
 const PartnersGrid = styled(motion.div)`
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 0;
   margin-top: ${spacing[12]};
 
   @media ${mediaQueries.tabletAndDown} {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 
   @media ${mediaQueries.mobileAndDown} {
@@ -981,7 +978,6 @@ const stats = [
 
 const partners = [
   { name: "Moos Accountants", logo: moosLogo, alt: "Moos Accountants" },
-  { name: "Adviesgroep\u201888", logo: srlLogo, alt: "Adviesgroep\u201888" },
   { name: "Confinant", logo: confinantLogo, alt: "Confinant" },
   { name: "Metis Audit", logo: metisLogo, alt: "Metis Audit" },
 ];
@@ -992,7 +988,6 @@ const partners = [
 
 export default function Home() {
   const heroSectionRef = useRef<HTMLElement>(null);
-
 
   // Structured data
   const organizationSchema = {
@@ -1125,16 +1120,13 @@ export default function Home() {
             transition={{ duration: 0.7, delay: 0.9 }}
           >
             <Link href="/contact" passHref legacyBehavior>
-              <CTAPrimary>
-                Get in Touch
-              </CTAPrimary>
+              <CTAPrimary>Get in Touch</CTAPrimary>
             </Link>
             <Link href="/why-choose-us" passHref legacyBehavior>
               <CTASecondary>Why Choose Us</CTASecondary>
             </Link>
           </HeroCTAGroup>
         </HeroContent>
-
       </HeroSection>
 
       {/* ─── Stats ─── */}
@@ -1194,12 +1186,11 @@ export default function Home() {
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           >
             <IntroText>
-              Operating from our offices in Podgorica, Montenegro, and
-              Sarajevo, Bosnia and Herzegovina, we offer a flexible hybrid
-              team from junior to manager level, ready to respond to various
-              audit tasks at your request. With extensive experience in Dutch
-              GAAP and IFRS, we ensure our clients receive exceptional
-              support.
+              Operating from our offices in Podgorica, Montenegro, and Sarajevo,
+              Bosnia and Herzegovina, we offer a flexible hybrid team from
+              junior to manager level, ready to respond to various audit tasks
+              at your request. With extensive experience in Dutch GAAP and IFRS,
+              we ensure our clients receive exceptional support.
             </IntroText>
           </IntroBlockquote>
         </IntroContent>
@@ -1301,9 +1292,7 @@ export default function Home() {
                 </PartnersCTASubtext>
               </PartnersCTAText>
               <Link href="/contact" passHref legacyBehavior>
-                <PartnersCTAButton>
-                  Get in Touch
-                </PartnersCTAButton>
+                <PartnersCTAButton>Get in Touch</PartnersCTAButton>
               </Link>
             </PartnersCTARow>
           </motion.div>
