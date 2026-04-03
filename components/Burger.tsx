@@ -27,7 +27,7 @@ interface BurgerProps {
 export const StyledBurger = styled.button<BurgerProps>`
   display: none;
   position: relative;
-  width: 2rem;
+  width: 1.75rem;
   height: 2rem;
   background: transparent;
   border: none;
@@ -41,8 +41,8 @@ export const StyledBurger = styled.button<BurgerProps>`
 
   /* Burger bar styles */
   div {
-    width: 2rem;
-    height: 0.25rem;
+    width: 1.75rem;
+    height: 2px;
     background: ${colors.neutral.white};
     border-radius: 10px;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -52,20 +52,20 @@ export const StyledBurger = styled.button<BurgerProps>`
     /* Top bar */
     :first-child {
       transform: ${({ open }) => (open ? "rotate(45deg)" : "rotate(0)")};
-      margin-bottom: ${({ open }) => (open ? "0" : "0.5rem")};
+      margin-bottom: ${({ open }) => (open ? "0" : "0.625rem")};
     }
 
     /* Middle bar */
     :nth-child(2) {
       opacity: ${({ open }) => (open ? "0" : "1")};
       transform: ${({ open }) => (open ? "translateX(20px)" : "translateX(0)")};
-      margin-bottom: ${({ open }) => (open ? "0" : "0.5rem")};
+      margin-bottom: ${({ open }) => (open ? "0" : "0.625rem")};
     }
 
     /* Bottom bar */
     :nth-child(3) {
       transform: ${({ open }) => (open ? "rotate(-45deg)" : "rotate(0)")};
-      margin-top: ${({ open }) => (open ? "-0.5rem" : "0")};
+      margin-top: ${({ open }) => (open ? "-0.3rem" : "0")};
     }
   }
 
