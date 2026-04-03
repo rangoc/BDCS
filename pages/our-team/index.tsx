@@ -279,7 +279,7 @@ const TeamRow = styled.div`
   display: flex;
   align-items: center;
   gap: ${spacing[4]};
-  padding: ${spacing[4]};
+  padding: ${spacing[4]} ${spacing[4]} ${spacing[4]} 0;
   border-bottom: 1px solid ${colors.neutral.gray100};
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;

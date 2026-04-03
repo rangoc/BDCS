@@ -102,9 +102,58 @@ If your Resend domain is `bdcs.me`, you can only send from `*@bdcs.me`. Sending 
 
 ## CSS Transitions
 
+### `transition: all` is a performance and animation trap
+
+`transition: all` transitions every CSS property that changes, including expensive ones like `backdrop-filter`, `border`, and `background`. This causes two problems:
+
+1. **Performance:** Properties like `backdrop-filter: blur()` are extremely expensive to composite. Transitioning them on a fixed header means the browser re-blurs every frame during scroll.
+2. **Staggered animations:** Not all properties can be smoothly interpolated. When `transition: all` is set, interpolatable properties (color, box-shadow) animate smoothly while non-interpolatable ones (gradient backgrounds, border shorthand) snap discretely — creating a staggered, broken feel.
+
+**Fix:** Always list specific properties:
+
+```css
+transition: color 0.4s ease-in-out, box-shadow 0.4s ease-in-out, border-bottom-color 0.4s ease-in-out;
+```
+
 ### Gradient-to-transparent transitions
 
-`transition: all` on `background` between a `linear-gradient(...)` and `transparent` may not animate smoothly across all browsers. Some browsers fade the gradient smoothly, others snap. For guaranteed smooth transitions, consider using `opacity` on a pseudo-element with the gradient instead of transitioning the gradient itself.
+CSS cannot smoothly interpolate between a `linear-gradient(...)` / `radial-gradient(...)` and `transparent`. The browser does a discrete swap partway through the transition duration.
+
+**Fix:** Place the gradient on a `::before` pseudo-element and transition its `opacity` instead:
+
+```css
+&::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(...);
+  opacity: ${isActive ? 1 : 0};
+  transition: opacity 0.4s ease-in-out;
+  z-index: -1;
+}
+```
+
+This gives a smooth fade in/out of any gradient background.
+
+### `border-bottom: none` cannot be transitioned
+
+Transitioning `border-bottom` from `1px solid rgba(...)` to `none` is a discrete change — the width and style snap, they don't animate. This creates a jarring pop during otherwise smooth transitions.
+
+**Fix:** Keep the border always present and transition only the color:
+
+```css
+border-bottom: 1px solid transparent; /* always 1px, always solid */
+transition: border-bottom-color 0.4s ease-in-out;
+
+/* When active: */
+border-bottom: 1px solid rgba(174, 151, 81, 0.15);
+```
+
+### `backdrop-filter: blur()` on fixed elements during scroll
+
+`backdrop-filter: blur(12px)` on a fixed header forces the browser to re-composite and blur all content behind it every frame during scroll. This is one of the most expensive CSS effects and can drop scroll below 60fps, especially on low-power devices or laptops in battery saver mode.
+
+**Fix:** Remove `backdrop-filter` and use an opaque or near-opaque background instead. If the frosted glass effect is essential, use `will-change: transform` to promote the element to its own compositor layer — but be aware this still has a per-frame cost.
 
 ---
 
