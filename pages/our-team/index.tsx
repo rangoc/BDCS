@@ -131,15 +131,15 @@ const HeroGoldGlow = styled.div`
 const HeroContent = styled.div`
   position: relative;
   z-index: 3;
-  padding: 0 ${spacing[12]} ${spacing[12]};
+  padding: 0 ${spacing[8]} ${spacing[12]};
   max-width: 1200px;
 
   @media ${mediaQueries.tabletAndDown} {
-    padding: 0 ${spacing[8]} ${spacing[10]};
+    padding: 0 ${spacing[6]} ${spacing[10]};
   }
 
   @media ${mediaQueries.mobileAndDown} {
-    padding: 0 ${spacing[6]} ${spacing[8]};
+    padding: 0 ${spacing[4]} ${spacing[8]};
   }
 `;
 

@@ -9,7 +9,6 @@
  */
 
 import { motion } from "framer-motion";
-import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
@@ -26,7 +25,6 @@ import {
   typography,
   zIndex,
 } from "../lib/theme";
-import logo from "../public/logo.webp";
 import { Burger } from "./Burger";
 import { Menu } from "./Menu";
 
@@ -47,21 +45,26 @@ const Wrapper = styled(motion.header)<{ $isScrolled: boolean }>`
   align-items: center;
   justify-content: space-between;
   padding: ${spacing[4]} ${spacing[8]};
-  background: ${({ $isScrolled }) =>
-    $isScrolled
-      ? `linear-gradient(to bottom left, ${colors.primary.main} 0%, ${colors.primary.darker} 100%)`
-      : "transparent"};
-  backdrop-filter: ${({ $isScrolled }) =>
-    $isScrolled ? "blur(12px) saturate(180%)" : "none"};
-  -webkit-backdrop-filter: ${({ $isScrolled }) =>
-    $isScrolled ? "blur(12px) saturate(180%)" : "none"};
+  background: transparent;
   color: ${({ $isScrolled }) =>
     $isScrolled ? colors.neutral.white : colors.primary.main};
   box-shadow: ${({ $isScrolled }) =>
     $isScrolled ? "0 8px 32px 0 rgba(0, 0, 0, 0.1)" : "none"};
-  border-bottom: ${({ $isScrolled }) =>
-    $isScrolled ? `1px solid rgba(174, 151, 81, 0.15)` : "none"};
-  transition: all ${({ $isScrolled }) => ($isScrolled ? "0.6s" : "0.3s")} ease-in-out;
+  border-bottom: 1px solid ${({ $isScrolled }) =>
+    $isScrolled ? "rgba(174, 151, 81, 0.15)" : "transparent"};
+  transition: color 0.4s ease-in-out, box-shadow 0.4s ease-in-out, border-bottom-color 0.4s ease-in-out;
+
+  /* Gradient background — faded via opacity so it can transition smoothly */
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 200% at 50% 50%, ${colors.primary.main} 0%, ${colors.primary.darker} 100%);
+    opacity: ${({ $isScrolled }) => ($isScrolled ? 1 : 0)};
+    transition: opacity 0.4s ease-in-out;
+    z-index: -1;
+    pointer-events: none;
+  }
 
   /* Gold top line — matches sidebar menu */
   &::after {
@@ -94,19 +97,37 @@ const Wrapper = styled(motion.header)<{ $isScrolled: boolean }>`
 `;
 
 /**
- * Logo container with responsive sizing
+ * Logo container — HTML recreation of the BDCS boxed logo
  */
 const LogoWrapper = styled(Link)`
-  display: block;
-  width: 120px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  border: 2px solid ${colors.neutral.white};
+  padding: ${spacing[1]} ${spacing[3]};
   cursor: pointer;
 
+  @media ${mediaQueries.mobileAndDown} {
+    padding: ${spacing[1]} ${spacing[2]};
+  }
+`;
+
+const LogoText = styled.span`
+  font-family: ${typography.fontFamily.heading};
+  font-weight: ${typography.fontWeight.bold};
+  font-size: ${typography.fontSize["2xl"]};
+  letter-spacing: ${typography.letterSpacing.wide};
+  text-transform: uppercase;
+  color: ${colors.neutral.white};
+  line-height: 1;
+
   @media ${mediaQueries.tabletAndDown} {
-    width: 100px;
+    font-size: ${typography.fontSize.xl};
   }
 
   @media ${mediaQueries.mobileAndDown} {
-    width: 80px;
+    font-size: ${typography.fontSize.lg};
   }
 `;
 
@@ -312,14 +333,8 @@ export function Header() {
   return (
     <Wrapper $isScrolled={isScrolled}>
       {/* Logo */}
-      <LogoWrapper href="/">
-        <Image
-          src={logo}
-          alt="BD Corporate Services"
-          priority={true}
-          sizes="120px"
-          style={{ width: "100%", height: "auto" }}
-        />
+      <LogoWrapper href="/" aria-label="BD Corporate Services — Home">
+        <LogoText aria-hidden="true">BDCS</LogoText>
       </LogoWrapper>
 
       {/* Desktop Navigation — 4 links (Contact moved to CTA) */}

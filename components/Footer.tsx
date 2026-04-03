@@ -111,6 +111,10 @@ const Inner = styled.div`
   @media ${mediaQueries.tabletAndDown} {
     padding: ${spacing[12]} ${spacing[6]} 0;
   }
+
+  @media ${mediaQueries.mobileAndDown} {
+    padding: ${spacing[12]} ${spacing[4]} 0;
+  }
 `;
 
 // ============================================================================
@@ -218,6 +222,10 @@ const BottomBarInner = styled.div`
     flex-direction: column;
     gap: ${spacing[4]};
     text-align: center;
+  }
+
+  @media ${mediaQueries.mobileAndDown} {
+    padding: ${spacing[6]} ${spacing[4]};
   }
 `;
 

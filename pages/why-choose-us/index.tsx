@@ -138,14 +138,14 @@ const HeroContent = styled(motion.div)`
   z-index: 2;
   max-width: 1200px;
   width: 100%;
-  padding: ${spacing[16]} ${spacing[12]} ${spacing[16]};
+  padding: ${spacing[16]} ${spacing[8]} ${spacing[16]};
 
   @media ${mediaQueries.tabletAndDown} {
-    padding: ${spacing[12]} ${spacing[8]} ${spacing[12]};
+    padding: ${spacing[12]} ${spacing[6]} ${spacing[12]};
   }
 
   @media ${mediaQueries.mobileAndDown} {
-    padding: ${spacing[10]} ${spacing[6]} ${spacing[10]};
+    padding: ${spacing[10]} ${spacing[4]} ${spacing[10]};
   }
 `;
 
@@ -540,6 +540,9 @@ export default function WhyChooseUs() {
             whileInView="visible"
             viewport={{ once: true }}
           >
+            <HeroHeading variants={fadeUp}>
+              Why Choose BD Corporate Services
+            </HeroHeading>
             <HeroGoldLine
               initial={{ scaleX: 0 }}
               whileInView={{ scaleX: 1 }}
@@ -550,9 +553,6 @@ export default function WhyChooseUs() {
                 ease: [0.25, 0.46, 0.45, 0.94],
               }}
             />
-            <HeroHeading variants={fadeUp}>
-              Why Choose BD Corporate Services
-            </HeroHeading>
             <HeroTagline variants={fadeUp} transition={{ delay: 0.3 }}>
               Discover why leading businesses trust us with their accounting and
               audit needs.
