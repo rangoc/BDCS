@@ -4,7 +4,6 @@ import anjaj from "../public/people/AnjaJovanovic.webp";
 import bobanc from "../public/people/BobanCabarkapa.webp";
 import bojanab from "../public/people/BojanaBoskovic.webp";
 import bojanav from "../public/people/BojanaVucicevic.webp";
-import bojanz from "../public/people/BojanZivkovic.webp";
 import dijanao from "../public/people/DijanaOpancina.webp";
 import drazenm from "../public/people/DrazenMilic.webp";
 import dritand from "../public/people/DritanDragovic.webp";
@@ -438,25 +437,6 @@ export const OUR_TEAM = [
     linkedin: ``,
     phone: "",
     email: "anja.jovanovic@bdcs.me",
-  },
-  {
-    name: "Bojan Živković",
-    image: bojanz,
-    role: "Assistant",
-    bio: `Bojan Zivković holds a bachelor’s degree in Finance and
-          Accounting from the University of Montenegro and is
-          currently pursuing a master’s degree in the same field.
-          He has gained practical experience in auditing, where he
-          developed proficiency in performing substantive
-          procedures and supporting key steps in audit
-          engagements. Bojan’s academic background and
-          professional exposure have equipped him with strong
-          analytical and problem-solving skills. He is committed to
-          continuous learning and delivering high-quality
-          assurance services.`,
-    linkedin: ``,
-    phone: "",
-    email: "bojan.zivkovic@bdcs.me",
   },
   {
     name: "Emina Aslama",
