@@ -340,7 +340,7 @@ export function Footer() {
             <SectionLabel>Company</SectionLabel>
             <CompanyName>BD Corporate Services</CompanyName>
             <Tagline>
-              Professional audit and accounting outsourcing firm with experienced
+              Professional audit and accounting nearshoring firm with experienced
               staff from Big 4 firms.
             </Tagline>
           </Column>

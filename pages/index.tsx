@@ -956,7 +956,7 @@ const services = [
     icon: "audit",
   },
   {
-    title: "Accounting Outsourcing",
+    title: "Accounting Nearshoring",
     description:
       "Flexible accounting teams ready to handle your financial operations efficiently.",
     icon: "accounting",
@@ -999,7 +999,7 @@ export default function Home() {
     logo: "https://www.bdcs.me/logo.webp",
     image: "https://www.bdcs.me/og/og-home.png",
     description:
-      "Professional audit and accounting outsourcing firm with experienced staff from Big 4 firms. We deliver quality, competitive pricing, and personalized attention.",
+      "Professional audit and accounting nearshoring firm with experienced staff from Big 4 firms. We deliver quality, competitive pricing, and personalized attention.",
     address: [
       {
         "@type": "PostalAddress",
@@ -1023,7 +1023,7 @@ export default function Home() {
     areaServed: ["ME", "BA", "NL"],
     serviceType: [
       "Audit Services",
-      "Accounting Outsourcing",
+      "Accounting Nearshoring",
       "IFRS Advisory",
       "Dutch GAAP Advisory",
     ],
@@ -1036,7 +1036,7 @@ export default function Home() {
     name: "BD Corporate Services",
     url: "https://www.bdcs.me",
     description:
-      "Professional audit and accounting outsourcing firm with experienced staff from Big 4 firms.",
+      "Professional audit and accounting nearshoring firm with experienced staff from Big 4 firms.",
   };
 
   return (
@@ -1048,7 +1048,7 @@ export default function Home() {
     >
       <SEO
         title="BDCS | BD Corporate Services"
-        description="Professional audit and accounting outsourcing firm with experienced staff from Big 4 firms. We deliver quality, competitive pricing, and personalized attention."
+        description="Professional audit and accounting nearshoring firm with experienced staff from Big 4 firms. We deliver quality, competitive pricing, and personalized attention."
         canonicalUrl="https://www.bdcs.me"
         ogUrl="https://www.bdcs.me"
         ogImgUrl="https://www.bdcs.me/og/og-home.png"
@@ -1108,7 +1108,7 @@ export default function Home() {
             viewport={{ once: true }}
             transition={{ duration: 0.7, delay: 0.7 }}
           >
-            Professional audit and accounting outsourcing firm consisting of
+            Professional audit and accounting nearshoring firm consisting of
             highly dedicated experienced staff with expertise gained at Big 4
             firms.
           </HeroDescription>

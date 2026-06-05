@@ -36,7 +36,7 @@ The footer becomes a natural extension of the homepage hero — same dark gradie
 
 **Column 2 — Services:**
 - Gold section label: "Services"
-- Link list: Audit & Assurance, Accounting Outsourcing, International Standards
+- Link list: Audit & Assurance, Accounting Nearshoring, International Standards
 - Links: sm, white, hover → `complimentary.light`
 
 **Column 3 — Pages:**

@@ -101,14 +101,14 @@ Each row below is one image. Plug the 3 text values into the template above. Eve
 |-------|------|
 | Headline | BDCS |
 | Subtitle | BD Corporate Services d.o.o. Podgorica |
-| Tagline | Professional audit and accounting outsourcing firm |
+| Tagline | Professional audit and accounting nearshoring firm |
 
 ### 2. `og-about.png`
 
 | Field | Text |
 |-------|------|
 | Headline | About Us |
-| Subtitle | Professional Audit & Accounting Outsourcing |
+| Subtitle | Professional Audit & Accounting Nearshoring |
 | Tagline | High quality services that go beyond cost reductions |
 
 ### 3. `og-team.png`

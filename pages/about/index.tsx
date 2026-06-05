@@ -287,7 +287,7 @@ const MVV_CONTENT = [
   {
     title: "Vision",
     lead: "A center of excellence in accounting and audit",
-    body: "We aim to be recognized as one of the top outsourcing companies through commitment to excellence, integrity and responsiveness.",
+    body: "We aim to be recognized as one of the top nearshoring companies through commitment to excellence, integrity and responsiveness.",
     values: null,
   },
   {
@@ -645,7 +645,7 @@ export default function About() {
               viewport={{ once: true }}
               transition={{ delay: 0.25 }}
             >
-              Premium accounting and audit outsourcing, delivered by Big 4
+              Premium accounting and audit nearshoring, delivered by Big 4
               alumni.
             </HeroTagline>
           </HeroContent>
