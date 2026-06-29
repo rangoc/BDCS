@@ -15,14 +15,12 @@ import hasijai from "../public/people/HasijaIsakovic.webp";
 import ivam from "../public/people/IvaMilacic.webp";
 import ivanaj from "../public/people/IvanaJovanovic.webp";
 import ivanaz from "../public/people/IvanaZvicer.webp";
-import ivanv from "../public/people/IvanVuskovic.webp";
 import jelenas from "../public/people/JelenaSimic.webp";
 import jovanaj from "../public/people/JovanaJanketic.webp";
 import jovanap from "../public/people/JovanaPopovic.webp";
 import kristinar from "../public/people/KristinaRadovic.webp";
 import matijav from "../public/people/MatijaVujovic.webp";
 import merisaa from "../public/people/MerisaAganbegovic.webp";
-import milenar from "../public/people/MilenaRaicevic.webp";
 import milicaj from "../public/people/MilicaJaric.webp";
 import milkaj from "../public/people/MilkaJovanovic.webp";
 import milosv from "../public/people/MilosVuletic.webp";
@@ -290,25 +288,6 @@ export const OUR_TEAM = [
     linkedin: ``,
     phone: "",
     email: "matija.vujovic@bdcs.me",
-  },
-  {
-    name: "Ivan Vušković",
-    image: ivanv,
-    role: "Senior",
-    bio: `Ivan Vuskovic holds a bachelor’s degree in Economics
-          from the University of Belgrade and has 3.5 years of
-          professional experience from EY. His experience spans
-          multiple industries, including banking, oil and gas,
-          consumer products, and retail, providing him with a
-          comprehensive understanding of diverse regulatory
-          frameworks. Ivan’s academic background and practical
-          exposure have equipped him with strong analytical and
-          problem-solving skills. He is committed to delivering
-          high-quality audit services and supporting clients in
-          achieving compliance and operational excellence.`,
-    linkedin: ``,
-    phone: "",
-    email: "ivan.vuskovic@bdcs.me",
   },
   {
     name: "Emina Konak",
@@ -625,25 +604,6 @@ export const OUR_TEAM = [
     linkedin: ``,
     phone: "",
     email: "jovana.popovic@bdcs.me",
-  },
-  {
-    name: "Milena Raičević",
-    image: milenar,
-    role: "Junior",
-    bio: `Milena Raičević completed her bachelor’s degree at the
-          Faculty of Economics in Podgorica and is currently
-          pursuing a master’s degree in Business Informatics. She
-          has gained significant professional experience as a
-          Project Assistant at NLB Bank, where she developed
-          strong communication, organizational, and problem-
-          solving skills. Her academic background, combined with
-          practical exposure to financial and project management
-          processes, has equipped her with adaptability and analytical capabilities. Milena is committed to continuous
-          learning and advancing her expertise in finance and
-          audit.`,
-    linkedin: ``,
-    phone: "",
-    email: "milena.raicevic@bdcs.me",
   },
   {
     name: "Nemanja Kljajević",
