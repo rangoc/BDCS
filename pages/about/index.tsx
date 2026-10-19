@@ -14,6 +14,7 @@ import styled from "styled-components";
 import { motion } from "framer-motion";
 import Image from "next/image";
 
+import { PrimeGlobalStatsNote } from "../../components/PrimeGlobal";
 import { SEO } from "../../components/SEO";
 import { StructuredData } from "../../components/StructuredData";
 import {
@@ -33,7 +34,6 @@ import about from "../../public/assets/hero-about.webp";
 const STATS = [
   { value: "10+", label: "Years Experience" },
   { value: "Big 4", label: "Alumni Team" },
-  { value: "50+", label: "Clients Served" },
   { value: "2", label: "Office Locations" },
 ];
 
@@ -287,7 +287,7 @@ const MVV_CONTENT = [
   {
     title: "Vision",
     lead: "A center of excellence in accounting and audit",
-    body: "We aim to be recognized as one of the top nearshoring companies through commitment to excellence, integrity and responsiveness.",
+    body: "We aim to be recognized as one of the top nearshoring companies through commitment to excellence, integrity and responsiveness. Our membership of PrimeGlobal, one of the world's largest associations of advisory and accounting firms, holds us to that standard.",
     values: null,
   },
   {
@@ -646,7 +646,7 @@ export default function About() {
               transition={{ delay: 0.25 }}
             >
               Premium accounting and audit nearshoring, delivered by Big 4
-              alumni.
+              alumni. Independent member of PrimeGlobal.
             </HeroTagline>
           </HeroContent>
         </HeroSection>
@@ -669,6 +669,7 @@ export default function About() {
               </React.Fragment>
             ))}
           </StatsInner>
+          <PrimeGlobalStatsNote />
         </StatsSection>
 
         {/* Quote */}
