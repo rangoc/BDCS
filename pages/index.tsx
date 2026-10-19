@@ -17,7 +17,7 @@ import styled from "styled-components";
 
 import { InteractiveTexture } from "../components/InteractiveTexture";
 import {
-  PrimeGlobalNetworkBand,
+  PrimeGlobalAssociationBand,
   PrimeGlobalStatsNote,
 } from "../components/PrimeGlobal";
 import { SEO } from "../components/SEO";
@@ -1200,7 +1200,7 @@ export default function Home() {
               junior to manager level, ready to respond to various audit tasks
               at your request. With extensive experience in Dutch GAAP and IFRS,
               we ensure our clients receive exceptional support. As an
-              independent member of PrimeGlobal, we are part of a network of
+              independent member of PrimeGlobal, we are part of an association of
               more than 300 advisory and accounting firms in 120 countries.
             </IntroText>
           </IntroBlockquote>
@@ -1250,7 +1250,7 @@ export default function Home() {
         </Container>
       </ServicesSection>
 
-      <PrimeGlobalNetworkBand />
+      <PrimeGlobalAssociationBand />
 
       {/* ─── Partners ─── */}
       <PartnersSection aria-label="Our partners">
