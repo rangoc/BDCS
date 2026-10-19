@@ -3,7 +3,7 @@
  *
  *  PrimeGlobalStatsNote — "Independent member of" line under the stats
  *    (home + about)
- *  PrimeGlobalNetworkBand — dark section with PrimeGlobal's network figures,
+ *  PrimeGlobalAssociationBand — dark section with PrimeGlobal's association figures,
  *    between Services and Partners on the home page
  *
  * Logo: official PrimeGlobal logo (public/partners/PrimeGlobalLogo.png).
@@ -134,7 +134,7 @@ const NoteLabel = styled.span`
 `;
 
 // ============================================================================
-// NETWORK BAND
+// ASSOCIATION BAND
 // ============================================================================
 
 const bandFade = {
@@ -146,7 +146,7 @@ const bandFade = {
   }),
 };
 
-export function PrimeGlobalNetworkBand() {
+export function PrimeGlobalAssociationBand() {
   return (
     <Band aria-label="PrimeGlobal membership">
       <BandGoldLine aria-hidden="true" />
@@ -159,7 +159,7 @@ export function PrimeGlobalNetworkBand() {
           <BandLogo>
             <PrimeGlobalLogo height={36} tone="light" />
           </BandLogo>
-          <BandLabel>Global Network</BandLabel>
+          <BandLabel>Global Association</BandLabel>
           <BandTitle>
             A local team, backed by a global association.
           </BandTitle>
@@ -182,7 +182,7 @@ export function PrimeGlobalNetworkBand() {
         </BandFigures>
       </BandInner>
       <BandSource>
-        PrimeGlobal network figures, Annual Impact Report 2024/25 · IAB World
+        PrimeGlobal association figures, Annual Impact Report 2024/25 · IAB World
         Survey 2025
       </BandSource>
     </Band>

@@ -31,7 +31,6 @@ import nikolar from "../public/people/NikolaRadunovic.webp";
 import nikolinaj from "../public/people/NikolinaJankovic.webp";
 import nikolinak from "../public/people/NikolinaKoljevic.webp";
 import stefanp from "../public/people/StefanPavlovic.webp";
-import zerinas from "../public/people/ZerinaSikira.webp";
 
 export const OUR_TEAM = [
   {
@@ -324,24 +323,6 @@ export const OUR_TEAM = [
     linkedin: ``,
     phone: "",
     email: "merisa.aganbegovic@bdcs.ba",
-  },
-  {
-    name: "Zerina Sikira",
-    image: zerinas,
-    role: "Senior",
-    bio: `Zerina Sikira is currently pursuing a master’s degree in
-          Marketing Management at the Faculty of Economics in
-          Sarajevo. She hold a bachelor’s degree in Financial
-          Management at the same faculty at University of
-          Sarajevo. She has gained professional experience in
-          accounting and auditing through roles at EY Sarajevo,
-          where she worked for over two years. She demonstrates
-          a strong commitment to continuous learning and
-          consistently delivers high-quality outcomes in auditing
-          and financial management.`,
-    linkedin: ``,
-    phone: "",
-    email: "zerina.sekira@bdcs.ba",
   },
   {
     name: "Anđelina Rakčević",
