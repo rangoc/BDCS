@@ -16,6 +16,10 @@ import React, { useRef } from "react";
 import styled from "styled-components";
 
 import { InteractiveTexture } from "../components/InteractiveTexture";
+import {
+  PrimeGlobalNetworkBand,
+  PrimeGlobalStatsNote,
+} from "../components/PrimeGlobal";
 import { SEO } from "../components/SEO";
 import { StructuredData } from "../components/StructuredData";
 import {
@@ -972,7 +976,6 @@ const services = [
 const stats = [
   { value: "10+", label: "Years of Experience" },
   { value: "Big 4", label: "Alumni Team" },
-  { value: "100%", label: "Client Satisfaction" },
   { value: "2", label: "Office Locations" },
 ];
 
@@ -999,7 +1002,7 @@ export default function Home() {
     logo: "https://www.bdcs.me/logo.webp",
     image: "https://www.bdcs.me/og/og-home.png",
     description:
-      "Professional audit and accounting nearshoring firm with experienced staff from Big 4 firms. We deliver quality, competitive pricing, and personalized attention.",
+      "Professional audit and accounting nearshoring firm with experienced staff from Big 4 firms. Independent member of PrimeGlobal. We deliver quality, competitive pricing, and personalized attention.",
     address: [
       {
         "@type": "PostalAddress",
@@ -1028,6 +1031,11 @@ export default function Home() {
       "Dutch GAAP Advisory",
     ],
     priceRange: "$$",
+    memberOf: {
+      "@type": "Organization",
+      name: "PrimeGlobal",
+      url: "https://www.primeglobal.net",
+    },
   };
 
   const websiteSchema = {
@@ -1048,7 +1056,7 @@ export default function Home() {
     >
       <SEO
         title="BDCS | BD Corporate Services"
-        description="Professional audit and accounting nearshoring firm with experienced staff from Big 4 firms. We deliver quality, competitive pricing, and personalized attention."
+        description="Professional audit and accounting nearshoring firm with experienced staff from Big 4 firms. Independent member of PrimeGlobal. We deliver quality, competitive pricing, and personalized attention."
         canonicalUrl="https://www.bdcs.me"
         ogUrl="https://www.bdcs.me"
         ogImgUrl="https://www.bdcs.me/og/og-home.png"
@@ -1108,9 +1116,9 @@ export default function Home() {
             viewport={{ once: true }}
             transition={{ duration: 0.7, delay: 0.7 }}
           >
-            Professional audit and accounting nearshoring firm consisting of
-            highly dedicated experienced staff with expertise gained at Big 4
-            firms.
+            Professional audit and accounting nearshoring firm and independent
+            member of PrimeGlobal, with highly dedicated experienced staff whose
+            expertise was gained at Big 4 firms.
           </HeroDescription>
 
           <HeroCTAGroup
@@ -1149,6 +1157,7 @@ export default function Home() {
             </React.Fragment>
           ))}
         </StatsInner>
+        <PrimeGlobalStatsNote />
       </StatsSection>
 
       {/* ─── Intro / Blockquote ─── */}
@@ -1190,7 +1199,9 @@ export default function Home() {
               Bosnia and Herzegovina, we offer a flexible hybrid team from
               junior to manager level, ready to respond to various audit tasks
               at your request. With extensive experience in Dutch GAAP and IFRS,
-              we ensure our clients receive exceptional support.
+              we ensure our clients receive exceptional support. As an
+              independent member of PrimeGlobal, we are part of a network of
+              more than 300 advisory and accounting firms in 120 countries.
             </IntroText>
           </IntroBlockquote>
         </IntroContent>
@@ -1238,6 +1249,8 @@ export default function Home() {
           </motion.div>
         </Container>
       </ServicesSection>
+
+      <PrimeGlobalNetworkBand />
 
       {/* ─── Partners ─── */}
       <PartnersSection aria-label="Our partners">

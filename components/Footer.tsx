@@ -9,6 +9,7 @@
 import React from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
+import { OfficePins } from "./OfficeLocations";
 import {
   colors,
   mediaQueries,
@@ -257,23 +258,6 @@ const SocialLink = styled(motion.a)`
   }
 `;
 
-const LocationsGroup = styled.div`
-  display: flex;
-  align-items: center;
-  gap: ${spacing[2]};
-  font-size: ${typography.fontSize.xs};
-  color: ${colors.neutral.gray400};
-  letter-spacing: ${typography.letterSpacing.wide};
-`;
-
-const LocationDot = styled.span`
-  display: inline-block;
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: ${colors.complimentary.dark};
-`;
-
 const CopyrightText = styled.p`
   font-size: ${typography.fontSize.xs};
   color: ${colors.neutral.gray500};
@@ -309,11 +293,6 @@ const PHONE_NUMBERS = [
   { number: "+31 61 001 6808", href: "tel:+31610016808" },
 ];
 
-const LOCATIONS = [
-  { city: "Podgorica", country: "Montenegro" },
-  { city: "Sarajevo", country: "Bosnia and Herzegovina" },
-];
-
 // ============================================================================
 // COMPONENT
 // ============================================================================
@@ -341,7 +320,7 @@ export function Footer() {
             <CompanyName>BD Corporate Services</CompanyName>
             <Tagline>
               Professional audit and accounting nearshoring firm with experienced
-              staff from Big 4 firms.
+              staff from Big 4 firms. Independent member of PrimeGlobal.
             </Tagline>
           </Column>
 
@@ -400,16 +379,7 @@ export function Footer() {
       <BottomBar>
         <BottomBarInner>
           {/* Locations */}
-          <LocationsGroup>
-            {LOCATIONS.map((loc, idx) => (
-              <React.Fragment key={loc.city}>
-                {idx > 0 && <LocationDot />}
-                <span>
-                  {loc.city}, {loc.country}
-                </span>
-              </React.Fragment>
-            ))}
-          </LocationsGroup>
+          <OfficePins />
 
           {/* Copyright */}
           <CopyrightText>

@@ -63,7 +63,7 @@ quality; it's all we know and all we practice.`,
   },
   {
     title: "National Standards",
-    description: `Our teams are led by experienced Big 4 professionals who are ACCA qualified and IFRS experts. Our team leader also has extensive Dutch GAAP experience. We are dedicated to providing our clients with the highest quality of services.`,
+    description: `Our teams are led by experienced Big 4 professionals who are ACCA qualified and IFRS experts. Our team leader also has extensive Dutch GAAP experience. As an independent member of PrimeGlobal, we share knowledge and best practice with more than 300 firms worldwide. We are dedicated to providing our clients with the highest quality of services.`,
     image: (
       <svg
         preserveAspectRatio="xMidYMid meet"
